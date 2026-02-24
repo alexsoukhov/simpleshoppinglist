@@ -7,16 +7,21 @@ class CartsListItemWidget extends StatelessWidget {
     super.key,
     this.onPressed,
     required this.cart,
+    required this.selectedCart,
     required this.index,
   });
 
   final Cart cart;
+  final Cart? selectedCart;
   final int index;
   final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: cart == selectedCart
+          ? Theme.of(context).highlightColor
+          : Theme.of(context).primaryColor,
       key: ObjectKey(cart),
       child: ListTile(
         onTap: onPressed,

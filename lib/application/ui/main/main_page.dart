@@ -38,23 +38,19 @@ class _MainPageState extends State<MainPage> {
         },
         child: BlocBuilder<MainBloc, MainState>(
           builder: (context, state) {
-            return Material(
-              child: Scaffold(
-                body: PageView(
-                  controller: _pageController,
-                  // The children are the individual pages the user can swipe between
-                  children: <Widget>[
-                    CartsListPage(),
-                    CartPage(),
-                  ],
-                ),
-
-                floatingActionButton: FloatingActionButton(
-                  onPressed: () => {},
-                  tooltip: 'Increment',
-                  child: const Icon(Icons.add),
-                ),
-              ),
+            return OrientationBuilder(
+              builder: (context, state) {
+                //TODO(AS): portrait/landscape
+                return Material(
+                  child: Scaffold(
+                    body: PageView(
+                      controller: _pageController,
+                      // The children are the individual pages the user can swipe between
+                      children: <Widget>[CartsListPage(), CartPage()],
+                    ),
+                  ),
+                );
+              },
             );
           },
         ),

@@ -4,6 +4,7 @@ import 'package:bloc_presentation/bloc_presentation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:simpleshoppinglist/data/models/cart.dart';
 import 'package:simpleshoppinglist/repositories/carts_repository.dart';
 import 'package:uuid/uuid.dart';
@@ -36,8 +37,14 @@ class CartsListBloc extends Bloc<CartsListEvent, CartsListState> with BlocPresen
       BlocProvider.of<CartsListBloc>(context);
 
   Future<void> _initData(Emitter<CartsListState> emit) async {
-    await _cartsRepository.cartsStream.forEach((element) async {
-      emit(state.copyWith(data: element));
+    await Rx.combineLatest2(
+        _cartsRepository.cartsStream,
+        _cartsRepository.selectedCartStream,
+            (List<Cart> stream1, Cart? stream2) {
+          return [stream1, stream2];
+        }).forEach((element) async {
+
+      emit(state.copyWith(data: element[0] as List<Cart>, selectedCart: element[1] as Cart?));
     });
   }
 

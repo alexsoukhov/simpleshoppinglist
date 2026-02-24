@@ -9,7 +9,9 @@ import '../data/models/cart.dart';
 import '../sources/hive/dto/cart_dto.dart';
 
 class CartsRepository {
-  CartsRepository(this._hiveSource);
+  CartsRepository(this._hiveSource) {
+    notifySelectedCart();
+  }
 
   final HiveSource _hiveSource;
 
@@ -42,13 +44,13 @@ class CartsRepository {
     notifySelectedCart();
   }
 
-  final StreamController<Cart> _selectedCartStreamController =
+  final StreamController<Cart?> _selectedCartStreamController =
       BehaviorSubject();
 
-  Stream<Cart> get selectedCartStream => _selectedCartStreamController.stream;
+  Stream<Cart?> get selectedCartStream => _selectedCartStreamController.stream;
 
   void notifySelectedCart() {
-    _selectedCartStreamController.sink.add(_selectedCart!);
+    _selectedCartStreamController.sink.add(_selectedCart);
   }
 
   void saveSelectedCart(Cart cart) {

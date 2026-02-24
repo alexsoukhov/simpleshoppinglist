@@ -21,17 +21,15 @@ class _CartsListPageState extends State<CartsListPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => CartsListBloc(
-          context.read<CartsRepository>(),
-          ApplicationErrorBloc.of(context),
-        ),
-        child: BlocPresentationListener<CartsListBloc, CartsListEvent>(
-          listener: (context, event) {
-            switch (event) {
-
-            }
-          },
-          child: BlocBuilder<CartsListBloc, CartsListState>(
+      create: (context) => CartsListBloc(
+        context.read<CartsRepository>(),
+        ApplicationErrorBloc.of(context),
+      ),
+      child: BlocPresentationListener<CartsListBloc, CartsListEvent>(
+        listener: (context, event) {
+          switch (event) {}
+        },
+        child: BlocBuilder<CartsListBloc, CartsListState>(
           builder: (context, state) {
             return CustomScrollView(
               slivers: <Widget>[
@@ -50,6 +48,7 @@ class _CartsListPageState extends State<CartsListPage> {
                       key: ValueKey(index),
                       child: CartsListItemWidget(
                         cart: state.data[index],
+                        selectedCart: state.selectedCart,
                         index: index,
                         onPressed: () => _onSelect(context, state.data[index]),
                       ),

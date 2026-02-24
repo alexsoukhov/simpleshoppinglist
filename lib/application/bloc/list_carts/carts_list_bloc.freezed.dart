@@ -471,7 +471,7 @@ String toString() {
 /// @nodoc
 mixin _$CartsListState {
 
- List<Cart> get data; bool get loading;
+ List<Cart> get data; bool get loading; Cart? get selectedCart;
 /// Create a copy of CartsListState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -482,16 +482,16 @@ $CartsListStateCopyWith<CartsListState> get copyWith => _$CartsListStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CartsListState&&const DeepCollectionEquality().equals(other.data, data)&&(identical(other.loading, loading) || other.loading == loading));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CartsListState&&const DeepCollectionEquality().equals(other.data, data)&&(identical(other.loading, loading) || other.loading == loading)&&(identical(other.selectedCart, selectedCart) || other.selectedCart == selectedCart));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(data),loading);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(data),loading,selectedCart);
 
 @override
 String toString() {
-  return 'CartsListState(data: $data, loading: $loading)';
+  return 'CartsListState(data: $data, loading: $loading, selectedCart: $selectedCart)';
 }
 
 
@@ -502,11 +502,11 @@ abstract mixin class $CartsListStateCopyWith<$Res>  {
   factory $CartsListStateCopyWith(CartsListState value, $Res Function(CartsListState) _then) = _$CartsListStateCopyWithImpl;
 @useResult
 $Res call({
- List<Cart> data, bool loading
+ List<Cart> data, bool loading, Cart? selectedCart
 });
 
 
-
+$CartCopyWith<$Res>? get selectedCart;
 
 }
 /// @nodoc
@@ -519,14 +519,27 @@ class _$CartsListStateCopyWithImpl<$Res>
 
 /// Create a copy of CartsListState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? data = null,Object? loading = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? data = null,Object? loading = null,Object? selectedCart = freezed,}) {
   return _then(_self.copyWith(
 data: null == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
 as List<Cart>,loading: null == loading ? _self.loading : loading // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,selectedCart: freezed == selectedCart ? _self.selectedCart : selectedCart // ignore: cast_nullable_to_non_nullable
+as Cart?,
   ));
 }
+/// Create a copy of CartsListState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$CartCopyWith<$Res>? get selectedCart {
+    if (_self.selectedCart == null) {
+    return null;
+  }
 
+  return $CartCopyWith<$Res>(_self.selectedCart!, (value) {
+    return _then(_self.copyWith(selectedCart: value));
+  });
+}
 }
 
 
@@ -608,10 +621,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<Cart> data,  bool loading)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<Cart> data,  bool loading,  Cart? selectedCart)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CartsListState() when $default != null:
-return $default(_that.data,_that.loading);case _:
+return $default(_that.data,_that.loading,_that.selectedCart);case _:
   return orElse();
 
 }
@@ -629,10 +642,10 @@ return $default(_that.data,_that.loading);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<Cart> data,  bool loading)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<Cart> data,  bool loading,  Cart? selectedCart)  $default,) {final _that = this;
 switch (_that) {
 case _CartsListState():
-return $default(_that.data,_that.loading);case _:
+return $default(_that.data,_that.loading,_that.selectedCart);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -649,10 +662,10 @@ return $default(_that.data,_that.loading);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<Cart> data,  bool loading)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<Cart> data,  bool loading,  Cart? selectedCart)?  $default,) {final _that = this;
 switch (_that) {
 case _CartsListState() when $default != null:
-return $default(_that.data,_that.loading);case _:
+return $default(_that.data,_that.loading,_that.selectedCart);case _:
   return null;
 
 }
@@ -664,7 +677,7 @@ return $default(_that.data,_that.loading);case _:
 
 
 class _CartsListState implements CartsListState {
-  const _CartsListState({final  List<Cart> data = const <Cart>[], this.loading = false}): _data = data;
+  const _CartsListState({final  List<Cart> data = const <Cart>[], this.loading = false, this.selectedCart = null}): _data = data;
   
 
  final  List<Cart> _data;
@@ -675,6 +688,7 @@ class _CartsListState implements CartsListState {
 }
 
 @override@JsonKey() final  bool loading;
+@override@JsonKey() final  Cart? selectedCart;
 
 /// Create a copy of CartsListState
 /// with the given fields replaced by the non-null parameter values.
@@ -686,16 +700,16 @@ _$CartsListStateCopyWith<_CartsListState> get copyWith => __$CartsListStateCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CartsListState&&const DeepCollectionEquality().equals(other._data, _data)&&(identical(other.loading, loading) || other.loading == loading));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CartsListState&&const DeepCollectionEquality().equals(other._data, _data)&&(identical(other.loading, loading) || other.loading == loading)&&(identical(other.selectedCart, selectedCart) || other.selectedCart == selectedCart));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_data),loading);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_data),loading,selectedCart);
 
 @override
 String toString() {
-  return 'CartsListState(data: $data, loading: $loading)';
+  return 'CartsListState(data: $data, loading: $loading, selectedCart: $selectedCart)';
 }
 
 
@@ -706,11 +720,11 @@ abstract mixin class _$CartsListStateCopyWith<$Res> implements $CartsListStateCo
   factory _$CartsListStateCopyWith(_CartsListState value, $Res Function(_CartsListState) _then) = __$CartsListStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<Cart> data, bool loading
+ List<Cart> data, bool loading, Cart? selectedCart
 });
 
 
-
+@override $CartCopyWith<$Res>? get selectedCart;
 
 }
 /// @nodoc
@@ -723,15 +737,28 @@ class __$CartsListStateCopyWithImpl<$Res>
 
 /// Create a copy of CartsListState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? data = null,Object? loading = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? data = null,Object? loading = null,Object? selectedCart = freezed,}) {
   return _then(_CartsListState(
 data: null == data ? _self._data : data // ignore: cast_nullable_to_non_nullable
 as List<Cart>,loading: null == loading ? _self.loading : loading // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,selectedCart: freezed == selectedCart ? _self.selectedCart : selectedCart // ignore: cast_nullable_to_non_nullable
+as Cart?,
   ));
 }
 
+/// Create a copy of CartsListState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$CartCopyWith<$Res>? get selectedCart {
+    if (_self.selectedCart == null) {
+    return null;
+  }
 
+  return $CartCopyWith<$Res>(_self.selectedCart!, (value) {
+    return _then(_self.copyWith(selectedCart: value));
+  });
+}
 }
 
 // dart format on
