@@ -1,0 +1,99 @@
+import 'dart:async';
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:simpleshoppinglist/data/models/cart.dart';
+import 'package:simpleshoppinglist/repositories/carts_repository.dart';
+import 'package:uuid/uuid.dart';
+
+import '../../../data/models/cart_item.dart';
+import '../application_error/application_error_bloc.dart';
+
+part 'cart_bloc.freezed.dart';
+
+part 'cart_event.dart';
+
+part 'cart_state.dart';
+
+class CartBloc extends Bloc<CartEvent, CartState> {
+  CartBloc(this._cartsRepository, this._errorBloc)
+    : super(CartState(loading: true)) {
+    on<CartEventInit>((event, emit) async {
+      await _initData(emit);
+    });
+    on<CartEventCreateItem>(_createItem);
+    on<CartEventReorder>(_reorder);
+    on<CartEventToggle>(_toggle);
+
+    add(const CartEventInit());
+  }
+
+  final CartsRepository _cartsRepository;
+  final ApplicationErrorBloc _errorBloc;
+
+  static CartBloc of(BuildContext context) =>
+      BlocProvider.of<CartBloc>(context);
+
+  Future<void> _initData(Emitter<CartState> emit) async {
+    await _cartsRepository.selectedCartStream.forEach((element) async {
+      emit(state.copyWith(data: element, suggestions: await _cartsRepository.getSuggestions(), loading: false));
+    });
+  }
+
+  Future<void> _createItem(
+    CartEventCreateItem event,
+    Emitter<CartState> emit,
+  ) async {
+    final selectedCart = _cartsRepository.selectedCart;
+    if (selectedCart != null) {
+      final item = CartItem(
+        id: Uuid().v4(),
+        value: event.name,
+        date: DateTime.now(),
+      );
+
+      _cartsRepository.saveSelectedCart(
+        selectedCart.copyWith(items: [item, ...selectedCart.items]),
+      );
+    }
+  }
+
+  Future<void> _reorder(CartEventReorder event, Emitter<CartState> emit) async {
+    final selectedCart = _cartsRepository.selectedCart;
+    if (selectedCart != null) {
+      final oldIndex = event.oldIndex;
+      var newIndex = event.newIndex;
+
+      if (oldIndex < newIndex) {
+        newIndex -= 1;
+      }
+
+      final list = selectedCart.items.toList();
+      final item = list.removeAt(oldIndex);
+      list.insert(newIndex, item);
+
+      _cartsRepository.saveSelectedCart(selectedCart.copyWith(items: list));
+    }
+
+    emit(state);
+  }
+
+  Future<void> _toggle(CartEventToggle event, Emitter<CartState> emit) async {
+    final selectedCart = _cartsRepository.selectedCart;
+
+    if (selectedCart != null) {
+      final list = selectedCart.items.toList();
+      list.remove(event.item);
+
+      final item = event.item.copyWith(marked: !event.item.marked);
+      if (item.marked) {
+        list.add(item);
+      } else {
+        list.insert(0, item);
+      }
+
+      _cartsRepository.saveSelectedCart(selectedCart.copyWith(items: list));
+    }
+  }
+}

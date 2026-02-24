@@ -1,0 +1,81 @@
+import 'package:bloc_presentation/bloc_presentation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:simpleshoppinglist/application/ui/list_carts/new_cart_widget.dart';
+import 'package:simpleshoppinglist/repositories/carts_repository.dart';
+
+import '../../../data/models/cart.dart';
+import '../../bloc/application_error/application_error_bloc.dart';
+import '../../bloc/list_carts/carts_list_bloc.dart';
+import '../../bloc/main/main_bloc.dart';
+import 'carts_list_item_widget.dart';
+
+class CartsListPage extends StatefulWidget {
+  const CartsListPage({super.key});
+
+  @override
+  State<CartsListPage> createState() => _CartsListPageState();
+}
+
+class _CartsListPageState extends State<CartsListPage> {
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+        create: (context) => CartsListBloc(
+          context.read<CartsRepository>(),
+          ApplicationErrorBloc.of(context),
+        ),
+        child: BlocPresentationListener<CartsListBloc, CartsListEvent>(
+          listener: (context, event) {
+            switch (event) {
+
+            }
+          },
+          child: BlocBuilder<CartsListBloc, CartsListState>(
+          builder: (context, state) {
+            return CustomScrollView(
+              slivers: <Widget>[
+                SliverAppBar(
+                  automaticallyImplyLeading: false,
+                  title: NewCartWidget(
+                    onPressed: (text) => _onAdd(context, text),
+                  ),
+                  floating: true,
+                  titleSpacing: 0,
+                  elevation: 1.0,
+                ),
+                SliverReorderableList(
+                  itemBuilder: (BuildContext context, int index) {
+                    return Material(
+                      key: ValueKey(index),
+                      child: CartsListItemWidget(
+                        cart: state.data[index],
+                        index: index,
+                        onPressed: () => _onSelect(context, state.data[index]),
+                      ),
+                    );
+                  },
+                  itemCount: state.data.length,
+                  onReorder: (int oldIndex, int newIndex) =>
+                      _onReorder(context, oldIndex, newIndex),
+                ),
+              ],
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  void _onAdd(BuildContext context, String name) {
+    CartsListBloc.of(context).add(CartsListEvent.createList(name));
+  }
+
+  void _onReorder(BuildContext context, int oldIndex, int newIndex) {
+    CartsListBloc.of(context).add(CartsListEvent.reorder(oldIndex, newIndex));
+  }
+
+  void _onSelect(BuildContext context, Cart cart) {
+    MainBloc.of(context).add(MainEvent.select(cart));
+  }
+}
