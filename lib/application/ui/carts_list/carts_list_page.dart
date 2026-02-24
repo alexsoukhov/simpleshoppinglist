@@ -1,12 +1,12 @@
 import 'package:bloc_presentation/bloc_presentation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:simpleshoppinglist/application/ui/list_carts/new_cart_widget.dart';
+import 'package:simpleshoppinglist/application/ui/carts_list/new_cart_widget.dart';
 import 'package:simpleshoppinglist/repositories/carts_repository.dart';
 
 import '../../../data/models/cart.dart';
 import '../../bloc/application_error/application_error_bloc.dart';
-import '../../bloc/list_carts/carts_list_bloc.dart';
+import '../../bloc/carts_list/carts_list_bloc.dart';
 import '../../bloc/main/main_bloc.dart';
 import 'carts_list_item_widget.dart';
 
@@ -44,16 +44,15 @@ class _CartsListPageState extends State<CartsListPage> {
                 ),
                 SliverReorderableList(
                   itemBuilder: (BuildContext context, int index) {
-                    return Material(
-                      key: ValueKey(index),
-                      child: CartsListItemWidget(
-                        cart: state.data[index],
-                        selectedCart: state.selectedCart,
-                        index: index,
-                        onPressed: () => _onSelect(context, state.data[index]),
-                        onDelete: () => _onDelete(context, state.data[index]),
-                        //_onMenu(context, state.data[index]),
-                      ),
+                    final cart = state.data[index];
+
+                    return CartsListItemWidget(
+                      key: ObjectKey(cart),
+                      cart: cart,
+                      selectedCart: state.selectedCart,
+                      index: index,
+                      onPressed: () => _onSelect(context, cart),
+                      onDelete: () => _onDelete(context, cart),
                     );
                   },
                   itemCount: state.data.length,

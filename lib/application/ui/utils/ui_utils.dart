@@ -54,18 +54,9 @@ class UIUtils {
       if (code != -1) {
         error += ' ($code)';
       }
-      showToast(context, error, background: Colors.red);
+      showToast(context, error, background: ThemeColors.toastBackground);
     } else {
-      showToast(context, value, background: Colors.red);
+      showToast(context, value, background: ThemeColors.toastBackground);
     }
-  }
-}
-
-extension Unique<E, Id> on List<E> {
-  List<E> unique([Id Function(E element)? id, bool inplace = true]) {
-    final ids = <dynamic>{};
-    var list = inplace ? this : List<E>.from(this);
-    list.retainWhere((x) => ids.add(id != null ? id(x) : x as Id));
-    return list;
   }
 }

@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:simpleshoppinglist/application/bloc/main/main_bloc.dart';
 import 'package:simpleshoppinglist/application/ui/cart/product_input_widget.dart';
-import 'package:simpleshoppinglist/application/ui/list_carts/new_cart_widget.dart';
 import 'package:simpleshoppinglist/repositories/carts_repository.dart';
 
-import '../../../data/models/cart.dart';
 import '../../../data/models/cart_item.dart';
 import '../../bloc/application_error/application_error_bloc.dart';
 import '../../bloc/cart/cart_bloc.dart';
-import '../../bloc/list_carts/carts_list_bloc.dart';
-import '../list_carts/carts_list_item_widget.dart';
 import 'cart_item_widget.dart';
 
 class CartPage extends StatefulWidget {
@@ -35,6 +32,7 @@ class _CartPageState extends State<CartPage> {
                 automaticallyImplyLeading: false,
                 title: ProductInputWidget(
                   onPressed: (text) => _onAdd(context, text),
+                  onBack: () => _onBack(context),
                   onCallback: (String search) {
                     return search.length > 1
                         ? state.suggestions
@@ -53,16 +51,14 @@ class _CartPageState extends State<CartPage> {
               ),
               SliverReorderableList(
                 itemBuilder: (BuildContext context, int index) {
-                  return Material(
-                    key: ValueKey(index),
-                    child: CartItemWidget(
-                      cart: state.data!.items[index],
-                      index: index,
-                      onLongPress: () =>
-                          _onLongPress(context, state.data!.items[index]),
-                      onDelete: () =>
-                          _onDelete(context, state.data!.items[index]),
-                    ),
+                  return CartItemWidget(
+                    key: ObjectKey(state.data!.items[index]),
+                    cart: state.data!.items[index],
+                    index: index,
+                    onLongPress: () =>
+                        _onLongPress(context, state.data!.items[index]),
+                    onDelete: () =>
+                        _onDelete(context, state.data!.items[index]),
                   );
                 },
                 itemCount: state.data?.items.length ?? 0,
@@ -90,5 +86,9 @@ class _CartPageState extends State<CartPage> {
 
   void _onReorder(BuildContext context, int oldIndex, int newIndex) {
     CartBloc.of(context).add(CartEvent.reorder(oldIndex, newIndex));
+  }
+
+  void _onBack(BuildContext context) {
+    MainBloc.of(context).add(MainEvent.openCartsListPage());
   }
 }

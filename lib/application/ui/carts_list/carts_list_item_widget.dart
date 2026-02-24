@@ -32,7 +32,6 @@ class _CartsListItemWidgetState extends State<CartsListItemWidget> {
       color: widget.cart == widget.selectedCart
           ? Theme.of(context).highlightColor
           : Theme.of(context).primaryColor,
-      key: ObjectKey(widget.cart),
       child: MenuAnchor(
         style: MenuStyle(
           shape: WidgetStatePropertyAll<OutlinedBorder>(
@@ -49,6 +48,7 @@ class _CartsListItemWidgetState extends State<CartsListItemWidget> {
         builder:
             (BuildContext context, MenuController controller, Widget? child) =>
                 ListTile(
+                  selected: widget.cart == widget.selectedCart,
                   onTap: widget.onPressed,
                   onLongPress: () => _menuController.open(),
                   title: Text(widget.cart.name),

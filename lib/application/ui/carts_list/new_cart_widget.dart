@@ -50,10 +50,13 @@ class _NewCartWidgetState extends State<NewCartWidget> {
               child: TextField(
                 onSubmitted: (_) {
                   widget.onPressed?.call(_textEditingController.text);
+                  _textEditingController.text = "";
                 },
                 onTap: () {
                   if (_textEditingController.text.isEmpty) {
-                    _textEditingController.text = DateFormat.yMMMd().format(DateTime.now());
+                    _textEditingController.text = DateFormat.yMMMd().format(
+                      DateTime.now(),
+                    );
                     _textEditingController.selection = TextSelection(
                       baseOffset: 0,
                       extentOffset: _textEditingController.value.text.length,
@@ -62,23 +65,24 @@ class _NewCartWidgetState extends State<NewCartWidget> {
                 },
                 controller: _textEditingController,
                 decoration: InputDecoration(
-                  hintText: S
-                      .of(context)
-                      .cart_name,
+                  hintText: S.of(context).cart_name,
                   border: InputBorder.none,
                 ),
                 textInputAction: TextInputAction.done,
                 autocorrect: false,
               ),
             ),
-            if (clear) IconButton(
-              onPressed: _textEditingController.clear,
-              icon: Icon(Icons.clear),
-            ),
+            if (clear)
+              IconButton(
+                onPressed: _textEditingController.clear,
+                icon: Icon(Icons.clear),
+              ),
             IconButton(
               icon: Icon(Icons.add),
-              onPressed: () =>
-                  widget.onPressed?.call(_textEditingController.text),
+              onPressed: () {
+                widget.onPressed?.call(_textEditingController.text);
+                _textEditingController.text = "";
+              },
             ),
           ],
         ),

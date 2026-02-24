@@ -27,7 +27,6 @@ class _CartItemWidgetState extends State<CartItemWidget> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      key: ObjectKey(widget.cart),
       child: MenuAnchor(
         style: MenuStyle(
           shape: WidgetStatePropertyAll<OutlinedBorder>(

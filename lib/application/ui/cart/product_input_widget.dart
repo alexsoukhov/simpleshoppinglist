@@ -7,10 +7,12 @@ class ProductInputWidget extends StatefulWidget {
   const ProductInputWidget({
     super.key,
     this.onPressed,
+    this.onBack,
     required this.onCallback,
   });
 
   final void Function(String value)? onPressed;
+  final VoidCallback? onBack;
   final FutureOr<List<String>?> Function(String search) onCallback;
 
   @override
@@ -52,6 +54,7 @@ class _ProductInputWidgetState extends State<ProductInputWidget> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
+            IconButton(onPressed: widget.onBack, icon: Icon(Icons.arrow_back)),
             Expanded(
               child: TypeAheadField<String>(
                 focusNode: _focusNode,

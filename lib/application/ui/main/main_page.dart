@@ -6,7 +6,7 @@ import 'package:simpleshoppinglist/application/ui/cart/cart_page.dart';
 import '../../../repositories/carts_repository.dart';
 import '../../bloc/application_error/application_error_bloc.dart';
 import '../../bloc/main/main_bloc.dart';
-import '../list_carts/carts_list_page.dart';
+import '../carts_list/carts_list_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -25,34 +25,52 @@ class _MainPageState extends State<MainPage> {
         context.read<CartsRepository>(),
         ApplicationErrorBloc.of(context),
       ),
-      child: BlocPresentationListener<MainBloc, MainEvent>(
-        listener: (context, event) {
-          switch (event) {
-            case MainEventOpenCartPage():
-              _pageController.animateToPage(
-                1,
-                duration: const Duration(milliseconds: 200),
-                curve: Curves.easeInOut,
-              );
+      child: BackButtonListener(
+        onBackButtonPressed: () async {
+          if (_pageController.page == 1) {
+            MainBloc.of(context).add(MainEvent.openCartsListPage());
+            return true;
+          } else {
+            return false;
           }
         },
-        child: BlocBuilder<MainBloc, MainState>(
-          builder: (context, state) {
-            return OrientationBuilder(
-              builder: (context, state) {
-                //TODO(AS): portrait/landscape
-                return Material(
-                  child: Scaffold(
-                    body: PageView(
-                      controller: _pageController,
-                      // The children are the individual pages the user can swipe between
-                      children: <Widget>[CartsListPage(), CartPage()],
-                    ),
-                  ),
+        child: BlocPresentationListener<MainBloc, MainEvent>(
+          listener: (context, event) {
+            switch (event) {
+              case MainEventOpenCartPage():
+                _pageController.animateToPage(
+                  1,
+                  duration: const Duration(milliseconds: 200),
+                  curve: Curves.easeInOut,
                 );
-              },
-            );
+                break;
+              case MainEventOpenCartsListPage():
+                _pageController.animateToPage(
+                  0,
+                  duration: const Duration(milliseconds: 200),
+                  curve: Curves.easeInOut,
+                );
+                break;
+            }
           },
+          child: BlocBuilder<MainBloc, MainState>(
+            builder: (context, state) {
+              return OrientationBuilder(
+                builder: (context, state) {
+                  //TODO(AS): portrait/landscape
+                  return Material(
+                    child: Scaffold(
+                      body: PageView(
+                        controller: _pageController,
+                        // The children are the individual pages the user can swipe between
+                        children: <Widget>[CartsListPage(), CartPage()],
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+          ),
         ),
       ),
     );

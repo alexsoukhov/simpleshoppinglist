@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'bloc/application_error/application_error_bloc.dart';
-import 'common/ui_utils.dart';
+import 'ui/utils/ui_utils.dart';
 
 class ApplicationError extends StatelessWidget {
   const ApplicationError({super.key, required this.child});

@@ -23,6 +23,7 @@ class MainBloc extends Bloc<MainEvent, MainState>
       await _initData(emit);
     });
     on<MainEventSelect>(_select);
+    on<MainEventOpenCartsListPage>(_openCartsList);
 
     add(const MainEventInit());
   }
@@ -40,5 +41,9 @@ class MainBloc extends Bloc<MainEvent, MainState>
     _cartsRepository.selectedCart = event.cart;
 
     emitPresentation(MainEvent.openCartPage());
+  }
+
+  Future<void> _openCartsList(MainEventOpenCartsListPage event, Emitter<MainState> emit) async {
+    emitPresentation(MainEvent.openCartsListPage());
   }
 }

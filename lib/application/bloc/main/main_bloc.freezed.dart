@@ -55,14 +55,15 @@ extension MainEventPatterns on MainEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( MainEventInit value)?  init,TResult Function( MainEventSelect value)?  select,TResult Function( MainEventCreateList value)?  createList,TResult Function( MainEventOpenCartPage value)?  openCartPage,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( MainEventInit value)?  init,TResult Function( MainEventSelect value)?  select,TResult Function( MainEventCreateList value)?  createList,TResult Function( MainEventOpenCartPage value)?  openCartPage,TResult Function( MainEventOpenCartsListPage value)?  openCartsListPage,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case MainEventInit() when init != null:
 return init(_that);case MainEventSelect() when select != null:
 return select(_that);case MainEventCreateList() when createList != null:
 return createList(_that);case MainEventOpenCartPage() when openCartPage != null:
-return openCartPage(_that);case _:
+return openCartPage(_that);case MainEventOpenCartsListPage() when openCartsListPage != null:
+return openCartsListPage(_that);case _:
   return orElse();
 
 }
@@ -80,14 +81,15 @@ return openCartPage(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( MainEventInit value)  init,required TResult Function( MainEventSelect value)  select,required TResult Function( MainEventCreateList value)  createList,required TResult Function( MainEventOpenCartPage value)  openCartPage,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( MainEventInit value)  init,required TResult Function( MainEventSelect value)  select,required TResult Function( MainEventCreateList value)  createList,required TResult Function( MainEventOpenCartPage value)  openCartPage,required TResult Function( MainEventOpenCartsListPage value)  openCartsListPage,}){
 final _that = this;
 switch (_that) {
 case MainEventInit():
 return init(_that);case MainEventSelect():
 return select(_that);case MainEventCreateList():
 return createList(_that);case MainEventOpenCartPage():
-return openCartPage(_that);case _:
+return openCartPage(_that);case MainEventOpenCartsListPage():
+return openCartsListPage(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -104,14 +106,15 @@ return openCartPage(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( MainEventInit value)?  init,TResult? Function( MainEventSelect value)?  select,TResult? Function( MainEventCreateList value)?  createList,TResult? Function( MainEventOpenCartPage value)?  openCartPage,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( MainEventInit value)?  init,TResult? Function( MainEventSelect value)?  select,TResult? Function( MainEventCreateList value)?  createList,TResult? Function( MainEventOpenCartPage value)?  openCartPage,TResult? Function( MainEventOpenCartsListPage value)?  openCartsListPage,}){
 final _that = this;
 switch (_that) {
 case MainEventInit() when init != null:
 return init(_that);case MainEventSelect() when select != null:
 return select(_that);case MainEventCreateList() when createList != null:
 return createList(_that);case MainEventOpenCartPage() when openCartPage != null:
-return openCartPage(_that);case _:
+return openCartPage(_that);case MainEventOpenCartsListPage() when openCartsListPage != null:
+return openCartsListPage(_that);case _:
   return null;
 
 }
@@ -128,13 +131,14 @@ return openCartPage(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  init,TResult Function( Cart cart)?  select,TResult Function()?  createList,TResult Function()?  openCartPage,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  init,TResult Function( Cart cart)?  select,TResult Function()?  createList,TResult Function()?  openCartPage,TResult Function()?  openCartsListPage,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case MainEventInit() when init != null:
 return init();case MainEventSelect() when select != null:
 return select(_that.cart);case MainEventCreateList() when createList != null:
 return createList();case MainEventOpenCartPage() when openCartPage != null:
-return openCartPage();case _:
+return openCartPage();case MainEventOpenCartsListPage() when openCartsListPage != null:
+return openCartsListPage();case _:
   return orElse();
 
 }
@@ -152,13 +156,14 @@ return openCartPage();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  init,required TResult Function( Cart cart)  select,required TResult Function()  createList,required TResult Function()  openCartPage,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  init,required TResult Function( Cart cart)  select,required TResult Function()  createList,required TResult Function()  openCartPage,required TResult Function()  openCartsListPage,}) {final _that = this;
 switch (_that) {
 case MainEventInit():
 return init();case MainEventSelect():
 return select(_that.cart);case MainEventCreateList():
 return createList();case MainEventOpenCartPage():
-return openCartPage();case _:
+return openCartPage();case MainEventOpenCartsListPage():
+return openCartsListPage();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -175,13 +180,14 @@ return openCartPage();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  init,TResult? Function( Cart cart)?  select,TResult? Function()?  createList,TResult? Function()?  openCartPage,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  init,TResult? Function( Cart cart)?  select,TResult? Function()?  createList,TResult? Function()?  openCartPage,TResult? Function()?  openCartsListPage,}) {final _that = this;
 switch (_that) {
 case MainEventInit() when init != null:
 return init();case MainEventSelect() when select != null:
 return select(_that.cart);case MainEventCreateList() when createList != null:
 return createList();case MainEventOpenCartPage() when openCartPage != null:
-return openCartPage();case _:
+return openCartPage();case MainEventOpenCartsListPage() when openCartsListPage != null:
+return openCartsListPage();case _:
   return null;
 
 }
@@ -352,6 +358,38 @@ int get hashCode => runtimeType.hashCode;
 @override
 String toString() {
   return 'MainEvent.openCartPage()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class MainEventOpenCartsListPage implements MainEvent {
+  const MainEventOpenCartsListPage();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MainEventOpenCartsListPage);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'MainEvent.openCartsListPage()';
 }
 
 
