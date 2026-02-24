@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
-import '../../../generated/l10n.dart';
-
 class ProductInputWidget extends StatefulWidget {
   const ProductInputWidget({
     super.key,
@@ -21,6 +19,7 @@ class ProductInputWidget extends StatefulWidget {
 
 class _ProductInputWidgetState extends State<ProductInputWidget> {
   final TextEditingController _textEditingController = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
   bool clear = false;
 
   @override
@@ -55,12 +54,14 @@ class _ProductInputWidgetState extends State<ProductInputWidget> {
           children: <Widget>[
             Expanded(
               child: TypeAheadField<String>(
+                focusNode: _focusNode,
                 suggestionsCallback: widget.onCallback,
                 controller: _textEditingController,
                 hideOnEmpty: true,
                 builder: (context, controller, focusNode) => TextField(
                   onSubmitted: (_) {
                     widget.onPressed?.call(_textEditingController.text);
+                    _textEditingController.text = "";
                   },
                   controller: controller,
                   focusNode: focusNode,
@@ -82,30 +83,6 @@ class _ProductInputWidgetState extends State<ProductInputWidget> {
               ),
             ),
 
-            /*TextField(
-                onSubmitted: (_) {
-                  widget.onPressed?.call(_textEditingController.text);
-                },
-                onTap: () {
-                  if (_textEditingController.text.isEmpty) {
-                    _textEditingController.text = DateTime.now().toString();
-                    _textEditingController.selection = TextSelection(
-                      baseOffset: 0,
-                      extentOffset: _textEditingController.value.text.length,
-                    );
-                  }
-                },
-                controller: _textEditingController,
-                decoration: InputDecoration(
-                  hintText: S
-                      .of(context)
-                      .cart_name,
-                  border: InputBorder.none,
-                ),
-                textInputAction: TextInputAction.done,
-                autocorrect: false,
-              ),
-            ),*/
             if (clear)
               IconButton(
                 onPressed: _textEditingController.clear,
@@ -113,8 +90,11 @@ class _ProductInputWidgetState extends State<ProductInputWidget> {
               ),
             IconButton(
               icon: Icon(Icons.add),
-              onPressed: () =>
-                  widget.onPressed?.call(_textEditingController.text),
+              onPressed: () {
+                _focusNode.unfocus();
+                widget.onPressed?.call(_textEditingController.text);
+                _textEditingController.text = "";
+              },
             ),
           ],
         ),

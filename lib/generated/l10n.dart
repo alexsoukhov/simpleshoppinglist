@@ -70,11 +70,11 @@ class S {
     );
   }
 
-  /// `A`
-  String get a {
+  /// `Удалить элемент`
+  String get remove_item {
     return Intl.message(
-      'A',
-      name: 'a',
+      'Удалить элемент',
+      name: 'remove_item',
       desc: '',
       args: [],
     );

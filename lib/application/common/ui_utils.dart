@@ -3,7 +3,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:simpleshoppinglist/application/common/theme.dart';
 import 'package:simpleshoppinglist/generated/l10n.dart';
 
-
 class UIUtils {
   static void showToast(
     BuildContext context,
@@ -16,7 +15,7 @@ class UIUtils {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          color: background ?? context.getColor(ThemeColors.toastBackground),
+          color: background ?? ThemeColors.toastBackground,
         ),
         child: Row(
           children: [
@@ -27,7 +26,7 @@ class UIUtils {
                 overflow: TextOverflow.ellipsis,
                 maxLines: 3,
                 style: FontStyles.fontNormal500.copyWith(
-                  color: context.getColor(ThemeColors.toastText),
+                  color: ThemeColors.toastText,
                 ),
               ),
             ),

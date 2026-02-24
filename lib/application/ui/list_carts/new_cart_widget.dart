@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../../generated/l10n.dart';
 
@@ -52,7 +53,7 @@ class _NewCartWidgetState extends State<NewCartWidget> {
                 },
                 onTap: () {
                   if (_textEditingController.text.isEmpty) {
-                    _textEditingController.text = DateTime.now().toString();
+                    _textEditingController.text = DateFormat.yMMMd().format(DateTime.now());
                     _textEditingController.selection = TextSelection(
                       baseOffset: 0,
                       extentOffset: _textEditingController.value.text.length,

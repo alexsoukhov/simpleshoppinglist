@@ -9,4 +9,6 @@ class CartEvent with _$CartEvent {
   const factory CartEvent.reorder(int oldIndex, int newIndex) = CartEventReorder;
 
   const factory CartEvent.toggle(CartItem item) = CartEventToggle;
+
+  const factory CartEvent.delete(CartItem item) = CartEventDelete;
 }

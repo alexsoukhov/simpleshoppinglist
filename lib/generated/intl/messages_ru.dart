@@ -22,8 +22,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "a": MessageLookupByLibrary.simpleMessage("A"),
         "cart_name": MessageLookupByLibrary.simpleMessage("Название списка"),
-        "error_general": MessageLookupByLibrary.simpleMessage("Ошибка")
+        "error_general": MessageLookupByLibrary.simpleMessage("Ошибка"),
+        "remove_item": MessageLookupByLibrary.simpleMessage("Удалить элемент")
       };
 }

@@ -55,12 +55,12 @@ extension CartsListEventPatterns on CartsListEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( CartsListEventInit value)?  init,TResult Function( CartsListEventSelect value)?  select,TResult Function( CartsListEventCreateList value)?  createList,TResult Function( CartsListEventReorder value)?  reorder,TResult Function( CartsListEventOpenCartPage value)?  openCartPage,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( CartsListEventInit value)?  init,TResult Function( CartsListEventDelete value)?  delete,TResult Function( CartsListEventCreateList value)?  createList,TResult Function( CartsListEventReorder value)?  reorder,TResult Function( CartsListEventOpenCartPage value)?  openCartPage,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case CartsListEventInit() when init != null:
-return init(_that);case CartsListEventSelect() when select != null:
-return select(_that);case CartsListEventCreateList() when createList != null:
+return init(_that);case CartsListEventDelete() when delete != null:
+return delete(_that);case CartsListEventCreateList() when createList != null:
 return createList(_that);case CartsListEventReorder() when reorder != null:
 return reorder(_that);case CartsListEventOpenCartPage() when openCartPage != null:
 return openCartPage(_that);case _:
@@ -81,12 +81,12 @@ return openCartPage(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( CartsListEventInit value)  init,required TResult Function( CartsListEventSelect value)  select,required TResult Function( CartsListEventCreateList value)  createList,required TResult Function( CartsListEventReorder value)  reorder,required TResult Function( CartsListEventOpenCartPage value)  openCartPage,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( CartsListEventInit value)  init,required TResult Function( CartsListEventDelete value)  delete,required TResult Function( CartsListEventCreateList value)  createList,required TResult Function( CartsListEventReorder value)  reorder,required TResult Function( CartsListEventOpenCartPage value)  openCartPage,}){
 final _that = this;
 switch (_that) {
 case CartsListEventInit():
-return init(_that);case CartsListEventSelect():
-return select(_that);case CartsListEventCreateList():
+return init(_that);case CartsListEventDelete():
+return delete(_that);case CartsListEventCreateList():
 return createList(_that);case CartsListEventReorder():
 return reorder(_that);case CartsListEventOpenCartPage():
 return openCartPage(_that);case _:
@@ -106,12 +106,12 @@ return openCartPage(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( CartsListEventInit value)?  init,TResult? Function( CartsListEventSelect value)?  select,TResult? Function( CartsListEventCreateList value)?  createList,TResult? Function( CartsListEventReorder value)?  reorder,TResult? Function( CartsListEventOpenCartPage value)?  openCartPage,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( CartsListEventInit value)?  init,TResult? Function( CartsListEventDelete value)?  delete,TResult? Function( CartsListEventCreateList value)?  createList,TResult? Function( CartsListEventReorder value)?  reorder,TResult? Function( CartsListEventOpenCartPage value)?  openCartPage,}){
 final _that = this;
 switch (_that) {
 case CartsListEventInit() when init != null:
-return init(_that);case CartsListEventSelect() when select != null:
-return select(_that);case CartsListEventCreateList() when createList != null:
+return init(_that);case CartsListEventDelete() when delete != null:
+return delete(_that);case CartsListEventCreateList() when createList != null:
 return createList(_that);case CartsListEventReorder() when reorder != null:
 return reorder(_that);case CartsListEventOpenCartPage() when openCartPage != null:
 return openCartPage(_that);case _:
@@ -131,11 +131,11 @@ return openCartPage(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  init,TResult Function( Cart cart)?  select,TResult Function( String name)?  createList,TResult Function( int oldIndex,  int newIndex)?  reorder,TResult Function()?  openCartPage,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  init,TResult Function( Cart cart)?  delete,TResult Function( String name)?  createList,TResult Function( int oldIndex,  int newIndex)?  reorder,TResult Function()?  openCartPage,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case CartsListEventInit() when init != null:
-return init();case CartsListEventSelect() when select != null:
-return select(_that.cart);case CartsListEventCreateList() when createList != null:
+return init();case CartsListEventDelete() when delete != null:
+return delete(_that.cart);case CartsListEventCreateList() when createList != null:
 return createList(_that.name);case CartsListEventReorder() when reorder != null:
 return reorder(_that.oldIndex,_that.newIndex);case CartsListEventOpenCartPage() when openCartPage != null:
 return openCartPage();case _:
@@ -156,11 +156,11 @@ return openCartPage();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  init,required TResult Function( Cart cart)  select,required TResult Function( String name)  createList,required TResult Function( int oldIndex,  int newIndex)  reorder,required TResult Function()  openCartPage,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  init,required TResult Function( Cart cart)  delete,required TResult Function( String name)  createList,required TResult Function( int oldIndex,  int newIndex)  reorder,required TResult Function()  openCartPage,}) {final _that = this;
 switch (_that) {
 case CartsListEventInit():
-return init();case CartsListEventSelect():
-return select(_that.cart);case CartsListEventCreateList():
+return init();case CartsListEventDelete():
+return delete(_that.cart);case CartsListEventCreateList():
 return createList(_that.name);case CartsListEventReorder():
 return reorder(_that.oldIndex,_that.newIndex);case CartsListEventOpenCartPage():
 return openCartPage();case _:
@@ -180,11 +180,11 @@ return openCartPage();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  init,TResult? Function( Cart cart)?  select,TResult? Function( String name)?  createList,TResult? Function( int oldIndex,  int newIndex)?  reorder,TResult? Function()?  openCartPage,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  init,TResult? Function( Cart cart)?  delete,TResult? Function( String name)?  createList,TResult? Function( int oldIndex,  int newIndex)?  reorder,TResult? Function()?  openCartPage,}) {final _that = this;
 switch (_that) {
 case CartsListEventInit() when init != null:
-return init();case CartsListEventSelect() when select != null:
-return select(_that.cart);case CartsListEventCreateList() when createList != null:
+return init();case CartsListEventDelete() when delete != null:
+return delete(_that.cart);case CartsListEventCreateList() when createList != null:
 return createList(_that.name);case CartsListEventReorder() when reorder != null:
 return reorder(_that.oldIndex,_that.newIndex);case CartsListEventOpenCartPage() when openCartPage != null:
 return openCartPage();case _:
@@ -230,8 +230,8 @@ String toString() {
 /// @nodoc
 
 
-class CartsListEventSelect implements CartsListEvent {
-  const CartsListEventSelect(this.cart);
+class CartsListEventDelete implements CartsListEvent {
+  const CartsListEventDelete(this.cart);
   
 
  final  Cart cart;
@@ -240,13 +240,13 @@ class CartsListEventSelect implements CartsListEvent {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$CartsListEventSelectCopyWith<CartsListEventSelect> get copyWith => _$CartsListEventSelectCopyWithImpl<CartsListEventSelect>(this, _$identity);
+$CartsListEventDeleteCopyWith<CartsListEventDelete> get copyWith => _$CartsListEventDeleteCopyWithImpl<CartsListEventDelete>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CartsListEventSelect&&(identical(other.cart, cart) || other.cart == cart));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CartsListEventDelete&&(identical(other.cart, cart) || other.cart == cart));
 }
 
 
@@ -255,15 +255,15 @@ int get hashCode => Object.hash(runtimeType,cart);
 
 @override
 String toString() {
-  return 'CartsListEvent.select(cart: $cart)';
+  return 'CartsListEvent.delete(cart: $cart)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $CartsListEventSelectCopyWith<$Res> implements $CartsListEventCopyWith<$Res> {
-  factory $CartsListEventSelectCopyWith(CartsListEventSelect value, $Res Function(CartsListEventSelect) _then) = _$CartsListEventSelectCopyWithImpl;
+abstract mixin class $CartsListEventDeleteCopyWith<$Res> implements $CartsListEventCopyWith<$Res> {
+  factory $CartsListEventDeleteCopyWith(CartsListEventDelete value, $Res Function(CartsListEventDelete) _then) = _$CartsListEventDeleteCopyWithImpl;
 @useResult
 $Res call({
  Cart cart
@@ -274,17 +274,17 @@ $CartCopyWith<$Res> get cart;
 
 }
 /// @nodoc
-class _$CartsListEventSelectCopyWithImpl<$Res>
-    implements $CartsListEventSelectCopyWith<$Res> {
-  _$CartsListEventSelectCopyWithImpl(this._self, this._then);
+class _$CartsListEventDeleteCopyWithImpl<$Res>
+    implements $CartsListEventDeleteCopyWith<$Res> {
+  _$CartsListEventDeleteCopyWithImpl(this._self, this._then);
 
-  final CartsListEventSelect _self;
-  final $Res Function(CartsListEventSelect) _then;
+  final CartsListEventDelete _self;
+  final $Res Function(CartsListEventDelete) _then;
 
 /// Create a copy of CartsListEvent
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? cart = null,}) {
-  return _then(CartsListEventSelect(
+  return _then(CartsListEventDelete(
 null == cart ? _self.cart : cart // ignore: cast_nullable_to_non_nullable
 as Cart,
   ));

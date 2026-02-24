@@ -44,6 +44,8 @@ class CartsRepository {
     notifySelectedCart();
   }
 
+  Future<void> remove(Cart cart) => _hiveSource.removeCart(cart.toDto());
+
   final StreamController<Cart?> _selectedCartStreamController =
       BehaviorSubject();
 
@@ -54,7 +56,7 @@ class CartsRepository {
   }
 
   void saveSelectedCart(Cart cart) {
-    _hiveSource.setCart(cart);
+    _hiveSource.setCart(cart.toDto());
 
     selectedCart = cart;
   }

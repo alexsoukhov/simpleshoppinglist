@@ -36,11 +36,15 @@ class _CartPageState extends State<CartPage> {
                 title: ProductInputWidget(
                   onPressed: (text) => _onAdd(context, text),
                   onCallback: (String search) {
-                    return state.suggestions
-                        .where(
-                          (e) => e.toLowerCase().contains(search.toLowerCase()),
-                        )
-                        .toList();
+                    return search.length > 1
+                        ? state.suggestions
+                              .where(
+                                (e) => e.toLowerCase().contains(
+                                  search.toLowerCase(),
+                                ),
+                              )
+                              .toList()
+                        : [];
                   },
                 ),
                 floating: true,
@@ -56,6 +60,8 @@ class _CartPageState extends State<CartPage> {
                       index: index,
                       onLongPress: () =>
                           _onLongPress(context, state.data!.items[index]),
+                      onDelete: () =>
+                          _onDelete(context, state.data!.items[index]),
                     ),
                   );
                 },
@@ -72,6 +78,10 @@ class _CartPageState extends State<CartPage> {
 
   void _onLongPress(BuildContext context, CartItem item) {
     CartBloc.of(context).add(CartEvent.toggle(item));
+  }
+
+  void _onDelete(BuildContext context, CartItem item) {
+    CartBloc.of(context).add(CartEvent.delete(item));
   }
 
   void _onAdd(BuildContext context, String name) {

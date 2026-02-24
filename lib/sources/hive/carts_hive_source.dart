@@ -26,7 +26,9 @@ mixin CartsHiveSource {
 
   CartDto? getCart(int id) => _cartsBox.get(id);
 
-  Future<void> setCart(Cart cart) async => _cartsBox.put(cart.index, cart.toDto());
+  Future<void> setCart(CartDto cart) async => _cartsBox.put(cart.index, cart);
+
+  Future<void> removeCart(CartDto cart) async => _cartsBox.delete(cart.index);
 
   Future<List<CartDto>> get carts async => _cartsBox.values.toList();
 

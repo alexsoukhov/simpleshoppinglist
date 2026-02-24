@@ -51,6 +51,8 @@ class _CartsListPageState extends State<CartsListPage> {
                         selectedCart: state.selectedCart,
                         index: index,
                         onPressed: () => _onSelect(context, state.data[index]),
+                        onDelete: () => _onDelete(context, state.data[index]),
+                        //_onMenu(context, state.data[index]),
                       ),
                     );
                   },
@@ -76,5 +78,9 @@ class _CartsListPageState extends State<CartsListPage> {
 
   void _onSelect(BuildContext context, Cart cart) {
     MainBloc.of(context).add(MainEvent.select(cart));
+  }
+
+  void _onDelete(BuildContext context, Cart cart) {
+    CartsListBloc.of(context).add(CartsListEvent.delete(cart));
   }
 }

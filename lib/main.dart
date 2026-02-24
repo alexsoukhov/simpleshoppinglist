@@ -1,4 +1,3 @@
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,8 +26,9 @@ final GoRouter _router = GoRouter(
         return const MainPage();
       },
       routes: <RouteBase>[
+        //TODO(AS):
         GoRoute(
-          path: 'details',
+          path: 'settings',
           builder: (BuildContext context, GoRouterState state) {
             return const SizedBox();
           },
@@ -56,59 +56,30 @@ class MyApp extends StatelessWidget {
     return ApplicationProviders(
       builder: (context) => Builder(
         builder: (context) => MaterialApp.router(
-            debugShowCheckedModeBanner: false,
-            routerConfig: _router,
-            localizationsDelegates: const [
-              S.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            builder: (context, widget) => ApplicationLifecycleListener(
-              repository: context.read<AppLifecycleStateRepository>(),
-              builder: (context) {
-                return ApplicationError(child: widget ?? const SizedBox());
-              },
-            ),
-            theme: ThemeData(        colorScheme: .fromSeed(seedColor: Colors.blue, brightness: Brightness.dark),
-            ),
-            locale: const Locale.fromSubtags(languageCode: 'ru'),
-            supportedLocales: S.delegate.supportedLocales,
+          debugShowCheckedModeBanner: false,
+          routerConfig: _router,
+          localizationsDelegates: const [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          builder: (context, widget) => ApplicationLifecycleListener(
+            repository: context.read<AppLifecycleStateRepository>(),
+            builder: (context) {
+              return ApplicationError(child: widget ?? const SizedBox());
+            },
           ),
-        ),
-    );
-  }
-
-
-/*  @override
-  Widget build(BuildContext context) {
-    return ApplicationProviders(
-      builder: (context) => Builder(
-        builder: (context) => AdaptiveTheme(
-          light: ThemeData(brightness: Brightness.light),
-          dark: ThemeData(brightness: Brightness.dark),
-          initial: AdaptiveThemeMode.dark,
-          builder: (theme, theme2) => MaterialApp.router(
-            debugShowCheckedModeBanner: false,
-            routerConfig: _router,
-            localizationsDelegates: const [
-              S.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            builder: (context, widget) => ApplicationLifecycleListener(
-              repository: context.read<AppLifecycleStateRepository>(),
-              builder: (context) {
-                return ApplicationError(child: widget ?? const SizedBox());
-              },
+          theme: ThemeData(
+            colorScheme: .fromSeed(
+              seedColor: Colors.blue,
+              brightness: Brightness.dark,
             ),
-            theme: theme,
-            locale: const Locale.fromSubtags(languageCode: 'ru'),
-            supportedLocales: S.delegate.supportedLocales,
           ),
+          locale: const Locale.fromSubtags(languageCode: 'ru'),
+          supportedLocales: S.delegate.supportedLocales,
         ),
       ),
     );
-  }*/
+  }
 }

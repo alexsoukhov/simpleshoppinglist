@@ -17,14 +17,15 @@ part 'carts_list_event.dart';
 
 part 'carts_list_state.dart';
 
-class CartsListBloc extends Bloc<CartsListEvent, CartsListState> with BlocPresentationMixin<CartsListState, CartsListEvent> {
+class CartsListBloc extends Bloc<CartsListEvent, CartsListState>
+    with BlocPresentationMixin<CartsListState, CartsListEvent> {
   CartsListBloc(this._cartsRepository, this._errorBloc)
     : super(CartsListState(loading: true)) {
     on<CartsListEventInit>((event, emit) async {
       await _initData(emit);
     });
-    on<CartsListEventSelect>(_select);
     on<CartsListEventCreateList>(_createList);
+    on<CartsListEventDelete>(_delete);
     on<CartsListEventReorder>(_reorder);
 
     add(const CartsListEventInit());
@@ -38,65 +39,55 @@ class CartsListBloc extends Bloc<CartsListEvent, CartsListState> with BlocPresen
 
   Future<void> _initData(Emitter<CartsListState> emit) async {
     await Rx.combineLatest2(
-        _cartsRepository.cartsStream,
-        _cartsRepository.selectedCartStream,
-            (List<Cart> stream1, Cart? stream2) {
-          return [stream1, stream2];
-        }).forEach((element) async {
-
-      emit(state.copyWith(data: element[0] as List<Cart>, selectedCart: element[1] as Cart?));
+      _cartsRepository.cartsStream,
+      _cartsRepository.selectedCartStream,
+      (List<Cart> stream1, Cart? stream2) {
+        return [stream1, stream2];
+      },
+    ).forEach((element) async {
+      emit(
+        state.copyWith(
+          data: (element[0] as List<Cart>).reversed.toList(),
+          selectedCart: element[1] as Cart?,
+        ),
+      );
     });
-  }
-
-  Future<void> _select(
-    CartsListEventSelect event,
-    Emitter<CartsListState> emit,
-  ) async {
-    _cartsRepository.selectedCart = event.cart;
-
-    emitPresentation(CartsListEvent.openCartPage());
   }
 
   Future<void> _createList(
     CartsListEventCreateList event,
     Emitter<CartsListState> emit,
   ) async {
-    _cartsRepository.add(
-      Cart(id: Uuid().v4(), name: event.name, date: DateTime.now(), items: []),
-    );
+    if (event.name.isNotEmpty) {
+      try {
+        await _cartsRepository.add(
+          Cart(
+            id: Uuid().v4(),
+            name: event.name,
+            date: DateTime.now(),
+            items: [],
+          ),
+        );
+      } catch (ex) {
+        ApplicationErrorBloc.handleError(_errorBloc, ex);
+      }
+    }
   }
 
   Future<void> _reorder(
     CartsListEventReorder event,
     Emitter<CartsListState> emit,
-  ) async {
-    /*
-    if (oldIndex < newIndex) {
-      newIndex -= 1;
+  ) async {}
+
+  void _delete(CartsListEventDelete event, Emitter<CartsListState> emit) {
+    try {
+      _cartsRepository.remove(event.cart);
+
+      if (_cartsRepository.selectedCart == event.cart) {
+        _cartsRepository.selectedCart = null;
+      }
+    } catch (ex) {
+      ApplicationErrorBloc.handleError(_errorBloc, ex);
     }
-    setState(() {
-      // this is required, before you modified your box;
-      
-      _cartsRepository.getCart(id)
-      
-      final oldItem = itemsBox.getAt(oldIndex);
-      final newItem = itemsBox.getAt(newIndex);
-
-      // here you just swap this box item, oldIndex <> newIndex
-      itemsBox.putAt(oldIndex, newItem);
-      itemsBox.putAt(newIndex, oldItem);
-    });
-
-
-    _cartsRepository.selectedCart?.items.toList().
-    // this is required, before you modified your box;
-    final oldItem = itemsBox.getAt(oldIndex);
-    final newItem = itemsBox.getAt(newIndex);
-
-    // here you just swap this box item, oldIndex <> newIndex
-    itemsBox.putAt(oldIndex, newItem);
-    itemsBox.putAt(newIndex, oldItem);
-
-    emit(state);*/
   }
 }

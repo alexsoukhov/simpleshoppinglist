@@ -25,6 +25,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     on<CartEventCreateItem>(_createItem);
     on<CartEventReorder>(_reorder);
     on<CartEventToggle>(_toggle);
+    on<CartEventDelete>(_delete);
 
     add(const CartEventInit());
   }
@@ -37,7 +38,13 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
   Future<void> _initData(Emitter<CartState> emit) async {
     await _cartsRepository.selectedCartStream.forEach((element) async {
-      emit(state.copyWith(data: element, suggestions: await _cartsRepository.getSuggestions(), loading: false));
+      emit(
+        state.copyWith(
+          data: element,
+          suggestions: await _cartsRepository.getSuggestions(),
+          loading: false,
+        ),
+      );
     });
   }
 
@@ -46,16 +53,20 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     Emitter<CartState> emit,
   ) async {
     final selectedCart = _cartsRepository.selectedCart;
-    if (selectedCart != null) {
+    if (selectedCart != null && event.name.isNotEmpty) {
       final item = CartItem(
         id: Uuid().v4(),
         value: event.name,
         date: DateTime.now(),
       );
 
-      _cartsRepository.saveSelectedCart(
-        selectedCart.copyWith(items: [item, ...selectedCart.items]),
-      );
+      try {
+        _cartsRepository.saveSelectedCart(
+          selectedCart.copyWith(items: [item, ...selectedCart.items]),
+        );
+      } catch (ex) {
+        ApplicationErrorBloc.handleError(_errorBloc, ex);
+      }
     }
   }
 
@@ -73,7 +84,11 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       final item = list.removeAt(oldIndex);
       list.insert(newIndex, item);
 
-      _cartsRepository.saveSelectedCart(selectedCart.copyWith(items: list));
+      try {
+        _cartsRepository.saveSelectedCart(selectedCart.copyWith(items: list));
+      } catch (ex) {
+        ApplicationErrorBloc.handleError(_errorBloc, ex);
+      }
     }
 
     emit(state);
@@ -93,7 +108,26 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         list.insert(0, item);
       }
 
-      _cartsRepository.saveSelectedCart(selectedCart.copyWith(items: list));
+      try {
+        _cartsRepository.saveSelectedCart(selectedCart.copyWith(items: list));
+      } catch (ex) {
+        ApplicationErrorBloc.handleError(_errorBloc, ex);
+      }
+    }
+  }
+
+  Future<void> _delete(CartEventDelete event, Emitter<CartState> emit) async {
+    final selectedCart = _cartsRepository.selectedCart;
+
+    if (selectedCart != null) {
+      final list = selectedCart.items.toList();
+      list.remove(event.item);
+
+      try {
+        _cartsRepository.saveSelectedCart(selectedCart.copyWith(items: list));
+      } catch (ex) {
+        ApplicationErrorBloc.handleError(_errorBloc, ex);
+      }
     }
   }
 }
