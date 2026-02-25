@@ -8,9 +8,11 @@ class ProductInputWidget extends StatefulWidget {
     super.key,
     this.onPressed,
     this.onBack,
+    required this.allowBack,
     required this.onCallback,
   });
 
+  final bool allowBack;
   final void Function(String value)? onPressed;
   final VoidCallback? onBack;
   final FutureOr<List<String>?> Function(String search) onCallback;
@@ -54,7 +56,7 @@ class _ProductInputWidgetState extends State<ProductInputWidget> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            IconButton(onPressed: widget.onBack, icon: Icon(Icons.arrow_back)),
+            if (widget.allowBack) IconButton(onPressed: widget.onBack, icon: Icon(Icons.arrow_back)),
             Expanded(
               child: TypeAheadField<String>(
                 focusNode: _focusNode,
@@ -76,6 +78,7 @@ class _ProductInputWidgetState extends State<ProductInputWidget> {
                 ),
                 decorationBuilder: (context, child) => Material(
                   type: MaterialType.card,
+                  color: Theme.of(context).colorScheme.surfaceContainerLow,
                   elevation: 4,
                   child: child,
                 ),

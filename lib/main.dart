@@ -13,6 +13,8 @@ import 'config.dart';
 import 'generated/l10n.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   Config.dev();
 
   runApp(const MyApp());

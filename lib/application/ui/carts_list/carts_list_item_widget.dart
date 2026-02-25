@@ -52,6 +52,14 @@ class _CartsListItemWidgetState extends State<CartsListItemWidget> {
                   onTap: widget.onPressed,
                   onLongPress: () => _menuController.open(),
                   title: Text(widget.cart.name),
+                  subtitle: Text(
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    widget.cart.items
+                        .where((e) => !e.marked)
+                        .take(10)
+                        .fold("", (e1, e2) => "$e1 ${e2.value}"),
+                  ),
                   //TODO(AS):
                   /*trailing: ReorderableDragStartListener(
                     index: widget.index,

@@ -10,7 +10,9 @@ import '../../bloc/cart/cart_bloc.dart';
 import 'cart_item_widget.dart';
 
 class CartPage extends StatefulWidget {
-  const CartPage({super.key});
+  const CartPage({super.key, this.allowBack = true});
+
+  final bool allowBack;
 
   @override
   State<CartPage> createState() => _CartPageState();
@@ -29,10 +31,11 @@ class _CartPageState extends State<CartPage> {
           return CustomScrollView(
             slivers: <Widget>[
               SliverAppBar(
-                automaticallyImplyLeading: false,
+                forceMaterialTransparency: true,
                 title: ProductInputWidget(
                   onPressed: (text) => _onAdd(context, text),
                   onBack: () => _onBack(context),
+                  allowBack: widget.allowBack,
                   onCallback: (String search) {
                     return search.length > 1
                         ? state.suggestions

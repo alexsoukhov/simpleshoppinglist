@@ -34,7 +34,7 @@ class _CartsListPageState extends State<CartsListPage> {
             return CustomScrollView(
               slivers: <Widget>[
                 SliverAppBar(
-                  automaticallyImplyLeading: false,
+                  forceMaterialTransparency: true,
                   title: NewCartWidget(
                     onPressed: (text) => _onAdd(context, text),
                   ),

@@ -36,38 +36,53 @@ class _MainPageState extends State<MainPage> {
         },
         child: BlocPresentationListener<MainBloc, MainEvent>(
           listener: (context, event) {
-            switch (event) {
-              case MainEventOpenCartPage():
-                _pageController.animateToPage(
-                  1,
-                  duration: const Duration(milliseconds: 200),
-                  curve: Curves.easeInOut,
-                );
-                break;
-              case MainEventOpenCartsListPage():
-                _pageController.animateToPage(
-                  0,
-                  duration: const Duration(milliseconds: 200),
-                  curve: Curves.easeInOut,
-                );
-                break;
+            if (_pageController.positions.isNotEmpty) {
+              switch (event) {
+                case MainEventOpenCartPage():
+                  _pageController.animateToPage(
+                    1,
+                    duration: const Duration(milliseconds: 200),
+                    curve: Curves.easeInOut,
+                  );
+                  break;
+                case MainEventOpenCartsListPage():
+                  _pageController.animateToPage(
+                    0,
+                    duration: const Duration(milliseconds: 200),
+                    curve: Curves.easeInOut,
+                  );
+                  break;
+              }
             }
           },
           child: BlocBuilder<MainBloc, MainState>(
             builder: (context, state) {
-              return OrientationBuilder(
-                builder: (context, state) {
-                  //TODO(AS): portrait/landscape
-                  return Material(
-                    child: Scaffold(
-                      body: PageView(
-                        controller: _pageController,
-                        // The children are the individual pages the user can swipe between
-                        children: <Widget>[CartsListPage(), CartPage()],
-                      ),
-                    ),
-                  );
-                },
+              return Material(
+                child: Scaffold(
+                  body: OrientationBuilder(
+                    builder: (context, orientation) {
+                      if (orientation == Orientation.portrait) {
+                        return PageView(
+                          controller: _pageController,
+                          children: <Widget>[CartsListPage(), CartPage()],
+                        );
+                      } else {
+                        return SafeArea(
+                          left: true,
+                          right: true,
+                          top: false,
+                          bottom: false,
+                          child: Row(
+                            children: <Widget>[
+                              Expanded(child: CartsListPage()),
+                              Expanded(child: CartPage(allowBack: false)),
+                            ],
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                ),
               );
             },
           ),

@@ -46,6 +46,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                   children: [
                     Expanded(
                       child: ListTile(
+                        onTap: () => _menuController.open(),
                         onLongPress: widget.onLongPress,
                         title: Text(
                           widget.cart.value,
