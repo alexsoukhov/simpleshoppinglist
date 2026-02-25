@@ -79,6 +79,26 @@ class S {
       args: [],
     );
   }
+
+  /// `продукты`
+  String get def_suggestion1 {
+    return Intl.message(
+      'продукты',
+      name: 'def_suggestion1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `аптека`
+  String get def_suggestion2 {
+    return Intl.message(
+      'аптека',
+      name: 'def_suggestion2',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

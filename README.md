@@ -7,8 +7,9 @@ Work in progress.
 Todo:
 - ~~portrait/lanscape support~~
 - ~~preview items~~
-- list name suggestions
+- ~~list name suggestions~~
 - share list via messengers
 - clipboard
 - settings
+- vibro
 etc

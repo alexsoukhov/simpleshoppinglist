@@ -1,8 +1,9 @@
 import 'package:bloc_presentation/bloc_presentation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:simpleshoppinglist/application/ui/carts_list/new_cart_widget.dart';
+import 'package:simpleshoppinglist/application/ui/carts_list/cart_name_input_widget.dart';
 import 'package:simpleshoppinglist/repositories/carts_repository.dart';
+import 'package:simpleshoppinglist/repositories/preferences_repository.dart';
 
 import '../../../data/models/cart.dart';
 import '../../bloc/application_error/application_error_bloc.dart';
@@ -35,8 +36,13 @@ class _CartsListPageState extends State<CartsListPage> {
               slivers: <Widget>[
                 SliverAppBar(
                   forceMaterialTransparency: true,
-                  title: NewCartWidget(
+                  title: CartNameInputWidget(
                     onPressed: (text) => _onAdd(context, text),
+                    onCallback: (String search) {
+                      return context
+                          .read<PreferencesRepository>()
+                          .getSuggestionsForValue(search);
+                    },
                   ),
                   floating: true,
                   titleSpacing: 0,

@@ -2,5 +2,7 @@
   "@@locale" : "ru",
   "error_general": "Ошибка",
   "cart_name": "Название списка",
-  "remove_item": "Удалить элемент"
+  "remove_item": "Удалить элемент",
+  "def_suggestion1": "продукты",
+  "def_suggestion2": "аптека"
 }

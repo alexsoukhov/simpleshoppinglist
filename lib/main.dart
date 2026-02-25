@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:simpleshoppinglist/application/ui/main/main_page.dart';
 import 'package:simpleshoppinglist/repositories/app_lifecycle_state_repository.dart';
+import 'package:simpleshoppinglist/sources/preferences/preferences_source.dart';
 
 import 'application/application_error.dart';
 import 'application/application_lifecycle_listener.dart';
@@ -69,6 +70,7 @@ class MyApp extends StatelessWidget {
           builder: (context, widget) => ApplicationLifecycleListener(
             repository: context.read<AppLifecycleStateRepository>(),
             builder: (context) {
+              PreferencesSource.initDefaultValues(context);
               return ApplicationError(child: widget ?? const SizedBox());
             },
           ),
