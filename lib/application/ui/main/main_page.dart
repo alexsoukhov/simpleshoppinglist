@@ -61,25 +61,23 @@ class _MainPageState extends State<MainPage> {
                 child: Scaffold(
                   body: OrientationBuilder(
                     builder: (context, orientation) {
-                      if (orientation == Orientation.portrait) {
-                        return PageView(
-                          controller: _pageController,
-                          children: <Widget>[CartsListPage(), CartPage()],
-                        );
-                      } else {
-                        return SafeArea(
-                          left: true,
-                          right: true,
-                          top: false,
-                          bottom: false,
-                          child: Row(
-                            children: <Widget>[
-                              Expanded(child: CartsListPage()),
-                              Expanded(child: CartPage(allowBack: false)),
-                            ],
-                          ),
-                        );
-                      }
+                      return orientation == Orientation.portrait
+                          ? PageView(
+                              controller: _pageController,
+                              children: <Widget>[CartsListPage(), CartPage()],
+                            )
+                          : SafeArea(
+                              left: true,
+                              right: true,
+                              top: false,
+                              bottom: false,
+                              child: Row(
+                                children: <Widget>[
+                                  Expanded(child: CartsListPage()),
+                                  Expanded(child: CartPage(allowBack: false)),
+                                ],
+                              ),
+                            );
                     },
                   ),
                 ),

@@ -4,11 +4,13 @@ import 'package:bloc_presentation/bloc_presentation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:intl/intl.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:simpleshoppinglist/data/models/cart.dart';
 import 'package:simpleshoppinglist/repositories/carts_repository.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../repositories/preferences_repository.dart';
 import '../application_error/application_error_bloc.dart';
 
 part 'carts_list_bloc.freezed.dart';
@@ -19,7 +21,7 @@ part 'carts_list_state.dart';
 
 class CartsListBloc extends Bloc<CartsListEvent, CartsListState>
     with BlocPresentationMixin<CartsListState, CartsListEvent> {
-  CartsListBloc(this._cartsRepository, this._errorBloc)
+  CartsListBloc(this._cartsRepository, this._preferencesRepository, this._errorBloc)
     : super(CartsListState(loading: true)) {
     on<CartsListEventInit>((event, emit) async {
       await _initData(emit);
@@ -32,6 +34,7 @@ class CartsListBloc extends Bloc<CartsListEvent, CartsListState>
   }
 
   final CartsRepository _cartsRepository;
+  final PreferencesRepository _preferencesRepository;
   final ApplicationErrorBloc _errorBloc;
 
   static CartsListBloc of(BuildContext context) =>
@@ -90,4 +93,27 @@ class CartsListBloc extends Bloc<CartsListEvent, CartsListState>
       ApplicationErrorBloc.handleError(_errorBloc, ex);
     }
   }
+
+  List<String> getSuggestions(String value) {
+    List<String> vals = _preferencesRepository.cartNameSuggestions;
+
+    List<String> result = [];
+
+    String v = value.toLowerCase();
+
+    result = vals.where((e) => !v.contains(e.toLowerCase())).toList();
+
+    if (_preferencesRepository.cartNameSuggestionDate) {
+      String date = DateFormat.yMMMd().format(
+        DateTime.now(),
+      );
+
+      if (!v.contains(date.toLowerCase())) {
+        result.insert(0, date);
+      }
+    }
+
+    return result;
+  }
+
 }

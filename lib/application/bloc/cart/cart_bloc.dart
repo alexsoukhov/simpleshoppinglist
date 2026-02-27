@@ -130,4 +130,12 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       }
     }
   }
+
+  List<String> getSuggestions(String search) {
+    return search.length > 1
+        ? state.suggestions
+              .where((e) => e.toLowerCase().contains(search.toLowerCase()))
+              .toList()
+        : [];
+  }
 }

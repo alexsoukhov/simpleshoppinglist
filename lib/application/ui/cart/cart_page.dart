@@ -35,17 +35,10 @@ class _CartPageState extends State<CartPage> {
                 title: ProductInputWidget(
                   onPressed: (text) => _onAdd(context, text),
                   onBack: () => _onBack(context),
+                  enabled: state.data != null,
                   allowBack: widget.allowBack,
                   onCallback: (String search) {
-                    return search.length > 1
-                        ? state.suggestions
-                              .where(
-                                (e) => e.toLowerCase().contains(
-                                  search.toLowerCase(),
-                                ),
-                              )
-                              .toList()
-                        : [];
+                    return CartBloc.of(context).getSuggestions(search);
                   },
                 ),
                 floating: true,

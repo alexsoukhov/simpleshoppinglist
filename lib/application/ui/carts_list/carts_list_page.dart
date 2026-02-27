@@ -24,6 +24,7 @@ class _CartsListPageState extends State<CartsListPage> {
     return BlocProvider(
       create: (context) => CartsListBloc(
         context.read<CartsRepository>(),
+        context.read<PreferencesRepository>(),
         ApplicationErrorBloc.of(context),
       ),
       child: BlocPresentationListener<CartsListBloc, CartsListEvent>(
@@ -39,9 +40,7 @@ class _CartsListPageState extends State<CartsListPage> {
                   title: CartNameInputWidget(
                     onPressed: (text) => _onAdd(context, text),
                     onCallback: (String search) {
-                      return context
-                          .read<PreferencesRepository>()
-                          .getSuggestionsForValue(search);
+                      return CartsListBloc.of(context).getSuggestions(search);
                     },
                   ),
                   floating: true,

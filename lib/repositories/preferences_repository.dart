@@ -11,25 +11,13 @@ class PreferencesRepository {
   static PreferencesRepository of(BuildContext context) =>
       context.read<PreferencesRepository>();
 
-  List<String> getSuggestionsForValue(String value) {
-    List<String> vals = _preferencesSource.cartSuggestions;
+  List<String> get cartNameSuggestions => _preferencesSource.cartNameSuggestions;
 
-    List<String> result = [];
+  set cartNameSuggestions(List<String> value) =>
+      _preferencesSource.cartNameSuggestions = value;
 
-    String v = value.toLowerCase();
+  bool get cartNameSuggestionDate => _preferencesSource.cartNameSuggestionDate;
 
-    result = vals.where((e) => !v.contains(e.toLowerCase())).toList();
-
-    if (_preferencesSource.cartSuggestionDate) {
-      String date = DateFormat.yMMMd().format(
-        DateTime.now(),
-      );
-
-      if (!v.contains(date.toLowerCase())) {
-        result.insert(0, date);
-      }
-    }
-
-    return result;
-  }
+  set cartNameSuggestionDate(bool value) =>
+      _preferencesSource.cartNameSuggestionDate = value;
 }

@@ -35,15 +35,15 @@ class PreferencesSource {
     _preferences = await SharedPreferences.getInstance();
   }
 
-  List<String> get cartSuggestions =>
+  List<String> get cartNameSuggestions =>
       _preferences.getStringList(_cartSuggestionsName) ?? _defaultSuggestions;
 
-  set cartSuggestions(List<String> values) =>
+  set cartNameSuggestions(List<String> values) =>
       _preferences.setStringList(_cartSuggestionsName, values);
 
-  bool get cartSuggestionDate =>
+  bool get cartNameSuggestionDate =>
       _preferences.getBool(_cartSuggestionDateName) ?? true;
 
-  set cartSuggestionDate(bool value) =>
+  set cartNameSuggestionDate(bool value) =>
       _preferences.setBool(_cartSuggestionDateName, value);
 }

@@ -2,9 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:intl/intl.dart';
-
-import '../../../generated/l10n.dart';
 
 class CartNameInputWidget extends StatefulWidget {
   const CartNameInputWidget({
@@ -67,6 +64,7 @@ class _CartNameInputWidgetState extends State<CartNameInputWidget> {
                     widget.onPressed?.call(_textEditingController.text);
                     _textEditingController.text = "";
                   },
+                  onTapUpOutside: (_) => {focusNode.unfocus()},
                   controller: controller,
                   focusNode: focusNode,
                   decoration: InputDecoration(

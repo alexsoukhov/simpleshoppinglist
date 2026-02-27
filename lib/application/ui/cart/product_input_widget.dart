@@ -8,10 +8,12 @@ class ProductInputWidget extends StatefulWidget {
     super.key,
     this.onPressed,
     this.onBack,
+    this.enabled = true,
     required this.allowBack,
     required this.onCallback,
   });
 
+  final bool enabled;
   final bool allowBack;
   final void Function(String value)? onPressed;
   final VoidCallback? onBack;
@@ -24,7 +26,7 @@ class ProductInputWidget extends StatefulWidget {
 class _ProductInputWidgetState extends State<ProductInputWidget> {
   final TextEditingController _textEditingController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
-  bool clear = false;
+  bool _clear = false;
 
   @override
   void initState() {
@@ -42,7 +44,7 @@ class _ProductInputWidgetState extends State<ProductInputWidget> {
 
   void _onTextChanged() {
     setState(() {
-      clear = _textEditingController.text.isNotEmpty;
+      _clear = _textEditingController.text.isNotEmpty;
     });
   }
 
@@ -56,40 +58,48 @@ class _ProductInputWidgetState extends State<ProductInputWidget> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            if (widget.allowBack) IconButton(onPressed: widget.onBack, icon: Icon(Icons.arrow_back)),
+            if (widget.allowBack)
+              IconButton(
+                onPressed: widget.onBack,
+                icon: Icon(Icons.arrow_back),
+              ),
             Expanded(
-              child: TypeAheadField<String>(
-                focusNode: _focusNode,
-                suggestionsCallback: widget.onCallback,
-                controller: _textEditingController,
-                hideOnEmpty: true,
-                builder: (context, controller, focusNode) => TextField(
-                  onSubmitted: (_) {
-                    widget.onPressed?.call(_textEditingController.text);
-                    _textEditingController.text = "";
-                  },
-                  controller: controller,
-                  focusNode: focusNode,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: "",
+              child: AbsorbPointer(
+                absorbing: !widget.enabled,
+                child: TypeAheadField<String>(
+                  focusNode: _focusNode,
+                  suggestionsCallback: widget.onCallback,
+                  controller: _textEditingController,
+                  hideOnEmpty: true,
+                  builder: (context, controller, focusNode) => TextField(
+                    onSubmitted: (_) {
+                      widget.onPressed?.call(_textEditingController.text);
+                      _textEditingController.text = "";
+                    },
+                    onTapUpOutside: (_) => {focusNode.unfocus()},
+                    controller: controller,
+                    focusNode: focusNode,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: "",
+                    ),
+                    textInputAction: TextInputAction.done,
                   ),
-                  textInputAction: TextInputAction.done,
+                  decorationBuilder: (context, child) => Material(
+                    type: MaterialType.card,
+                    color: Theme.of(context).colorScheme.surfaceContainerLow,
+                    elevation: 4,
+                    child: child,
+                  ),
+                  itemBuilder: (context, item) => ListTile(title: Text(item)),
+                  onSelected: (String value) {
+                    _textEditingController.text = value;
+                  },
                 ),
-                decorationBuilder: (context, child) => Material(
-                  type: MaterialType.card,
-                  color: Theme.of(context).colorScheme.surfaceContainerLow,
-                  elevation: 4,
-                  child: child,
-                ),
-                itemBuilder: (context, item) => ListTile(title: Text(item)),
-                onSelected: (String value) {
-                  _textEditingController.text = value;
-                },
               ),
             ),
 
-            if (clear)
+            if (_clear)
               IconButton(
                 onPressed: _textEditingController.clear,
                 icon: Icon(Icons.clear),
