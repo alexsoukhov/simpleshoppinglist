@@ -59,7 +59,9 @@ class _MainPageState extends State<MainPage> {
             builder: (context, state) {
               return Material(
                 child: Scaffold(
-                  body: OrientationBuilder(
+                  drawer: Drawer(
+                      child: SizedBox()),
+                      body: OrientationBuilder(
                     builder: (context, orientation) {
                       return orientation == Orientation.portrait
                           ? PageView(

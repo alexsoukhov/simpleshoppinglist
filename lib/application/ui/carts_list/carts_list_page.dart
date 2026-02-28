@@ -36,6 +36,31 @@ class _CartsListPageState extends State<CartsListPage> {
             return CustomScrollView(
               slivers: <Widget>[
                 SliverAppBar(
+                  leading: Builder(
+                    builder: (BuildContext context) {
+                      return Card(
+                        margin: EdgeInsets.only(left: 4, top: 4, bottom: 4),
+                        // Use the shape property to define the card's corners
+                        shape: RoundedRectangleBorder(
+                          // Specify the exact radius using BorderRadius.circular()
+                          borderRadius: BorderRadiusGeometry.only( topLeft: Radius.circular(12.0), bottomLeft: Radius.circular(12.0)), // Adjust the value (e.g., 20.0) for desired roundness
+                          // You can also add a side border if needed
+                          // side: BorderSide(width: 1, color: Colors.grey),
+                        ),
+                        elevation: 5, // Optional: adds a shadow
+                        child:  IconButton(
+                          icon: const Icon(Icons.menu),
+                          onPressed: () {
+                            Scaffold.of(context).openDrawer();
+                          },
+                          tooltip: MaterialLocalizations.of(
+                            context,
+                          ).openAppDrawerTooltip,
+                        ),
+                      );
+                    },
+                  ),
+
                   forceMaterialTransparency: true,
                   title: CartNameInputWidget(
                     onPressed: (text) => _onAdd(context, text),

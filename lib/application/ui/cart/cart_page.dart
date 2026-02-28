@@ -31,6 +31,8 @@ class _CartPageState extends State<CartPage> {
           return CustomScrollView(
             slivers: <Widget>[
               SliverAppBar(
+                automaticallyImplyLeading: false, // this will hide Drawer hamburger icon
+                actions: <Widget>[Container()],
                 forceMaterialTransparency: true,
                 title: ProductInputWidget(
                   onPressed: (text) => _onAdd(context, text),
@@ -45,6 +47,16 @@ class _CartPageState extends State<CartPage> {
                 titleSpacing: 0,
                 elevation: 1.0,
               ),
+              PinnedHeaderSliver(
+                child: Card(
+                  elevation: 5.0,
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Text(state.data?.name ?? ""),
+                  ),
+                ),
+              ),
+
               SliverReorderableList(
                 itemBuilder: (BuildContext context, int index) {
                   return CartItemWidget(
