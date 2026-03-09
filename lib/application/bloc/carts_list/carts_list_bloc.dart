@@ -29,6 +29,7 @@ class CartsListBloc extends Bloc<CartsListEvent, CartsListState>
     on<CartsListEventCreateList>(_createList);
     on<CartsListEventDelete>(_delete);
     on<CartsListEventReorder>(_reorder);
+    on<CartsListEventEdit>(_edit);
 
     add(const CartsListEventInit());
   }
@@ -114,6 +115,17 @@ class CartsListBloc extends Bloc<CartsListEvent, CartsListState>
     }
 
     return result;
+  }
+
+  void _edit(CartsListEventEdit event, Emitter<CartsListState> emit) {
+    if (event.value.isNotEmpty) {
+      try {
+
+        _cartsRepository.saveCart(event.item.copyWith(name: event.value));
+      } catch (ex) {
+        ApplicationErrorBloc.handleError(_errorBloc, ex);
+      }
+    }
   }
 
 }

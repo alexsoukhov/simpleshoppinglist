@@ -61,6 +61,10 @@ class CartsRepository {
     selectedCart = cart;
   }
 
+  void saveCart(Cart cart) {
+    _hiveSource.setCart(cart.toDto());
+  }
+
   Future<List<String>> getSuggestions() async {
     return (await _hiveSource.carts).expand((e) => e.items.map((e) => e.value)).toSet().toList();
   }

@@ -73,17 +73,19 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   }
 
   void _add(SettingsEventAdd event, Emitter<SettingsState> emit) {
-    final list = state.suggestions.toList();
-    list.add(event.value);
+    if (event.value.isNotEmpty) {
+      final list = state.suggestions.toList();
+      list.add(event.value);
 
-    SettingsState newState = state.copyWith(suggestions: list);
+      SettingsState newState = state.copyWith(suggestions: list);
 
-    emit(
-      newState.copyWith(
-        suggestions: list,
-        isModified: _originalSettings != newState,
-      ),
-    );
+      emit(
+        newState.copyWith(
+          suggestions: list,
+          isModified: _originalSettings != newState,
+        ),
+      );
+    }
   }
 
   void _switchDate(

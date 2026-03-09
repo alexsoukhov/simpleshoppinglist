@@ -26,6 +26,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     on<CartEventReorder>(_reorder);
     on<CartEventToggle>(_toggle);
     on<CartEventDelete>(_delete);
+    on<CartEventEdit>(_edit);
 
     add(const CartEventInit());
   }
@@ -122,6 +123,24 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     if (selectedCart != null) {
       final list = selectedCart.items.toList();
       list.remove(event.item);
+
+      try {
+        _cartsRepository.saveSelectedCart(selectedCart.copyWith(items: list));
+      } catch (ex) {
+        ApplicationErrorBloc.handleError(_errorBloc, ex);
+      }
+    }
+  }
+
+  Future<void> _edit(CartEventEdit event, Emitter<CartState> emit) async {
+    final selectedCart = _cartsRepository.selectedCart;
+
+    if (selectedCart != null && event.value.isNotEmpty) {
+      final list = selectedCart.items.toList();
+      int idx = list.indexOf(event.item);
+
+      final item = event.item.copyWith(value: event.value);
+      list[idx] = item;
 
       try {
         _cartsRepository.saveSelectedCart(selectedCart.copyWith(items: list));

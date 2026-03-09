@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:simpleshoppinglist/application/bloc/settings/settings_suggestion_input_widget.dart';
 import 'package:simpleshoppinglist/application/ui/settings/settings_suggestion_item_widget.dart';
 import 'package:simpleshoppinglist/repositories/preferences_repository.dart';
 
@@ -23,26 +24,28 @@ class SettingsPage extends StatelessWidget {
             body: CustomScrollView(
               slivers: <Widget>[
                 SliverAppBar(
-                  automaticallyImplyLeading: false, // this will hide Drawer hamburger icon
-                  actions: <Widget>[Container()],
                   forceMaterialTransparency: true,
-                  title: Text(
-                    S.of(context).settings,
-                  ),
+                  title: Text(S.of(context).settings),
                   titleSpacing: 0,
                   elevation: 1.0,
                 ),
                 SliverReorderableList(
                   itemBuilder: (BuildContext context, int index) {
-                    return SettingsSuggestionItemWidget(
-                      key: ObjectKey(state.suggestions[index]),
-                      item: state.suggestions[index],
-                      index: index,
-                      onDelete: () =>
-                          _onDelete(context, index),
-                    );
+                    if (index < state.suggestions.length) {
+                      return SettingsSuggestionItemWidget(
+                        key: ObjectKey(state.suggestions[index]),
+                        item: state.suggestions[index],
+                        index: index,
+                        onDelete: () => _onDelete(context, index),
+                      );
+                    } else {
+                      return SettingsSuggestionInputWidget(
+                        key: ValueKey("edit_field"),
+                        onAdd: (v) => _onAdd(context, v),
+                      );
+                    }
                   },
-                  itemCount: state.suggestions.length ?? 0,
+                  itemCount: state.suggestions.length + 1,
                   onReorder: (int oldIndex, int newIndex) =>
                       _onReorder(context, oldIndex, newIndex),
                 ),
@@ -59,7 +62,7 @@ class SettingsPage extends StatelessWidget {
   }
 
   void _onAdd(BuildContext context, String name) {
-    SettingsBloc.of(context).add(SettingsEvent.createItem(name));
+    SettingsBloc.of(context).add(SettingsEvent.add(name));
   }
 
   void _onReorder(BuildContext context, int oldIndex, int newIndex) {

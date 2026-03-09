@@ -6,7 +6,7 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 class ProductInputWidget extends StatefulWidget {
   const ProductInputWidget({
     super.key,
-    this.onPressed,
+    this.onAdd,
     this.onBack,
     this.enabled = true,
     required this.allowBack,
@@ -15,7 +15,7 @@ class ProductInputWidget extends StatefulWidget {
 
   final bool enabled;
   final bool allowBack;
-  final void Function(String value)? onPressed;
+  final void Function(String value)? onAdd;
   final VoidCallback? onBack;
   final FutureOr<List<String>?> Function(String search) onCallback;
 
@@ -73,7 +73,7 @@ class _ProductInputWidgetState extends State<ProductInputWidget> {
                   hideOnEmpty: true,
                   builder: (context, controller, focusNode) => TextField(
                     onSubmitted: (_) {
-                      widget.onPressed?.call(_textEditingController.text);
+                      widget.onAdd?.call(_textEditingController.text);
                       _textEditingController.text = "";
                     },
                     onTapUpOutside: (_) => {focusNode.unfocus()},
@@ -108,7 +108,7 @@ class _ProductInputWidgetState extends State<ProductInputWidget> {
               icon: Icon(Icons.add),
               onPressed: () {
                 _focusNode.unfocus();
-                widget.onPressed?.call(_textEditingController.text);
+                widget.onAdd?.call(_textEditingController.text);
                 _textEditingController.text = "";
               },
             ),

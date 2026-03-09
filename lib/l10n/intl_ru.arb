@@ -3,7 +3,10 @@
   "error_general": "Ошибка",
   "cart_name": "Название списка",
   "remove_item": "Удалить элемент",
+  "edit_item": "Редактировать элемент",
   "def_suggestion1": "продукты",
   "def_suggestion2": "аптека",
-  "settings": "Настройки"
+  "settings": "Настройки",
+  "save": "Сохранить",
+  "cancel": "Отменить"
 }

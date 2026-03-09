@@ -7,6 +7,7 @@ import 'package:simpleshoppinglist/repositories/carts_repository.dart';
 import '../../../data/models/cart_item.dart';
 import '../../bloc/application_error/application_error_bloc.dart';
 import '../../bloc/cart/cart_bloc.dart';
+import '../utils/ui_utils.dart';
 import 'cart_item_widget.dart';
 
 class CartPage extends StatelessWidget {
@@ -26,11 +27,9 @@ class CartPage extends StatelessWidget {
           return CustomScrollView(
             slivers: <Widget>[
               SliverAppBar(
-                automaticallyImplyLeading: false, // this will hide Drawer hamburger icon
-                actions: <Widget>[Container()],
                 forceMaterialTransparency: true,
                 title: ProductInputWidget(
-                  onPressed: (text) => _onAdd(context, text),
+                  onAdd: (text) => _onAdd(context, text),
                   onBack: () => _onBack(context),
                   enabled: state.data != null,
                   allowBack: allowBack,
@@ -62,6 +61,11 @@ class CartPage extends StatelessWidget {
                         _onLongPress(context, state.data!.items[index]),
                     onDelete: () =>
                         _onDelete(context, state.data!.items[index]),
+                    onEdit: () => _onEdit(
+                      context,
+                      CartBloc.of(context),
+                      state.data!.items[index],
+                    ),
                   );
                 },
                 itemCount: state.data?.items.length ?? 0,
@@ -93,5 +97,13 @@ class CartPage extends StatelessWidget {
 
   void _onBack(BuildContext context) {
     MainBloc.of(context).add(MainEvent.openCartsListPage());
+  }
+
+  void _onEdit(BuildContext context, CartBloc bloc, CartItem item) async {
+    String? result = await UIUtils.editValueDialog(context, item.value);
+
+    if (result is String) {
+      bloc.add(CartEvent.edit(item, result));
+    }
   }
 }

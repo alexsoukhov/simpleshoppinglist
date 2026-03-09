@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:simpleshoppinglist/application/ui/carts_list/cart_name_input_widget.dart';
+import 'package:simpleshoppinglist/application/ui/utils/ui_utils.dart';
 import 'package:simpleshoppinglist/repositories/carts_repository.dart';
 import 'package:simpleshoppinglist/repositories/preferences_repository.dart';
 
 import '../../../data/models/cart.dart';
+import '../../../generated/l10n.dart';
 import '../../bloc/application_error/application_error_bloc.dart';
 import '../../bloc/carts_list/carts_list_bloc.dart';
 import '../../bloc/main/main_bloc.dart';
@@ -55,6 +57,8 @@ class CartsListPage extends StatelessWidget {
                       index: index,
                       onPressed: () => _onSelect(context, cart),
                       onDelete: () => _onDelete(context, cart),
+                      onEdit: () =>
+                          _onEdit(context, CartsListBloc.of(context), cart),
                     );
                   },
                   itemCount: state.data.length,
@@ -85,8 +89,15 @@ class CartsListPage extends StatelessWidget {
     CartsListBloc.of(context).add(CartsListEvent.delete(cart));
   }
 
+  void _onEdit(BuildContext context, CartsListBloc bloc, Cart cart) async {
+    String? result = await UIUtils.editValueDialog(context, cart.name);
+
+    if (result is String) {
+      bloc.add(CartsListEvent.edit(cart, result));
+    }
+  }
+
   void _onMenu(BuildContext context) {
     context.go("/settings");
   }
-
 }

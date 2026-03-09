@@ -55,12 +55,11 @@ extension SettingsEventPatterns on SettingsEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( SettingsEventInit value)?  init,TResult Function( SettingsEventCreateItem value)?  createItem,TResult Function( SettingsEventReorder value)?  reorder,TResult Function( SettingsEventDelete value)?  delete,TResult Function( SettingsEventAdd value)?  add,TResult Function( SettingsEventSwitchDate value)?  switchDate,TResult Function( SettingsEventSave value)?  save,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( SettingsEventInit value)?  init,TResult Function( SettingsEventReorder value)?  reorder,TResult Function( SettingsEventDelete value)?  delete,TResult Function( SettingsEventAdd value)?  add,TResult Function( SettingsEventSwitchDate value)?  switchDate,TResult Function( SettingsEventSave value)?  save,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case SettingsEventInit() when init != null:
-return init(_that);case SettingsEventCreateItem() when createItem != null:
-return createItem(_that);case SettingsEventReorder() when reorder != null:
+return init(_that);case SettingsEventReorder() when reorder != null:
 return reorder(_that);case SettingsEventDelete() when delete != null:
 return delete(_that);case SettingsEventAdd() when add != null:
 return add(_that);case SettingsEventSwitchDate() when switchDate != null:
@@ -83,12 +82,11 @@ return save(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( SettingsEventInit value)  init,required TResult Function( SettingsEventCreateItem value)  createItem,required TResult Function( SettingsEventReorder value)  reorder,required TResult Function( SettingsEventDelete value)  delete,required TResult Function( SettingsEventAdd value)  add,required TResult Function( SettingsEventSwitchDate value)  switchDate,required TResult Function( SettingsEventSave value)  save,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( SettingsEventInit value)  init,required TResult Function( SettingsEventReorder value)  reorder,required TResult Function( SettingsEventDelete value)  delete,required TResult Function( SettingsEventAdd value)  add,required TResult Function( SettingsEventSwitchDate value)  switchDate,required TResult Function( SettingsEventSave value)  save,}){
 final _that = this;
 switch (_that) {
 case SettingsEventInit():
-return init(_that);case SettingsEventCreateItem():
-return createItem(_that);case SettingsEventReorder():
+return init(_that);case SettingsEventReorder():
 return reorder(_that);case SettingsEventDelete():
 return delete(_that);case SettingsEventAdd():
 return add(_that);case SettingsEventSwitchDate():
@@ -110,12 +108,11 @@ return save(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( SettingsEventInit value)?  init,TResult? Function( SettingsEventCreateItem value)?  createItem,TResult? Function( SettingsEventReorder value)?  reorder,TResult? Function( SettingsEventDelete value)?  delete,TResult? Function( SettingsEventAdd value)?  add,TResult? Function( SettingsEventSwitchDate value)?  switchDate,TResult? Function( SettingsEventSave value)?  save,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( SettingsEventInit value)?  init,TResult? Function( SettingsEventReorder value)?  reorder,TResult? Function( SettingsEventDelete value)?  delete,TResult? Function( SettingsEventAdd value)?  add,TResult? Function( SettingsEventSwitchDate value)?  switchDate,TResult? Function( SettingsEventSave value)?  save,}){
 final _that = this;
 switch (_that) {
 case SettingsEventInit() when init != null:
-return init(_that);case SettingsEventCreateItem() when createItem != null:
-return createItem(_that);case SettingsEventReorder() when reorder != null:
+return init(_that);case SettingsEventReorder() when reorder != null:
 return reorder(_that);case SettingsEventDelete() when delete != null:
 return delete(_that);case SettingsEventAdd() when add != null:
 return add(_that);case SettingsEventSwitchDate() when switchDate != null:
@@ -137,11 +134,10 @@ return save(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  init,TResult Function( String name)?  createItem,TResult Function( int oldIndex,  int newIndex)?  reorder,TResult Function( int idx)?  delete,TResult Function( String value)?  add,TResult Function( bool value)?  switchDate,TResult Function()?  save,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  init,TResult Function( int oldIndex,  int newIndex)?  reorder,TResult Function( int idx)?  delete,TResult Function( String value)?  add,TResult Function( bool value)?  switchDate,TResult Function()?  save,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case SettingsEventInit() when init != null:
-return init();case SettingsEventCreateItem() when createItem != null:
-return createItem(_that.name);case SettingsEventReorder() when reorder != null:
+return init();case SettingsEventReorder() when reorder != null:
 return reorder(_that.oldIndex,_that.newIndex);case SettingsEventDelete() when delete != null:
 return delete(_that.idx);case SettingsEventAdd() when add != null:
 return add(_that.value);case SettingsEventSwitchDate() when switchDate != null:
@@ -164,11 +160,10 @@ return save();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  init,required TResult Function( String name)  createItem,required TResult Function( int oldIndex,  int newIndex)  reorder,required TResult Function( int idx)  delete,required TResult Function( String value)  add,required TResult Function( bool value)  switchDate,required TResult Function()  save,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  init,required TResult Function( int oldIndex,  int newIndex)  reorder,required TResult Function( int idx)  delete,required TResult Function( String value)  add,required TResult Function( bool value)  switchDate,required TResult Function()  save,}) {final _that = this;
 switch (_that) {
 case SettingsEventInit():
-return init();case SettingsEventCreateItem():
-return createItem(_that.name);case SettingsEventReorder():
+return init();case SettingsEventReorder():
 return reorder(_that.oldIndex,_that.newIndex);case SettingsEventDelete():
 return delete(_that.idx);case SettingsEventAdd():
 return add(_that.value);case SettingsEventSwitchDate():
@@ -190,11 +185,10 @@ return save();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  init,TResult? Function( String name)?  createItem,TResult? Function( int oldIndex,  int newIndex)?  reorder,TResult? Function( int idx)?  delete,TResult? Function( String value)?  add,TResult? Function( bool value)?  switchDate,TResult? Function()?  save,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  init,TResult? Function( int oldIndex,  int newIndex)?  reorder,TResult? Function( int idx)?  delete,TResult? Function( String value)?  add,TResult? Function( bool value)?  switchDate,TResult? Function()?  save,}) {final _that = this;
 switch (_that) {
 case SettingsEventInit() when init != null:
-return init();case SettingsEventCreateItem() when createItem != null:
-return createItem(_that.name);case SettingsEventReorder() when reorder != null:
+return init();case SettingsEventReorder() when reorder != null:
 return reorder(_that.oldIndex,_that.newIndex);case SettingsEventDelete() when delete != null:
 return delete(_that.idx);case SettingsEventAdd() when add != null:
 return add(_that.value);case SettingsEventSwitchDate() when switchDate != null:
@@ -238,72 +232,6 @@ String toString() {
 
 
 
-
-/// @nodoc
-
-
-class SettingsEventCreateItem implements SettingsEvent {
-  const SettingsEventCreateItem(this.name);
-  
-
- final  String name;
-
-/// Create a copy of SettingsEvent
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$SettingsEventCreateItemCopyWith<SettingsEventCreateItem> get copyWith => _$SettingsEventCreateItemCopyWithImpl<SettingsEventCreateItem>(this, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SettingsEventCreateItem&&(identical(other.name, name) || other.name == name));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,name);
-
-@override
-String toString() {
-  return 'SettingsEvent.createItem(name: $name)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class $SettingsEventCreateItemCopyWith<$Res> implements $SettingsEventCopyWith<$Res> {
-  factory $SettingsEventCreateItemCopyWith(SettingsEventCreateItem value, $Res Function(SettingsEventCreateItem) _then) = _$SettingsEventCreateItemCopyWithImpl;
-@useResult
-$Res call({
- String name
-});
-
-
-
-
-}
-/// @nodoc
-class _$SettingsEventCreateItemCopyWithImpl<$Res>
-    implements $SettingsEventCreateItemCopyWith<$Res> {
-  _$SettingsEventCreateItemCopyWithImpl(this._self, this._then);
-
-  final SettingsEventCreateItem _self;
-  final $Res Function(SettingsEventCreateItem) _then;
-
-/// Create a copy of SettingsEvent
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? name = null,}) {
-  return _then(SettingsEventCreateItem(
-null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,
-  ));
-}
-
-
-}
 
 /// @nodoc
 

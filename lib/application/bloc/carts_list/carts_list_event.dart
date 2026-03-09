@@ -11,4 +11,6 @@ class CartsListEvent with _$CartsListEvent {
   const factory CartsListEvent.reorder(int oldIndex, int newIndex) = CartsListEventReorder;
 
   const factory CartsListEvent.openCartPage() = CartsListEventOpenCartPage;
+
+  const factory CartsListEvent.edit(Cart item, String value) = CartsListEventEdit;
 }

@@ -80,6 +80,16 @@ class S {
     );
   }
 
+  /// `Редактировать элемент`
+  String get edit_item {
+    return Intl.message(
+      'Редактировать элемент',
+      name: 'edit_item',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `продукты`
   String get def_suggestion1 {
     return Intl.message(
@@ -105,6 +115,26 @@ class S {
     return Intl.message(
       'Настройки',
       name: 'settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Сохранить`
+  String get save {
+    return Intl.message(
+      'Сохранить',
+      name: 'save',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Отменить`
+  String get cancel {
+    return Intl.message(
+      'Отменить',
+      name: 'cancel',
       desc: '',
       args: [],
     );

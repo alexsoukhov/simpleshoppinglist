@@ -8,6 +8,7 @@ class CartItemWidget extends StatefulWidget {
     super.key,
     this.onLongPress,
     this.onDelete,
+    this.onEdit,
     required this.cart,
     required this.index,
   });
@@ -16,6 +17,7 @@ class CartItemWidget extends StatefulWidget {
   final int index;
   final VoidCallback? onLongPress;
   final VoidCallback? onDelete;
+  final VoidCallback? onEdit;
 
   @override
   State<CartItemWidget> createState() => _CartItemWidgetState();
@@ -85,6 +87,13 @@ class _CartItemWidgetState extends State<CartItemWidget> {
               onTap: () {
                 _menuController.close();
                 widget.onDelete?.call();
+              },
+            ),
+            ListTile(
+              title: Text(S.of(context).edit_item),
+              onTap: () {
+                _menuController.close();
+                widget.onEdit?.call();
               },
             ),
           ],

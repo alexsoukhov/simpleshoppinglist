@@ -59,4 +59,35 @@ class UIUtils {
       showToast(context, value, background: ThemeColors.toastBackground);
     }
   }
+
+  static Future<String?> editValueDialog(
+    BuildContext context,
+    String value,
+  ) async => await showDialog<String>(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      final TextEditingController textEditingController = TextEditingController(
+        text: value,
+      );
+
+      return AlertDialog(
+        content: TextField(controller: textEditingController, autofocus: true),
+        actions: <Widget>[
+          TextButton(
+            child: Text(S.of(context).cancel),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          TextButton(
+            child: Text(S.of(context).save),
+            onPressed: () {
+              Navigator.of(context).pop(textEditingController.text);
+            },
+          ),
+        ],
+      );
+    },
+  );
 }
