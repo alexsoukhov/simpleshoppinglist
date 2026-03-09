@@ -9,16 +9,11 @@ import '../../bloc/application_error/application_error_bloc.dart';
 import '../../bloc/cart/cart_bloc.dart';
 import 'cart_item_widget.dart';
 
-class CartPage extends StatefulWidget {
+class CartPage extends StatelessWidget {
   const CartPage({super.key, this.allowBack = true});
 
   final bool allowBack;
 
-  @override
-  State<CartPage> createState() => _CartPageState();
-}
-
-class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -38,7 +33,7 @@ class _CartPageState extends State<CartPage> {
                   onPressed: (text) => _onAdd(context, text),
                   onBack: () => _onBack(context),
                   enabled: state.data != null,
-                  allowBack: widget.allowBack,
+                  allowBack: allowBack,
                   onCallback: (String search) {
                     return CartBloc.of(context).getSuggestions(search);
                   },

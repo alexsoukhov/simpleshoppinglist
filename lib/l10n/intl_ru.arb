@@ -4,5 +4,6 @@
   "cart_name": "Название списка",
   "remove_item": "Удалить элемент",
   "def_suggestion1": "продукты",
-  "def_suggestion2": "аптека"
+  "def_suggestion2": "аптека",
+  "settings": "Настройки"
 }

@@ -6,11 +6,13 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 class CartNameInputWidget extends StatefulWidget {
   const CartNameInputWidget({
     super.key,
-    this.onPressed,
+    this.onAdd,
+    this.onMenu,
     required this.onCallback,
   });
 
-  final void Function(String value)? onPressed;
+  final void Function(String value)? onAdd;
+  final VoidCallback? onMenu;
   final FutureOr<List<String>?> Function(String search) onCallback;
 
   @override
@@ -61,7 +63,7 @@ class _CartNameInputWidgetState extends State<CartNameInputWidget> {
                 hideOnEmpty: true,
                 builder: (context, controller, focusNode) => TextField(
                   onSubmitted: (_) {
-                    widget.onPressed?.call(_textEditingController.text);
+                    widget.onAdd?.call(_textEditingController.text);
                     _textEditingController.text = "";
                   },
                   onTapUpOutside: (_) => {focusNode.unfocus()},
@@ -94,8 +96,15 @@ class _CartNameInputWidgetState extends State<CartNameInputWidget> {
               icon: Icon(Icons.add),
               onPressed: () {
                 _focusNode.unfocus();
-                widget.onPressed?.call(_textEditingController.text);
+                widget.onAdd?.call(_textEditingController.text);
                 _textEditingController.text = "";
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.menu),
+              onPressed: () {
+                _focusNode.unfocus();
+                widget.onMenu?.call();
               },
             ),
           ],

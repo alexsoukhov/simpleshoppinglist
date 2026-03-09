@@ -26,6 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "def_suggestion1": MessageLookupByLibrary.simpleMessage("продукты"),
         "def_suggestion2": MessageLookupByLibrary.simpleMessage("аптека"),
         "error_general": MessageLookupByLibrary.simpleMessage("Ошибка"),
-        "remove_item": MessageLookupByLibrary.simpleMessage("Удалить элемент")
+        "remove_item": MessageLookupByLibrary.simpleMessage("Удалить элемент"),
+        "settings": MessageLookupByLibrary.simpleMessage("Настройки")
       };
 }

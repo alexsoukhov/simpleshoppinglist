@@ -1,6 +1,7 @@
 import 'package:bloc_presentation/bloc_presentation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:simpleshoppinglist/application/ui/carts_list/cart_name_input_widget.dart';
 import 'package:simpleshoppinglist/repositories/carts_repository.dart';
 import 'package:simpleshoppinglist/repositories/preferences_repository.dart';
@@ -11,14 +12,9 @@ import '../../bloc/carts_list/carts_list_bloc.dart';
 import '../../bloc/main/main_bloc.dart';
 import 'carts_list_item_widget.dart';
 
-class CartsListPage extends StatefulWidget {
+class CartsListPage extends StatelessWidget {
   const CartsListPage({super.key});
 
-  @override
-  State<CartsListPage> createState() => _CartsListPageState();
-}
-
-class _CartsListPageState extends State<CartsListPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -38,7 +34,8 @@ class _CartsListPageState extends State<CartsListPage> {
                 SliverAppBar(
                   forceMaterialTransparency: true,
                   title: CartNameInputWidget(
-                    onPressed: (text) => _onAdd(context, text),
+                    onAdd: (text) => _onAdd(context, text),
+                    onMenu: () => _onMenu(context),
                     onCallback: (String search) {
                       return CartsListBloc.of(context).getSuggestions(search);
                     },
@@ -87,4 +84,9 @@ class _CartsListPageState extends State<CartsListPage> {
   void _onDelete(BuildContext context, Cart cart) {
     CartsListBloc.of(context).add(CartsListEvent.delete(cart));
   }
+
+  void _onMenu(BuildContext context) {
+    context.go("/settings");
+  }
+
 }
