@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../../../generated/l10n.dart';
-import '../../../common/theme.dart';
+import '../theme.dart';
 
 extension ToastContext on BuildContext {
   void showToast(String text, {Color? background}) {
