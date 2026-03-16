@@ -1,31 +1,29 @@
 import 'package:flutter/material.dart';
 
-import '../../../data/models/cart.dart';
-import '../../../generated/l10n.dart';
+import '../../../../data/models/cart_item.dart';
+import '../../../../generated/l10n.dart';
 
-class CartsListItemWidget extends StatefulWidget {
-  const CartsListItemWidget({
+class CartItemWidget extends StatefulWidget {
+  const CartItemWidget({
     super.key,
-    this.onPressed,
+    this.onLongPress,
     this.onDelete,
     this.onEdit,
     required this.cart,
-    required this.selectedCart,
     required this.index,
   });
 
-  final Cart cart;
-  final Cart? selectedCart;
+  final CartItem cart;
   final int index;
-  final VoidCallback? onPressed;
+  final VoidCallback? onLongPress;
   final VoidCallback? onDelete;
   final VoidCallback? onEdit;
 
   @override
-  State<CartsListItemWidget> createState() => _CartsListItemWidgetState();
+  State<CartItemWidget> createState() => _CartItemWidgetState();
 }
 
-class _CartsListItemWidgetState extends State<CartsListItemWidget> {
+class _CartItemWidgetState extends State<CartItemWidget> {
   final MenuController _menuController = MenuController();
 
   @override
@@ -36,9 +34,6 @@ class _CartsListItemWidgetState extends State<CartsListItemWidget> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
-        color: widget.cart == widget.selectedCart
-            ? Theme.of(context).highlightColor
-            : Theme.of(context).primaryColor,
         child: MenuAnchor(
           style: MenuStyle(
             shape: WidgetStatePropertyAll<OutlinedBorder>(
@@ -53,26 +48,39 @@ class _CartsListItemWidgetState extends State<CartsListItemWidget> {
           crossAxisUnconstrained: false,
           controller: _menuController,
           builder:
-              (BuildContext context, MenuController controller, Widget? child) {
-                final String desc = widget.cart.items
-                    .where((e) => !e.marked)
-                    .take(10)
-                    .fold("", (e1, e2) => "$e1 ${e2.value}");
-                return ListTile(
-                  selected: widget.cart == widget.selectedCart,
-                  onTap: widget.onPressed,
-                  onLongPress: () => _menuController.open(),
-                  title: Text(widget.cart.name),
-                  subtitle: desc.isNotEmpty
-                      ? Text(maxLines: 1, overflow: TextOverflow.ellipsis, desc)
-                      : null,
-                  //TODO(AS):
-                  /*trailing: ReorderableDragStartListener(
-                      index: widget.index,
+              (
+                BuildContext context,
+                MenuController controller,
+                Widget? child,
+              ) => Row(
+                children: [
+                  Expanded(
+                    child: ListTile(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(8)),
+                      ),
+                      onTap: () => _menuController.open(),
+                      onLongPress: widget.onLongPress,
+                      title: Text(
+                        widget.cart.value,
+                        style: TextStyle(
+                          decoration: widget.cart.marked
+                              ? TextDecoration.lineThrough
+                              : TextDecoration.none,
+                        ),
+                      ),
+                    ),
+                  ),
+                  ReorderableDragStartListener(
+                    index: widget.index,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 14.0),
                       child: Icon(Icons.drag_handle),
-                    ),*/
-                );
-              },
+                    ),
+                  ),
+                ],
+              ),
+
           menuChildren: [
             ListTile(
               title: Text(S.of(context).remove_item),

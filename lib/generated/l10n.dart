@@ -139,6 +139,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Новый список`
+  String get new_list {
+    return Intl.message(
+      'Новый список',
+      name: 'new_list',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `пусто`
+  String get empty {
+    return Intl.message(
+      'пусто',
+      name: 'empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `всё куплено`
+  String get all_bought {
+    return Intl.message(
+      'всё куплено',
+      name: 'all_bought',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

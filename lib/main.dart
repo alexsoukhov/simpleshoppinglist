@@ -15,14 +15,6 @@ import 'application/application_providers.dart';
 import 'config.dart';
 import 'generated/l10n.dart';
 
-interface class A {
-  void b() => {};
-}
-
-class C extends A {
-  void b() => {};
-}
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -41,7 +33,6 @@ final GoRouter _router = GoRouter(
         return const MainPage();
       },
       routes: <RouteBase>[
-        //TODO(AS):
         GoRoute(
           path: 'settings',
           builder: (BuildContext context, GoRouterState state) {
@@ -51,16 +42,6 @@ final GoRouter _router = GoRouter(
       ],
     ),
   ],
-);
-
-CupertinoThemeData cupertinoThemeLight() => const CupertinoThemeData(
-  brightness: Brightness.light,
-  scaffoldBackgroundColor: Colors.black,
-  primaryColor: Colors.white,
-  textTheme: CupertinoTextThemeData(
-    primaryColor: Colors.black,
-    textStyle: TextStyle(fontSize: 16, color: Colors.red),
-  ),
 );
 
 class MyApp extends StatelessWidget {

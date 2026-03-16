@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:simpleshoppinglist/application/ui/common/extensions/toast.dart';
 
 import 'bloc/application_error/application_error_bloc.dart';
-import 'ui/utils/ui_utils.dart';
 
 class ApplicationError extends StatelessWidget {
   const ApplicationError({super.key, required this.child});
@@ -29,7 +29,7 @@ class ApplicationError extends StatelessWidget {
 
   void _handleEvent(BuildContext context, ApplicationErrorState state) {
     if (state is ApplicationErrorStateShow) {
-      UIUtils.displayError(context, code: state.code, value: state.value);
+      context.displayError(code: state.code, value: state.value);
     }
   }
 }

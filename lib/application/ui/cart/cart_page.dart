@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simpleshoppinglist/application/bloc/main/main_bloc.dart';
-import 'package:simpleshoppinglist/application/ui/cart/product_input_widget.dart';
+import 'package:simpleshoppinglist/application/ui/cart/widgets/product_input_widget.dart';
 import 'package:simpleshoppinglist/repositories/carts_repository.dart';
 
 import '../../../data/models/cart_item.dart';
 import '../../bloc/application_error/application_error_bloc.dart';
 import '../../bloc/cart/cart_bloc.dart';
-import '../utils/ui_utils.dart';
-import 'cart_item_widget.dart';
+import '../common/extensions/dialog.dart';
+import 'widgets/cart_item_widget.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key, this.allowBack = true});
@@ -100,7 +100,7 @@ class CartPage extends StatelessWidget {
   }
 
   void _onEdit(BuildContext context, CartBloc bloc, CartItem item) async {
-    String? result = await UIUtils.editValueDialog(context, item.value);
+    String? result = await context.editValueDialog(item.value);
 
     if (result is String) {
       bloc.add(CartEvent.edit(item, result));

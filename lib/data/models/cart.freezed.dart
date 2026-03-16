@@ -210,8 +210,8 @@ return $default(_that.index,_that.id,_that.name,_that.date,_that.items,_that.mar
 /// @nodoc
 
 
-class _Cart implements Cart {
-  const _Cart({this.index = 0, required this.id, required this.name, required this.date, final  List<CartItem> items = const <CartItem>[], this.marked = false}): _items = items;
+class _Cart extends Cart {
+  const _Cart({this.index = 0, required this.id, required this.name, required this.date, final  List<CartItem> items = const <CartItem>[], this.marked = false}): _items = items,super._();
   
 
 @override@JsonKey() final  int index;

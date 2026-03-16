@@ -67,6 +67,7 @@ class _ProductInputWidgetState extends State<ProductInputWidget> {
               child: AbsorbPointer(
                 absorbing: !widget.enabled,
                 child: TypeAheadField<String>(
+                  animationDuration: const Duration(milliseconds: 1),
                   focusNode: _focusNode,
                   suggestionsCallback: widget.onCallback,
                   controller: _textEditingController,
@@ -91,14 +92,24 @@ class _ProductInputWidgetState extends State<ProductInputWidget> {
                     elevation: 4,
                     child: child,
                   ),
-                  itemBuilder: (context, item) => ListTile(title: Text(item)),
+                  itemBuilder: (context, item) => ListTile(
+                    contentPadding: EdgeInsets.only(left: 16),
+                    title: Text(item),
+                    trailing: IconButton(
+                      onPressed: () {
+                        _focusNode.unfocus();
+                        widget.onAdd?.call(_textEditingController.text);
+                        _textEditingController.text = "";
+                      },
+                      icon: Icon(Icons.add),
+                    ),
+                  ),
                   onSelected: (String value) {
                     _textEditingController.text = value;
                   },
                 ),
               ),
             ),
-
             if (_clear)
               IconButton(
                 onPressed: _textEditingController.clear,

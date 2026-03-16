@@ -8,5 +8,8 @@
   "def_suggestion2": "аптека",
   "settings": "Настройки",
   "save": "Сохранить",
-  "cancel": "Отменить"
+  "cancel": "Отменить",
+  "new_list": "Новый список",
+  "empty": "пусто",
+  "all_bought": "всё куплено"
 }
