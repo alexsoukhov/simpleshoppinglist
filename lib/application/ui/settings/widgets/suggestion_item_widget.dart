@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../generated/l10n.dart';
+import '../../../../generated/l10n.dart';
 
-class SettingsSuggestionItemWidget extends StatefulWidget {
-  const SettingsSuggestionItemWidget({
+class SuggestionItemWidget extends StatefulWidget {
+  const SuggestionItemWidget({
     super.key,
     this.onDelete,
     required this.item,
@@ -15,10 +15,10 @@ class SettingsSuggestionItemWidget extends StatefulWidget {
   final VoidCallback? onDelete;
 
   @override
-  State<SettingsSuggestionItemWidget> createState() => _SettingsSuggestionItemWidgetState();
+  State<SuggestionItemWidget> createState() => _SuggestionItemWidgetState();
 }
 
-class _SettingsSuggestionItemWidgetState extends State<SettingsSuggestionItemWidget> {
+class _SuggestionItemWidgetState extends State<SuggestionItemWidget> {
   final MenuController _menuController = MenuController();
 
   @override

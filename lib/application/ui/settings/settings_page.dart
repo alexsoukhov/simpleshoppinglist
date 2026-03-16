@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:simpleshoppinglist/application/ui/settings/widgets/settings_suggestion_input_widget.dart';
-import 'package:simpleshoppinglist/application/ui/settings/settings_suggestion_item_widget.dart';
+import 'package:simpleshoppinglist/application/ui/settings/widgets/suggestion_input_widget.dart';
+import 'package:simpleshoppinglist/application/ui/settings/widgets/suggestion_item_widget.dart';
 import 'package:simpleshoppinglist/repositories/preferences_repository.dart';
 
 import '../../../generated/l10n.dart';
@@ -32,14 +32,14 @@ class SettingsPage extends StatelessWidget {
                 SliverReorderableList(
                   itemBuilder: (BuildContext context, int index) {
                     if (index < state.suggestions.length) {
-                      return SettingsSuggestionItemWidget(
+                      return SuggestionItemWidget(
                         key: ObjectKey(state.suggestions[index]),
                         item: state.suggestions[index],
                         index: index,
                         onDelete: () => _onDelete(context, index),
                       );
                     } else {
-                      return SettingsSuggestionInputWidget(
+                      return SuggestionInputWidget(
                         key: ValueKey("edit_field"),
                         onAdd: (v) => _onAdd(context, v),
                       );

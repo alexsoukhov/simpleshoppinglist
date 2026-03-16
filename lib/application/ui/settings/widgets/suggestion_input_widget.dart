@@ -3,18 +3,18 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
-class SettingsSuggestionInputWidget extends StatefulWidget {
-  const SettingsSuggestionInputWidget({super.key, this.onAdd});
+class SuggestionInputWidget extends StatefulWidget {
+  const SuggestionInputWidget({super.key, this.onAdd});
 
   final void Function(String value)? onAdd;
 
   @override
-  State<SettingsSuggestionInputWidget> createState() =>
-      _SettingsSuggestionInputWidgetState();
+  State<SuggestionInputWidget> createState() =>
+      _SuggestionInputWidgetState();
 }
 
-class _SettingsSuggestionInputWidgetState
-    extends State<SettingsSuggestionInputWidget> {
+class _SuggestionInputWidgetState
+    extends State<SuggestionInputWidget> {
   final TextEditingController _textEditingController = TextEditingController();
   bool _clear = false;
 
