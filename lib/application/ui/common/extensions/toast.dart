@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../../../generated/l10n.dart';
-import '../theme.dart';
+import '../../theme/theme.dart';
 
 extension ToastContext on BuildContext {
   void showToast(String text, {Color? background}) {
@@ -22,9 +22,7 @@ extension ToastContext on BuildContext {
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 3,
-                style: FontStyles.fontNormal500.copyWith(
-                  color: ThemeColors.toastText,
-                ),
+                style: TextStyle(color: ThemeColors.toastText),
               ),
             ),
           ],

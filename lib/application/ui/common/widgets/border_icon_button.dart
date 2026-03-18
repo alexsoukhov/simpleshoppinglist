@@ -1,29 +1,44 @@
 import 'package:flutter/material.dart';
 
-class BorderIconButton extends StatelessWidget {
-  final VoidCallback onTap;
-  final Widget child;
-  final Color color;
-  final Color borderColor;
+import '../../theme/styles.dart';
 
-  const BorderIconButton({super.key,
+class BorderIconButton extends StatelessWidget {
+  final IconData icon;
+  final VoidCallback onTap;
+  final Color? backgroundColor;
+  final Color? borderColor;
+  final Color? iconColor;
+
+  const BorderIconButton({
+    super.key,
+    required this.icon,
     required this.onTap,
-    required this.child,
-    required this.color,
-    required this.borderColor,
+    this.iconColor,
+    this.backgroundColor,
+    this.borderColor,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 36,
-      height: 36,
+      width: Styles.buttonSize,
+      height: Styles.buttonSize,
       decoration: BoxDecoration(
-        color: color,
+        color: backgroundColor ?? Styles.backgroundColor(context),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: borderColor, width: 1),
+        border: Border.all(
+          color: borderColor ?? Styles.borderColorSmall(context),
+          width: 1,
+        ),
       ),
-      child: IconButton(icon: child, onPressed: onTap,),
+      child: IconButton(
+        icon: Icon(
+          icon,
+          color: iconColor ?? Styles.iconColor(context),
+          size: Styles.iconSize,
+        ),
+        onPressed: onTap,
+      ),
     );
   }
 }

@@ -4,7 +4,7 @@ import 'package:simpleshoppinglist/application/ui/carts_list/widgets/preview_tag
 import '../../../../data/models/cart.dart';
 import '../../../../data/models/cart_item.dart';
 import '../../../../generated/l10n.dart';
-import 'cart_name_input_widget.dart';
+import '../../theme/styles.dart';
 
 class CartsListItemWidget extends StatefulWidget {
   const CartsListItemWidget({
@@ -38,13 +38,10 @@ class _CartsListItemWidgetState extends State<CartsListItemWidget> {
       child: MenuAnchor(
         style: MenuStyle(
           backgroundColor: WidgetStatePropertyAll<Color>(
-            Theme.of(context).colorScheme.surfaceContainerLow,
+            Styles.backgroundColor(context),
           ),
           side: WidgetStatePropertyAll<BorderSide>(
-            BorderSide(
-              color: Theme.of(context).colorScheme.primaryContainer,
-              width: 1,
-            ),
+            BorderSide(color: Styles.borderColor(context), width: 1),
           ),
           shape: WidgetStatePropertyAll<OutlinedBorder>(
             const RoundedRectangleBorder(
@@ -65,12 +62,9 @@ class _CartsListItemWidgetState extends State<CartsListItemWidget> {
           return Container(
             margin: const EdgeInsets.only(bottom: 6),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surfaceContainerLow,
+              color: Styles.backgroundColor(context),
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(
-                color: Theme.of(context).colorScheme.primaryContainer,
-                width: 1,
-              ),
+              border: Border.all(color: Styles.borderColor(context), width: 1),
             ),
             child: Material(
               color: Colors.transparent,
@@ -94,7 +88,6 @@ class _CartsListItemWidgetState extends State<CartsListItemWidget> {
                             Text(
                               widget.cart.name,
                               style: const TextStyle(
-                                fontSize: 14,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -115,7 +108,7 @@ class _CartsListItemWidgetState extends State<CartsListItemWidget> {
                           Text(
                             '${widget.cart.doneCount}/${widget.cart.items.length}',
                             style: TextStyle(
-                              color: Theme.of(context).colorScheme.primary,
+                              color: Styles.textColorSmall(context),
                               fontSize: 11,
                               fontWeight: FontWeight.w500,
                             ),
@@ -124,9 +117,7 @@ class _CartsListItemWidgetState extends State<CartsListItemWidget> {
                           Text(
                             '›',
                             style: TextStyle(
-                              color: Theme.of(
-                                context,
-                              ).colorScheme.primaryContainer,
+                              color: Styles.iconColor(context),
                               fontSize: 18,
                             ),
                           ),
@@ -144,7 +135,7 @@ class _CartsListItemWidgetState extends State<CartsListItemWidget> {
             title: Row(
               children: [
                 Icon(
-                  color: Theme.of(context).colorScheme.primary,
+                  color: Styles.iconColor(context),
                   Icons.delete,
                 ),
                 const SizedBox(width: 8),
@@ -159,7 +150,7 @@ class _CartsListItemWidgetState extends State<CartsListItemWidget> {
           ListTile(
             title: Row(
               children: [
-                Icon(color: Theme.of(context).colorScheme.primary, Icons.edit),
+                Icon(color: Styles.iconColor(context), Icons.edit),
                 const SizedBox(width: 8),
                 Text(S.of(context).edit_item),
               ],

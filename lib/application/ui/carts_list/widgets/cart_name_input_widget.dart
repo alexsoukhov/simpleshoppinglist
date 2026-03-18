@@ -5,6 +5,7 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 import '../../../../generated/l10n.dart';
 import '../../common/widgets/border_icon_button.dart';
+import '../../theme/styles.dart';
 
 class CartNameInputWidget extends StatefulWidget {
   const CartNameInputWidget({
@@ -53,7 +54,6 @@ class _CartNameInputWidgetState extends State<CartNameInputWidget> {
       padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
       child: Row(
         children: [
-          // Поле ввода
           Expanded(
             child: Container(
               height: 36,
@@ -101,14 +101,10 @@ class _CartNameInputWidgetState extends State<CartNameInputWidget> {
                       ),
                       decorationBuilder: (context, child) => Container(
                         decoration: BoxDecoration(
-                          color: Theme.of(
-                            context,
-                          ).colorScheme.surfaceContainerLow,
+                          color: Styles.backgroundColor(context),
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
-                            color: Theme.of(
-                              context,
-                            ).colorScheme.primaryContainer,
+                            color: Styles.borderColorSmall(context),
                             width: 1,
                           ),
                         ),
@@ -131,7 +127,7 @@ class _CartNameInputWidgetState extends State<CartNameInputWidget> {
                   ),
                   if (clear)
                     IconButton(
-                      iconSize: 20,
+                      iconSize: Styles.iconSize,
                       onPressed: _textEditingController.clear,
                       icon: Icon(Icons.clear),
                     ),
@@ -146,13 +142,7 @@ class _CartNameInputWidgetState extends State<CartNameInputWidget> {
               widget.onAdd?.call(_textEditingController.text);
               _textEditingController.text = "";
             },
-            color: Theme.of(context).colorScheme.surfaceContainerLow,
-            borderColor: Theme.of(context).colorScheme.primaryContainer,
-            child: Icon(
-              Icons.add,
-              color: Theme.of(context).colorScheme.primary,
-              size: 18,
-            ),
+            icon: Icons.add,
           ),
           const SizedBox(width: 6),
           BorderIconButton(
@@ -160,13 +150,7 @@ class _CartNameInputWidgetState extends State<CartNameInputWidget> {
               _focusNode.unfocus();
               widget.onMenu?.call();
             },
-            color: Theme.of(context).colorScheme.surfaceContainerLow,
-            borderColor: Theme.of(context).colorScheme.primaryContainer,
-            child: Icon(
-              Icons.settings_outlined,
-              color: Theme.of(context).colorScheme.primary,
-              size: 16,
-            ),
+            icon: Icons.settings_outlined,
           ),
         ],
       ),
