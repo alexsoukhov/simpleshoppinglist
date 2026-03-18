@@ -13,7 +13,7 @@ class PreviewTagWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
       decoration: BoxDecoration(
         color: Styles.cardBackgroundColor(context),
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: Styles.borderRadiusPreview,
         border: Border.all(color: Styles.borderColorSmall(context), width: .5),
       ),
       child: Text(

@@ -59,7 +59,7 @@ class _CartNameInputWidgetState extends State<CartNameInputWidget> {
               height: 36,
               decoration: BoxDecoration(
                 color: Styles.cardBackgroundColor(context),
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: Styles.borderRadius,
                 border: Border.all(
                   color: Styles.borderColorSmall(context),
                   width: 1,
@@ -100,7 +100,7 @@ class _CartNameInputWidgetState extends State<CartNameInputWidget> {
                       decorationBuilder: (context, child) => Container(
                         decoration: BoxDecoration(
                           color: Styles.cardBackgroundColor(context),
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: Styles.borderRadius,
                           border: Border.all(
                             color: Styles.borderColorSmall(context),
                             width: 1,

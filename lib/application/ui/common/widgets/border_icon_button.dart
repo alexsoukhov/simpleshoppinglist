@@ -25,7 +25,7 @@ class BorderIconButton extends StatelessWidget {
       height: Styles.buttonSize,
       decoration: BoxDecoration(
         color: backgroundColor ?? Styles.cardBackgroundColor(context),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: Styles.borderRadius,
         border: Border.all(
           color: borderColor ?? Styles.borderColorSmall(context),
           width: 1,

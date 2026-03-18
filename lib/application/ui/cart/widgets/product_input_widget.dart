@@ -65,7 +65,7 @@ class _ProductInputWidgetState extends State<ProductInputWidget> {
             height: Styles.inputHeight,
             decoration: BoxDecoration(
               color: Styles.cardBackgroundColor(context),
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: Styles.borderRadius,
               border: Border.all(
                 color: Styles.borderColorSmall(context),
                 width: 1,

@@ -63,13 +63,13 @@ class _CartsListItemWidgetState extends State<CartsListItemWidget> {
             margin: const EdgeInsets.only(bottom: 6),
             decoration: BoxDecoration(
               color: Styles.cardBackgroundColor(context),
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: Styles.borderRadius,
               border: Border.all(color: Styles.borderColor(context), width: 1),
             ),
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: Styles.borderRadius,
                 onTap: widget.onPressed,
                 onLongPress: () => _menuController.open(),
                 child: Padding(
