@@ -8,6 +8,7 @@ import '../../../data/models/cart_item.dart';
 import '../../bloc/application_error/application_error_bloc.dart';
 import '../../bloc/cart/cart_bloc.dart';
 import '../common/extensions/dialog.dart';
+import '../theme/styles.dart';
 import 'widgets/cart_item_widget.dart';
 
 class CartPage extends StatelessWidget {
@@ -24,54 +25,63 @@ class CartPage extends StatelessWidget {
       ),
       child: BlocBuilder<CartBloc, CartState>(
         builder: (context, state) {
-          return CustomScrollView(
-            slivers: <Widget>[
-              SliverAppBar(
-                forceMaterialTransparency: true,
-                title: ProductInputWidget(
-                  onAdd: (text) => _onAdd(context, text),
-                  onBack: () => _onBack(context),
-                  enabled: state.data != null,
-                  allowBack: allowBack,
-                  onCallback: (String search) {
-                    return CartBloc.of(context).getSuggestions(search);
-                  },
+          return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+            child: CustomScrollView(
+              slivers: <Widget>[
+                SliverAppBar(
+                  forceMaterialTransparency: true,
+                  title: ProductInputWidget(
+                    onAdd: (text) => _onAdd(context, text),
+                    onBack: () => _onBack(context),
+                    enabled: state.data != null,
+                    allowBack: allowBack,
+                    onCallback: (String search) {
+                      return CartBloc.of(context).getSuggestions(search);
+                    },
+                  ),
+                  floating: true,
+                  titleSpacing: 0,
+                  elevation: 1.0,
                 ),
-                floating: true,
-                titleSpacing: 0,
-                elevation: 1.0,
-              ),
-              PinnedHeaderSliver(
-                child: Card(
-                  elevation: 5.0,
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Text(state.data?.name ?? ""),
+                PinnedHeaderSliver(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Styles.cardBackgroundColor(context),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: Styles.borderColorSmall(context),
+                        width: 1,
+                      ),
+                    ),
+                    padding: const EdgeInsets.all(14),
+                    child: Center(child: Text(state.data?.name ?? "")),
                   ),
                 ),
-              ),
-              SliverReorderableList(
-                itemBuilder: (BuildContext context, int index) {
-                  return CartItemWidget(
-                    key: ObjectKey(state.data!.items[index]),
-                    cart: state.data!.items[index],
-                    index: index,
-                    onLongPress: () =>
-                        _onLongPress(context, state.data!.items[index]),
-                    onDelete: () =>
-                        _onDelete(context, state.data!.items[index]),
-                    onEdit: () => _onEdit(
-                      context,
-                      CartBloc.of(context),
-                      state.data!.items[index],
-                    ),
-                  );
-                },
-                itemCount: state.data?.items.length ?? 0,
-                onReorder: (int oldIndex, int newIndex) =>
-                    _onReorder(context, oldIndex, newIndex),
-              ),
-            ],
+                SliverPadding(padding: EdgeInsets.only(top: 8)),
+                SliverReorderableList(
+                  itemBuilder: (BuildContext context, int index) {
+                    return CartItemWidget(
+                      key: ObjectKey(state.data!.items[index]),
+                      cart: state.data!.items[index],
+                      index: index,
+                      onLongPress: () =>
+                          _onLongPress(context, state.data!.items[index]),
+                      onDelete: () =>
+                          _onDelete(context, state.data!.items[index]),
+                      onEdit: () => _onEdit(
+                        context,
+                        CartBloc.of(context),
+                        state.data!.items[index],
+                      ),
+                    );
+                  },
+                  itemCount: state.data?.items.length ?? 0,
+                  onReorder: (int oldIndex, int newIndex) =>
+                      _onReorder(context, oldIndex, newIndex),
+                ),
+              ],
+            ),
           );
         },
       ),
