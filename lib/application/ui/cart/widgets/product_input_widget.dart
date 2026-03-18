@@ -3,20 +3,23 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
+import '../../common/widgets/border_icon_button.dart';
+import '../../theme/styles.dart';
+
 class ProductInputWidget extends StatefulWidget {
   const ProductInputWidget({
     super.key,
-    this.onAdd,
-    this.onBack,
-    this.enabled = true,
+    required this.onBack,
     required this.allowBack,
     required this.onCallback,
+    this.onAdd,
+    this.enabled = true,
   });
 
   final bool enabled;
   final bool allowBack;
   final void Function(String value)? onAdd;
-  final VoidCallback? onBack;
+  final VoidCallback onBack;
   final FutureOr<List<String>?> Function(String search) onCallback;
 
   @override
@@ -50,81 +53,98 @@ class _ProductInputWidgetState extends State<ProductInputWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5.0,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            if (widget.allowBack)
-              IconButton(
-                onPressed: widget.onBack,
-                icon: Icon(Icons.arrow_back),
-              ),
-            Expanded(
-              child: AbsorbPointer(
-                absorbing: !widget.enabled,
-                child: TypeAheadField<String>(
-                  animationDuration: const Duration(milliseconds: 1),
-                  focusNode: _focusNode,
-                  suggestionsCallback: widget.onCallback,
-                  controller: _textEditingController,
-                  hideOnEmpty: true,
-                  builder: (context, controller, focusNode) => TextField(
-                    onSubmitted: (_) {
-                      widget.onAdd?.call(_textEditingController.text);
-                      _textEditingController.text = "";
-                    },
-                    onTapUpOutside: (_) => {focusNode.unfocus()},
-                    controller: controller,
-                    focusNode: focusNode,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "",
-                    ),
-                    textInputAction: TextInputAction.done,
-                  ),
-                  decorationBuilder: (context, child) => Material(
-                    type: MaterialType.card,
-                    color: Theme.of(context).colorScheme.surfaceContainerLow,
-                    elevation: 4,
-                    child: child,
-                  ),
-                  itemBuilder: (context, item) => ListTile(
-                    contentPadding: EdgeInsets.only(left: 16),
-                    title: Text(item),
-                    trailing: IconButton(
-                      onPressed: () {
-                        _focusNode.unfocus();
-                        widget.onAdd?.call(_textEditingController.text);
-                        _textEditingController.text = "";
-                      },
-                      icon: Icon(Icons.add),
-                    ),
-                  ),
-                  onSelected: (String value) {
-                    _textEditingController.text = value;
-                  },
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          if (widget.allowBack)
+            BorderIconButton(onTap: widget.onBack, icon: Icons.arrow_back),
+          const SizedBox(width: 6),
+          Expanded(
+            child: Container(
+              height: 36,
+              decoration: BoxDecoration(
+                color: Styles.cardBackgroundColor(context),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: Styles.borderColorSmall(context),
+                  width: 1,
                 ),
               ),
-            ),
-            if (_clear)
-              IconButton(
-                onPressed: _textEditingController.clear,
-                icon: Icon(Icons.clear),
+              padding: const EdgeInsets.only(left: 12),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: AbsorbPointer(
+                      absorbing: !widget.enabled,
+                      child: TypeAheadField<String>(
+                        animationDuration: const Duration(milliseconds: 1),
+                        focusNode: _focusNode,
+                        suggestionsCallback: widget.onCallback,
+                        controller: _textEditingController,
+                        hideOnEmpty: true,
+                        builder: (context, controller, focusNode) => TextField(
+                          onSubmitted: (_) {
+                            widget.onAdd?.call(_textEditingController.text);
+                            _textEditingController.text = "";
+                          },
+                          onTapUpOutside: (_) => {focusNode.unfocus()},
+                          controller: controller,
+                          focusNode: focusNode,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "",
+                          ),
+                          textInputAction: TextInputAction.done,
+                        ),
+                        decorationBuilder: (context, child) => Material(
+                          type: MaterialType.card,
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.surfaceContainerLow,
+                          elevation: 4,
+                          child: child,
+                        ),
+                        itemBuilder: (context, item) => ListTile(
+                          contentPadding: EdgeInsets.only(left: 16),
+                          title: Text(item),
+                          trailing: IconButton(
+                            onPressed: () {
+                              _focusNode.unfocus();
+                              widget.onAdd?.call(_textEditingController.text);
+                              _textEditingController.text = "";
+                            },
+                            icon: Icon(Icons.add),
+                          ),
+                        ),
+                        onSelected: (String value) {
+                          _textEditingController.text = value;
+                        },
+                      ),
+                    ),
+                  ),
+                  if (_clear)
+                    IconButton(
+                      onPressed: _textEditingController.clear,
+                      icon: Icon(Icons.clear),
+                    ),
+                ],
               ),
-            IconButton(
-              icon: Icon(Icons.add),
-              onPressed: () {
-                _focusNode.unfocus();
-                widget.onAdd?.call(_textEditingController.text);
-                _textEditingController.text = "";
-              },
             ),
-          ],
-        ),
+          ),
+          const SizedBox(width: 6),
+          BorderIconButton(
+            icon: Icons.add,
+            onTap: () {
+              _focusNode.unfocus();
+              widget.onAdd?.call(_textEditingController.text);
+              _textEditingController.text = "";
+            },
+          ),
+        ],
       ),
     );
   }

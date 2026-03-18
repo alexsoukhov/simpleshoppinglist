@@ -50,7 +50,6 @@ class CartPage extends StatelessWidget {
                   ),
                 ),
               ),
-
               SliverReorderableList(
                 itemBuilder: (BuildContext context, int index) {
                   return CartItemWidget(

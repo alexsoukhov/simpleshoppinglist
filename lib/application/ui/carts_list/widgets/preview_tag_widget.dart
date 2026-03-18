@@ -1,29 +1,24 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class PreviewTagWidget extends StatelessWidget {
-  final String label;
+import '../../theme/styles.dart';
 
-  const PreviewTagWidget({required this.label});
+class PreviewTagWidget extends StatelessWidget {
+  const PreviewTagWidget({super.key, required this.label});
+
+  final String label;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceContainerLow,
+        color: Styles.cardBackgroundColor(context),
         borderRadius: BorderRadius.circular(5),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.primaryContainer,
-          width: .5,
-        ),
+        border: Border.all(color: Styles.borderColorSmall(context), width: .5),
       ),
       child: Text(
         label,
-        style: TextStyle(
-          color: Theme.of(context).colorScheme.primaryFixedDim,
-          fontSize: 11,
-        ),
+        style: TextStyle(color: Styles.textColorDim(context), fontSize: 11),
       ),
     );
   }

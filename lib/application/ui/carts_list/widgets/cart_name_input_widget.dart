@@ -51,17 +51,17 @@ class _CartNameInputWidgetState extends State<CartNameInputWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
+      padding: const EdgeInsets.symmetric(horizontal: 4),
       child: Row(
         children: [
           Expanded(
             child: Container(
               height: 36,
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surfaceContainerLow,
+                color: Styles.cardBackgroundColor(context),
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
-                  color: Theme.of(context).colorScheme.primaryContainer,
+                  color: Styles.borderColorSmall(context),
                   width: 1,
                 ),
               ),
@@ -89,9 +89,7 @@ class _CartNameInputWidgetState extends State<CartNameInputWidget> {
                         decoration: InputDecoration(
                           hintText: S.of(context).new_list,
                           hintStyle: TextStyle(
-                            color: Theme.of(
-                              context,
-                            ).colorScheme.primaryFixedDim,
+                            color: Styles.textColorDim(context),
                           ),
                           border: InputBorder.none,
                           isDense: true,
@@ -101,7 +99,7 @@ class _CartNameInputWidgetState extends State<CartNameInputWidget> {
                       ),
                       decorationBuilder: (context, child) => Container(
                         decoration: BoxDecoration(
-                          color: Styles.backgroundColor(context),
+                          color: Styles.cardBackgroundColor(context),
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
                             color: Styles.borderColorSmall(context),
@@ -113,9 +111,7 @@ class _CartNameInputWidgetState extends State<CartNameInputWidget> {
                       itemBuilder: (context, item) => ListTile(
                         title: Text(
                           style: TextStyle(
-                            color: Theme.of(
-                              context,
-                            ).colorScheme.primaryFixedDim,
+                            color: Styles.textColorDim(context),
                           ),
                           item,
                         ),

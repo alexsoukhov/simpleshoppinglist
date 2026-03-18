@@ -14,7 +14,7 @@ class Styles {
           .colorScheme
           .primaryContainer;
 
-  static Color backgroundColor(BuildContext context) =>
+  static Color cardBackgroundColor(BuildContext context) =>
       Theme
           .of(context)
           .colorScheme
@@ -31,6 +31,12 @@ class Styles {
           .of(context)
           .colorScheme
           .primary;
+
+  static Color textColorDim(BuildContext context) =>
+      Theme
+          .of(context)
+          .colorScheme
+          .primaryFixedDim;
 
   static const double iconSize = 16.0;
   static const double inputHeight = 36.0;

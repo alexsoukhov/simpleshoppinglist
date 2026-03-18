@@ -38,7 +38,7 @@ class _CartsListItemWidgetState extends State<CartsListItemWidget> {
       child: MenuAnchor(
         style: MenuStyle(
           backgroundColor: WidgetStatePropertyAll<Color>(
-            Styles.backgroundColor(context),
+            Styles.cardBackgroundColor(context),
           ),
           side: WidgetStatePropertyAll<BorderSide>(
             BorderSide(color: Styles.borderColor(context), width: 1),
@@ -62,7 +62,7 @@ class _CartsListItemWidgetState extends State<CartsListItemWidget> {
           return Container(
             margin: const EdgeInsets.only(bottom: 6),
             decoration: BoxDecoration(
-              color: Styles.backgroundColor(context),
+              color: Styles.cardBackgroundColor(context),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(color: Styles.borderColor(context), width: 1),
             ),
