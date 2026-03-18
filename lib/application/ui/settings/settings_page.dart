@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simpleshoppinglist/application/ui/settings/widgets/suggestion_input_widget.dart';
 import 'package:simpleshoppinglist/application/ui/settings/widgets/suggestion_item_widget.dart';
 
-import '../../../data/repositories/preferences_repository.dart';
+import '../../../di/di.dart';
+import '../../../domain/preferences_repository.dart';
 import '../../../generated/l10n.dart';
 import '../../bloc/application_error/application_error_bloc.dart';
 import '../../bloc/settings/settings_bloc.dart';
@@ -15,7 +16,7 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => SettingsBloc(
-        context.read<PreferencesRepository>(),
+        getIt<PreferencesRepository>(),
         ApplicationErrorBloc.of(context),
       ),
       child: BlocBuilder<SettingsBloc, SettingsState>(

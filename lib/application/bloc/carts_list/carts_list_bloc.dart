@@ -9,8 +9,8 @@ import 'package:rxdart/rxdart.dart';
 import 'package:simpleshoppinglist/data/models/cart.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../../data/repositories/preferences_repository.dart';
 import '../../../domain/carts_repository.dart';
+import '../../../domain/preferences_repository.dart';
 import '../application_error/application_error_bloc.dart';
 
 part 'carts_list_bloc.freezed.dart';

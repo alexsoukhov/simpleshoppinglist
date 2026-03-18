@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../data/repositories/preferences_repository.dart';
+import '../../../domain/preferences_repository.dart';
 import '../application_error/application_error_bloc.dart';
 
 part 'settings_bloc.freezed.dart';

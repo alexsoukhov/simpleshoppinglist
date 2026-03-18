@@ -1,23 +1,24 @@
-import 'package:flutter/cupertino.dart';
-import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 import 'package:simpleshoppinglist/sources/preferences/preferences_source.dart';
 
-class PreferencesRepository {
-  PreferencesRepository(this._preferencesSource);
+import '../../domain/preferences_repository.dart';
+
+class PreferencesRepositoryImpl implements PreferencesRepository {
+  PreferencesRepositoryImpl(this._preferencesSource);
 
   final PreferencesSource _preferencesSource;
 
-  static PreferencesRepository of(BuildContext context) =>
-      context.read<PreferencesRepository>();
+  @override
+  List<String> get cartNameSuggestions =>
+      _preferencesSource.cartNameSuggestions;
 
-  List<String> get cartNameSuggestions => _preferencesSource.cartNameSuggestions;
-
+  @override
   set cartNameSuggestions(List<String> value) =>
       _preferencesSource.cartNameSuggestions = value;
 
+  @override
   bool get cartNameSuggestionDate => _preferencesSource.cartNameSuggestionDate;
 
+  @override
   set cartNameSuggestionDate(bool value) =>
       _preferencesSource.cartNameSuggestionDate = value;
 }
