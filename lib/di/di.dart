@@ -1,4 +1,6 @@
 import 'package:get_it/get_it.dart';
+import 'package:simpleshoppinglist/data/repositories/carts_repository.dart';
+import 'package:simpleshoppinglist/domain/carts_repository.dart';
 import 'package:simpleshoppinglist/sources/hive/hive_source.dart';
 import 'package:simpleshoppinglist/sources/preferences/preferences_source.dart';
 
@@ -10,7 +12,10 @@ Future<void> configureDependencies() async {
   );
 
   getIt.registerSingletonAsync<HiveSource>(
-        () async => await HiveSource.create(),
+    () async => await HiveSource.create(),
+    onCreated: (value) {
+      getIt.registerSingleton<CartsRepository>(CartsRepositoryImpl(value));
+    },
   );
 
   await getIt.allReady();

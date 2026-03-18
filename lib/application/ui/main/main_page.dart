@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simpleshoppinglist/application/ui/cart/cart_page.dart';
 
-import '../../../repositories/carts_repository.dart';
+import '../../../di/di.dart';
+import '../../../domain/carts_repository.dart';
 import '../../bloc/application_error/application_error_bloc.dart';
 import '../../bloc/main/main_bloc.dart';
 import '../carts_list/carts_list_page.dart';
@@ -22,7 +23,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => MainBloc(
-        context.read<CartsRepository>(),
+        getIt<CartsRepository>(),
         ApplicationErrorBloc.of(context),
       ),
       child: BackButtonListener(

@@ -1,18 +1,17 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:simpleshoppinglist/application/ui/main/main_page.dart';
 import 'package:simpleshoppinglist/application/ui/settings/settings_page.dart';
-import 'package:simpleshoppinglist/di.dart';
-import 'package:simpleshoppinglist/repositories/app_lifecycle_state_repository.dart';
+import 'package:simpleshoppinglist/di/di.dart';
 import 'package:simpleshoppinglist/sources/preferences/preferences_source.dart';
 
 import 'application/application_error.dart';
 import 'application/application_lifecycle_listener.dart';
 import 'application/application_providers.dart';
 import 'config.dart';
+import 'data/repositories/app_lifecycle_state_repository.dart';
 import 'generated/l10n.dart';
 
 Future<void> main() async {

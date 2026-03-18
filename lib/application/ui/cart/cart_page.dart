@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simpleshoppinglist/application/bloc/main/main_bloc.dart';
 import 'package:simpleshoppinglist/application/ui/cart/widgets/product_input_widget.dart';
-import 'package:simpleshoppinglist/repositories/carts_repository.dart';
 
 import '../../../data/models/cart_item.dart';
+import '../../../di/di.dart';
+import '../../../domain/carts_repository.dart';
 import '../../bloc/application_error/application_error_bloc.dart';
 import '../../bloc/cart/cart_bloc.dart';
 import '../common/extensions/dialog.dart';
@@ -20,7 +21,7 @@ class CartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => CartBloc(
-        context.read<CartsRepository>(),
+        getIt<CartsRepository>(),
         ApplicationErrorBloc.of(context),
       ),
       child: BlocBuilder<CartBloc, CartState>(

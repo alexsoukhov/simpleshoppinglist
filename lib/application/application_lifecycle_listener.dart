@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../repositories/app_lifecycle_state_repository.dart';
+import '../data/repositories/app_lifecycle_state_repository.dart';
 
 class ApplicationLifecycleListener extends StatefulWidget {
   const ApplicationLifecycleListener({

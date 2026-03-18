@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simpleshoppinglist/application/ui/settings/widgets/suggestion_input_widget.dart';
 import 'package:simpleshoppinglist/application/ui/settings/widgets/suggestion_item_widget.dart';
-import 'package:simpleshoppinglist/repositories/preferences_repository.dart';
 
+import '../../../data/repositories/preferences_repository.dart';
 import '../../../generated/l10n.dart';
 import '../../bloc/application_error/application_error_bloc.dart';
 import '../../bloc/settings/settings_bloc.dart';

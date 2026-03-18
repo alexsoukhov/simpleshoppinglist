@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:simpleshoppinglist/application/ui/carts_list/widgets/cart_name_input_widget.dart';
-import 'package:simpleshoppinglist/repositories/carts_repository.dart';
-import 'package:simpleshoppinglist/repositories/preferences_repository.dart';
 
 import '../../../data/models/cart.dart';
+import '../../../data/repositories/preferences_repository.dart';
+import '../../../di/di.dart';
+import '../../../domain/carts_repository.dart';
 import '../../bloc/application_error/application_error_bloc.dart';
 import '../../bloc/carts_list/carts_list_bloc.dart';
 import '../../bloc/main/main_bloc.dart';
@@ -20,7 +21,7 @@ class CartsListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => CartsListBloc(
-        context.read<CartsRepository>(),
+        getIt<CartsRepository>(),
         context.read<PreferencesRepository>(),
         ApplicationErrorBloc.of(context),
       ),

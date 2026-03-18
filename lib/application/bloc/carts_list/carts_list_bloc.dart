@@ -7,10 +7,10 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:intl/intl.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:simpleshoppinglist/data/models/cart.dart';
-import 'package:simpleshoppinglist/repositories/carts_repository.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../../repositories/preferences_repository.dart';
+import '../../../data/repositories/preferences_repository.dart';
+import '../../../domain/carts_repository.dart';
 import '../application_error/application_error_bloc.dart';
 
 part 'carts_list_bloc.freezed.dart';
