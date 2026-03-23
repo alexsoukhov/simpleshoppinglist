@@ -9,9 +9,9 @@ import 'package:rxdart/rxdart.dart';
 import 'package:simpleshoppinglist/data/models/cart.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../../domain/carts_repository.dart';
-import '../../../domain/preferences_repository.dart';
-import '../application_error/application_error_bloc.dart';
+import '../../../../../domain/carts_repository.dart';
+import '../../../../../domain/preferences_repository.dart';
+import '../../application_error/bloc/application_error_bloc.dart';
 
 part 'carts_list_bloc.freezed.dart';
 

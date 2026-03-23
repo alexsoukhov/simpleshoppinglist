@@ -1,13 +1,13 @@
 import 'package:bloc_presentation/bloc_presentation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:simpleshoppinglist/application/ui/cart/cart_page.dart';
 
-import '../../../di/di.dart';
-import '../../../domain/carts_repository.dart';
-import '../../bloc/application_error/application_error_bloc.dart';
-import '../../bloc/main/main_bloc.dart';
+import '../../../../di/di.dart';
+import '../../../../domain/carts_repository.dart';
+import '../application_error/bloc/application_error_bloc.dart';
+import '../cart/cart_page.dart';
 import '../carts_list/carts_list_page.dart';
+import 'bloc/main_bloc.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -22,10 +22,8 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => MainBloc(
-        getIt<CartsRepository>(),
-        ApplicationErrorBloc.of(context),
-      ),
+      create: (context) =>
+          MainBloc(getIt<CartsRepository>(), ApplicationErrorBloc.of(context)),
       child: BackButtonListener(
         onBackButtonPressed: () async {
           if (_pageController.page == 1) {

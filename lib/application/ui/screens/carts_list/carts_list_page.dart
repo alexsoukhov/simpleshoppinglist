@@ -2,16 +2,15 @@ import 'package:bloc_presentation/bloc_presentation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:simpleshoppinglist/application/ui/carts_list/widgets/cart_name_input_widget.dart';
-
-import '../../../data/models/cart.dart';
-import '../../../di/di.dart';
-import '../../../domain/carts_repository.dart';
-import '../../../domain/preferences_repository.dart';
-import '../../bloc/application_error/application_error_bloc.dart';
-import '../../bloc/carts_list/carts_list_bloc.dart';
-import '../../bloc/main/main_bloc.dart';
-import '../common/extensions/dialog.dart';
+import 'package:simpleshoppinglist/application/ui/screens/carts_list/widgets/cart_name_input_widget.dart';
+import '../../../../data/models/cart.dart';
+import '../../../../di/di.dart';
+import '../../../../domain/carts_repository.dart';
+import '../../../../domain/preferences_repository.dart';
+import '../../common/extensions/dialog.dart';
+import '../application_error/bloc/application_error_bloc.dart';
+import '../main/bloc/main_bloc.dart';
+import 'bloc/carts_list_bloc.dart';
 import 'widgets/carts_list_item_widget.dart';
 
 class CartsListPage extends StatelessWidget {
@@ -48,20 +47,27 @@ class CartsListPage extends StatelessWidget {
                 ),
                 SliverReorderableList(
                   itemBuilder: (BuildContext context, int index) {
-                    final cart = state.data[index];
+                    if (index < state.data.length) {
+                      final cart = state.data[index];
 
-                    return CartsListItemWidget(
-                      key: ObjectKey(cart),
-                      cart: cart,
-                      selectedCart: state.selectedCart,
-                      index: index,
-                      onPressed: () => _onSelect(context, cart),
-                      onDelete: () => _onDelete(context, cart),
-                      onEdit: () =>
-                          _onEdit(context, CartsListBloc.of(context), cart),
-                    );
+                      return CartsListItemWidget(
+                        key: ObjectKey(cart),
+                        cart: cart,
+                        selectedCart: state.selectedCart,
+                        index: index,
+                        onPressed: () => _onSelect(context, cart),
+                        onDelete: () => _onDelete(context, cart),
+                        onEdit: () =>
+                            _onEdit(context, CartsListBloc.of(context), cart),
+                      );
+                    } else {
+                      return SizedBox(
+                        key: ValueKey("offset_nav_bar"),
+                        height: kBottomNavigationBarHeight,
+                      );
+                    }
                   },
-                  itemCount: state.data.length,
+                  itemCount: state.data.length + 1,
                   onReorder: (int oldIndex, int newIndex) =>
                       _onReorder(context, oldIndex, newIndex),
                 ),

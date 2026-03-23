@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../theme/dimensions.dart';
 import '../../theme/styles.dart';
 
 class BorderIconButton extends StatelessWidget {
@@ -21,11 +22,11 @@ class BorderIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: Styles.buttonSize,
-      height: Styles.buttonSize,
+      width: Dimensions.buttonSize,
+      height: Dimensions.buttonSize,
       decoration: BoxDecoration(
         color: backgroundColor ?? Styles.cardBackgroundColor(context),
-        borderRadius: Styles.borderRadius,
+        borderRadius: Dimensions.borderRadius,
         border: Border.all(
           color: borderColor ?? Styles.borderColorSmall(context),
           width: 1,
@@ -35,7 +36,7 @@ class BorderIconButton extends StatelessWidget {
         icon: Icon(
           icon,
           color: iconColor ?? Styles.iconColor(context),
-          size: Styles.iconSize,
+          size: Dimensions.iconSize,
         ),
         onPressed: onTap,
       ),

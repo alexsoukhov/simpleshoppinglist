@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simpleshoppinglist/application/ui/common/extensions/toast.dart';
 
-import 'bloc/application_error/application_error_bloc.dart';
+import 'bloc/application_error_bloc.dart';
 
 class ApplicationError extends StatelessWidget {
   const ApplicationError({super.key, required this.child});

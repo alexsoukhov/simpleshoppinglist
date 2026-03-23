@@ -4,8 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../config.dart';
-import '../../../utils/logger.dart';
+import '../../../../../config.dart';
+import '../../../../../utils/logger.dart';
 
 part 'application_error_bloc.freezed.dart';
 

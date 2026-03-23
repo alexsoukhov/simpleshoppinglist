@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:simpleshoppinglist/application/bloc/main/main_bloc.dart';
-import 'package:simpleshoppinglist/application/ui/cart/widgets/product_input_widget.dart';
-
-import '../../../data/models/cart_item.dart';
-import '../../../di/di.dart';
-import '../../../domain/carts_repository.dart';
-import '../../bloc/application_error/application_error_bloc.dart';
-import '../../bloc/cart/cart_bloc.dart';
-import '../common/extensions/dialog.dart';
-import '../theme/styles.dart';
+import 'package:simpleshoppinglist/application/ui/screens/cart/widgets/product_input_widget.dart';
+import 'package:simpleshoppinglist/application/ui/screens/main/bloc/main_bloc.dart';
+import '../../../../data/models/cart_item.dart';
+import '../../../../di/di.dart';
+import '../../../../domain/carts_repository.dart';
+import '../../common/extensions/dialog.dart';
+import '../../theme/dimensions.dart';
+import '../../theme/styles.dart';
+import '../application_error/bloc/application_error_bloc.dart';
+import 'bloc/cart_bloc.dart';
 import 'widgets/cart_item_widget.dart';
 
 class CartPage extends StatelessWidget {
@@ -20,14 +20,14 @@ class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CartBloc(
-        getIt<CartsRepository>(),
-        ApplicationErrorBloc.of(context),
-      ),
+      create: (context) =>
+          CartBloc(getIt<CartsRepository>(), ApplicationErrorBloc.of(context)),
       child: BlocBuilder<CartBloc, CartState>(
         builder: (context, state) {
           return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4),
+            padding: const EdgeInsets.symmetric(
+              horizontal: Dimensions.paddingMainHorizontal,
+            ),
             child: CustomScrollView(
               slivers: <Widget>[
                 SliverAppBar(
@@ -49,7 +49,7 @@ class CartPage extends StatelessWidget {
                   child: Container(
                     decoration: BoxDecoration(
                       color: Styles.cardBackgroundColor(context),
-                      borderRadius: Styles.borderRadius,
+                      borderRadius: Dimensions.borderRadius,
                       border: Border.all(
                         color: Styles.borderColorSmall(context),
                         width: 1,
@@ -62,22 +62,30 @@ class CartPage extends StatelessWidget {
                 SliverPadding(padding: EdgeInsets.only(top: 8)),
                 SliverReorderableList(
                   itemBuilder: (BuildContext context, int index) {
-                    return CartItemWidget(
-                      key: ObjectKey(state.data!.items[index]),
-                      cart: state.data!.items[index],
-                      index: index,
-                      onLongPress: () =>
-                          _onLongPress(context, state.data!.items[index]),
-                      onDelete: () =>
-                          _onDelete(context, state.data!.items[index]),
-                      onEdit: () => _onEdit(
-                        context,
-                        CartBloc.of(context),
-                        state.data!.items[index],
-                      ),
-                    );
+                    if (index < (state.data?.items.length ?? 0)) {
+                      return CartItemWidget(
+                        key: ObjectKey(state.data!.items[index]),
+                        cart: state.data!.items[index],
+                        index: index,
+                        onLongPress: () =>
+                            _onLongPress(context, state.data!.items[index]),
+                        onDelete: () =>
+                            _onDelete(context, state.data!.items[index]),
+                        onEdit: () =>
+                            _onEdit(
+                              context,
+                              CartBloc.of(context),
+                              state.data!.items[index],
+                            ),
+                      );
+                    } else {
+                      return SizedBox(
+                        key: ValueKey("offset_nav_bar"),
+                        height: kBottomNavigationBarHeight,
+                      );
+                    }
                   },
-                  itemCount: state.data?.items.length ?? 0,
+                  itemCount: (state.data?.items.length ?? 0) + 1,
                   onReorder: (int oldIndex, int newIndex) =>
                       _onReorder(context, oldIndex, newIndex),
                 ),

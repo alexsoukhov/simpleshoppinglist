@@ -5,9 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../data/models/cart.dart';
-import '../../../domain/carts_repository.dart';
-import '../application_error/application_error_bloc.dart';
+import '../../../../../data/models/cart.dart';
+import '../../../../../domain/carts_repository.dart';
+import '../../application_error/bloc/application_error_bloc.dart';
 
 part 'main_bloc.freezed.dart';
 

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:simpleshoppinglist/application/ui/theme/dimensions.dart';
 
-import '../../../../data/models/cart_item.dart';
-import '../../../../generated/l10n.dart';
-import '../../theme/styles.dart';
+import '../../../../../data/models/cart_item.dart';
+import '../../../../../generated/l10n.dart';
+import '../../../theme/styles.dart';
 
 class CartItemWidget extends StatefulWidget {
   const CartItemWidget({
@@ -51,19 +52,25 @@ class _CartItemWidgetState extends State<CartItemWidget> {
       builder:
           (BuildContext context, MenuController controller, Widget? child) =>
               Container(
-                margin: const EdgeInsets.only(bottom: 6),
+                margin: const EdgeInsets.only(bottom: Dimensions.gapVertical),
                 decoration: BoxDecoration(
                   color: Styles.cardBackgroundColor(context),
-                  borderRadius: Styles.borderRadius,
-                  border: Border.all(
+                  //borderRadius: Dimensions.borderRadius,
+                  border: Border(
+                    bottom: BorderSide(
+                      color: Styles.borderColor(context),
+                      width: 1,
+                    ),
+                  ),
+                  /*border: Border.all(
                     color: Styles.borderColor(context),
                     width: 1,
-                  ),
+                  ),*/
                 ),
                 child: Material(
                   color: Colors.transparent,
                   child: InkWell(
-                    borderRadius: Styles.borderRadius,
+                    //borderRadius: Dimensions.borderRadius,
                     onTap: () => _menuController.open(),
                     onLongPress: widget.onLongPress,
                     child: Padding(
@@ -87,9 +94,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                           ReorderableDragStartListener(
                             index: widget.index,
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8.0,
-                              ),
+                              padding: const EdgeInsets.only(left: 8.0),
                               child: Icon(Icons.drag_handle),
                             ),
                           ),
@@ -101,16 +106,29 @@ class _CartItemWidgetState extends State<CartItemWidget> {
               ),
       menuChildren: [
         ListTile(
-          title: Text(S.of(context).remove_item),
+          title: Row(
+            children: [
+              Icon(color: Styles.iconColor(context), Icons.delete),
+              const SizedBox(width: 8),
+              Text(S.of(context).remove_item),
+            ],
+          ),
           onTap: () {
             _menuController.close();
             widget.onDelete?.call();
           },
         ),
         ListTile(
-          title: Text(S.of(context).edit_item),
+          title: Row(
+            children: [
+              Icon(color: Styles.iconColor(context), Icons.edit),
+              const SizedBox(width: 8),
+              Text(S.of(context).edit_item),
+            ],
+          ),
           onTap: () {
             _menuController.close();
+
             widget.onEdit?.call();
           },
         ),

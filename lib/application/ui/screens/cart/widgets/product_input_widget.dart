@@ -3,8 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
-import '../../common/widgets/border_icon_button.dart';
-import '../../theme/styles.dart';
+import '../../../common/widgets/border_icon_button.dart';
+import '../../../theme/dimensions.dart';
+import '../../../theme/styles.dart';
 
 class ProductInputWidget extends StatefulWidget {
   const ProductInputWidget({
@@ -59,13 +60,13 @@ class _ProductInputWidgetState extends State<ProductInputWidget> {
       children: <Widget>[
         if (widget.allowBack)
           BorderIconButton(onTap: widget.onBack, icon: Icons.arrow_back),
-        const SizedBox(width: 6),
+        const SizedBox(width: Dimensions.gapHorizontal),
         Expanded(
           child: Container(
-            height: Styles.inputHeight,
+            height: Dimensions.inputHeight,
             decoration: BoxDecoration(
               color: Styles.cardBackgroundColor(context),
-              borderRadius: Styles.borderRadius,
+              borderRadius: Dimensions.borderRadius,
               border: Border.all(
                 color: Styles.borderColorSmall(context),
                 width: 1,
@@ -133,7 +134,7 @@ class _ProductInputWidgetState extends State<ProductInputWidget> {
             ),
           ),
         ),
-        const SizedBox(width: 6),
+        const SizedBox(width: Dimensions.gapHorizontal),
         BorderIconButton(
           icon: Icons.add,
           onTap: () {

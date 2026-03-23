@@ -3,9 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
-import '../../../../generated/l10n.dart';
-import '../../common/widgets/border_icon_button.dart';
-import '../../theme/styles.dart';
+import '../../../../../generated/l10n.dart';
+import '../../../common/widgets/border_icon_button.dart';
+import '../../../theme/dimensions.dart';
+import '../../../theme/styles.dart';
 
 class CartNameInputWidget extends StatefulWidget {
   const CartNameInputWidget({
@@ -51,15 +52,17 @@ class _CartNameInputWidgetState extends State<CartNameInputWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4),
+      padding: const EdgeInsets.symmetric(
+        horizontal: Dimensions.paddingMainHorizontal,
+      ),
       child: Row(
         children: [
           Expanded(
             child: Container(
-              height: 36,
+              height: Dimensions.inputHeight,
               decoration: BoxDecoration(
                 color: Styles.cardBackgroundColor(context),
-                borderRadius: Styles.borderRadius,
+                borderRadius: Dimensions.borderRadius,
                 border: Border.all(
                   color: Styles.borderColorSmall(context),
                   width: 1,
@@ -100,7 +103,7 @@ class _CartNameInputWidgetState extends State<CartNameInputWidget> {
                       decorationBuilder: (context, child) => Container(
                         decoration: BoxDecoration(
                           color: Styles.cardBackgroundColor(context),
-                          borderRadius: Styles.borderRadius,
+                          borderRadius: Dimensions.borderRadius,
                           border: Border.all(
                             color: Styles.borderColorSmall(context),
                             width: 1,
@@ -110,9 +113,7 @@ class _CartNameInputWidgetState extends State<CartNameInputWidget> {
                       ),
                       itemBuilder: (context, item) => ListTile(
                         title: Text(
-                          style: TextStyle(
-                            color: Styles.textColorDim(context),
-                          ),
+                          style: TextStyle(color: Styles.textColorDim(context)),
                           item,
                         ),
                       ),
@@ -123,7 +124,7 @@ class _CartNameInputWidgetState extends State<CartNameInputWidget> {
                   ),
                   if (clear)
                     IconButton(
-                      iconSize: Styles.iconSize,
+                      iconSize: Dimensions.iconSize,
                       onPressed: _textEditingController.clear,
                       icon: Icon(Icons.clear),
                     ),
@@ -131,7 +132,7 @@ class _CartNameInputWidgetState extends State<CartNameInputWidget> {
               ),
             ),
           ),
-          const SizedBox(width: 6),
+          const SizedBox(width: Dimensions.gapHorizontal),
           BorderIconButton(
             onTap: () {
               _focusNode.unfocus();
@@ -140,7 +141,7 @@ class _CartNameInputWidgetState extends State<CartNameInputWidget> {
             },
             icon: Icons.add,
           ),
-          const SizedBox(width: 6),
+          const SizedBox(width: Dimensions.gapHorizontal),
           BorderIconButton(
             onTap: () {
               _focusNode.unfocus();

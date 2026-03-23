@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../../../generated/l10n.dart';
+import '../../theme/dimensions.dart';
 import '../../theme/styles.dart';
 import '../../theme/theme.dart';
 
@@ -12,7 +13,7 @@ extension ToastContext on BuildContext {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          borderRadius: Styles.borderRadius,
+          borderRadius: Dimensions.borderRadius,
           color: background ?? ThemeColors.toastBackground,
         ),
         child: Row(

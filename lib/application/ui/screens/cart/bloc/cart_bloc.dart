@@ -6,9 +6,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:simpleshoppinglist/data/models/cart.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../../data/models/cart_item.dart';
-import '../../../domain/carts_repository.dart';
-import '../application_error/application_error_bloc.dart';
+import '../../../../../data/models/cart_item.dart';
+import '../../../../../domain/carts_repository.dart';
+import '../../application_error/bloc/application_error_bloc.dart';
 
 part 'cart_bloc.freezed.dart';
 

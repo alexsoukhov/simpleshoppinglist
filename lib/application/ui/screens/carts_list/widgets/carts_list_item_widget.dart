@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:simpleshoppinglist/application/ui/carts_list/widgets/preview_tag_widget.dart';
+import 'package:simpleshoppinglist/application/ui/screens/carts_list/widgets/preview_tag_widget.dart';
 
-import '../../../../data/models/cart.dart';
-import '../../../../data/models/cart_item.dart';
-import '../../../../generated/l10n.dart';
-import '../../theme/styles.dart';
+import '../../../../../data/models/cart.dart';
+import '../../../../../data/models/cart_item.dart';
+import '../../../../../generated/l10n.dart';
+import '../../../theme/dimensions.dart';
+import '../../../theme/styles.dart';
 
 class CartsListItemWidget extends StatefulWidget {
   const CartsListItemWidget({
@@ -34,7 +35,9 @@ class _CartsListItemWidgetState extends State<CartsListItemWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
+      padding: const EdgeInsets.symmetric(
+        horizontal: Dimensions.paddingMainHorizontal,
+      ),
       child: MenuAnchor(
         style: MenuStyle(
           backgroundColor: WidgetStatePropertyAll<Color>(
@@ -60,16 +63,18 @@ class _CartsListItemWidgetState extends State<CartsListItemWidget> {
           final extra = remaining.length - shown.length;
 
           return Container(
-            margin: const EdgeInsets.only(bottom: 6),
+            margin: const EdgeInsets.only(bottom: Dimensions.gapVertical),
             decoration: BoxDecoration(
-              color: Styles.cardBackgroundColor(context),
-              borderRadius: Styles.borderRadius,
+              color: widget.cart == widget.selectedCart
+                  ? Styles.cardSelectedBackgroundColor(context)
+                  : Styles.cardBackgroundColor(context),
+              borderRadius: Dimensions.borderRadius,
               border: Border.all(color: Styles.borderColor(context), width: 1),
             ),
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                borderRadius: Styles.borderRadius,
+                borderRadius: Dimensions.borderRadius,
                 onTap: widget.onPressed,
                 onLongPress: () => _menuController.open(),
                 child: Padding(
@@ -134,10 +139,7 @@ class _CartsListItemWidgetState extends State<CartsListItemWidget> {
           ListTile(
             title: Row(
               children: [
-                Icon(
-                  color: Styles.iconColor(context),
-                  Icons.delete,
-                ),
+                Icon(color: Styles.iconColor(context), Icons.delete),
                 const SizedBox(width: 8),
                 Text(S.of(context).remove_item),
               ],
