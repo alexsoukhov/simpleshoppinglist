@@ -169,6 +169,76 @@ class S {
       args: [],
     );
   }
+
+  /// `Сохранить изменения`
+  String get save_changes {
+    return Intl.message(
+      'Сохранить изменения',
+      name: 'save_changes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Да`
+  String get yes {
+    return Intl.message(
+      'Да',
+      name: 'yes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Нет`
+  String get no {
+    return Intl.message(
+      'Нет',
+      name: 'no',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Подсказки названия списка`
+  String get cart_name_suggestions {
+    return Intl.message(
+      'Подсказки названия списка',
+      name: 'cart_name_suggestions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Предлагать дату`
+  String get suggest_date {
+    return Intl.message(
+      'Предлагать дату',
+      name: 'suggest_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Цвет`
+  String get theme {
+    return Intl.message(
+      'Цвет',
+      name: 'theme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Скопируйте сообщение и нажмите на ссылку`
+  String get share_desc {
+    return Intl.message(
+      'Скопируйте сообщение и нажмите на ссылку',
+      name: 'share_desc',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

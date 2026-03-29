@@ -128,7 +128,6 @@ class _CartItemWidgetState extends State<CartItemWidget> {
           ),
           onTap: () {
             _menuController.close();
-
             widget.onEdit?.call();
           },
         ),

@@ -1,7 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
+
+import '../../../theme/dimensions.dart';
+import '../../../theme/styles.dart';
 
 class SuggestionInputWidget extends StatefulWidget {
   const SuggestionInputWidget({super.key, this.onAdd});
@@ -9,12 +9,10 @@ class SuggestionInputWidget extends StatefulWidget {
   final void Function(String value)? onAdd;
 
   @override
-  State<SuggestionInputWidget> createState() =>
-      _SuggestionInputWidgetState();
+  State<SuggestionInputWidget> createState() => _SuggestionInputWidgetState();
 }
 
-class _SuggestionInputWidgetState
-    extends State<SuggestionInputWidget> {
+class _SuggestionInputWidgetState extends State<SuggestionInputWidget> {
   final TextEditingController _textEditingController = TextEditingController();
   bool _clear = false;
 
@@ -40,39 +38,41 @@ class _SuggestionInputWidgetState
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5.0,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Expanded(
-              child: TextField(
-                controller: _textEditingController,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: "",
-                ),
-                textInputAction: TextInputAction.done,
+    return Container(
+      decoration: BoxDecoration(
+        color: Styles.cardBackgroundColor(context),
+        borderRadius: Dimensions.borderRadius,
+        border: Border.all(color: Styles.borderColorSmall(context), width: 1),
+      ),
+      padding: const EdgeInsets.only(left: 12),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: TextField(
+              controller: _textEditingController,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: "",
               ),
+              textInputAction: TextInputAction.done,
             ),
+          ),
 
-            if (_clear)
-              IconButton(
-                onPressed: _textEditingController.clear,
-                icon: Icon(Icons.clear),
-              ),
+          if (_clear)
             IconButton(
-              icon: Icon(Icons.add),
-              onPressed: () {
-                widget.onAdd?.call(_textEditingController.text);
-                _textEditingController.text = "";
-              },
+              onPressed: _textEditingController.clear,
+              icon: Icon(Icons.clear),
             ),
-          ],
-        ),
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {
+              widget.onAdd?.call(_textEditingController.text);
+              _textEditingController.text = "";
+            },
+          ),
+        ],
       ),
     );
   }

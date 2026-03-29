@@ -13,4 +13,8 @@ class CartEvent with _$CartEvent {
   const factory CartEvent.delete(CartItem item) = CartEventDelete;
 
   const factory CartEvent.edit(CartItem item, String value) = CartEventEdit;
+
+  const factory CartEvent.share() = CartEventShare;
+
+  const factory CartEvent.shareData(String data) = CartEventShareData;
 }

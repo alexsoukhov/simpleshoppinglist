@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:bloc_presentation/bloc_presentation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -16,7 +17,8 @@ part 'cart_event.dart';
 
 part 'cart_state.dart';
 
-class CartBloc extends Bloc<CartEvent, CartState> {
+class CartBloc extends Bloc<CartEvent, CartState>
+    with BlocPresentationMixin<CartState, CartEvent> {
   CartBloc(this._cartsRepository, this._errorBloc)
     : super(CartState(loading: true)) {
     on<CartEventInit>((event, emit) async {
@@ -27,6 +29,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     on<CartEventToggle>(_toggle);
     on<CartEventDelete>(_delete);
     on<CartEventEdit>(_edit);
+    on<CartEventShare>(_share);
 
     add(const CartEventInit());
   }
@@ -147,6 +150,20 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       } catch (ex) {
         ApplicationErrorBloc.handleError(_errorBloc, ex);
       }
+    }
+  }
+
+  Future<void> _share(CartEventShare event, Emitter<CartState> emit) async {
+    final selectedCart = _cartsRepository.selectedCart;
+
+    if (selectedCart != null) {
+      final list = selectedCart.items.toList();
+
+      String res = list.fold("", (String prev, CartItem elem) {
+        return "$prev\n${elem.value}";
+      });
+
+      emitPresentation(CartEvent.shareData(res));
     }
   }
 

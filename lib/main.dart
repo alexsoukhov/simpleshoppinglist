@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:simpleshoppinglist/di/di.dart';
+import 'package:simpleshoppinglist/domain/preferences_repository.dart';
 import 'package:simpleshoppinglist/sources/preferences/preferences_source.dart';
 
 import 'application/ui/screens/application_error/application_error.dart';
@@ -49,8 +50,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ApplicationProviders(
-      builder: (context) => Builder(
-        builder: (context) => MaterialApp.router(
+      builder: (context) => StreamBuilder(
+        stream: getIt<PreferencesRepository>().appSeedColorStream,
+        builder: (context, stream) => MaterialApp.router(
           debugShowCheckedModeBanner: false,
           routerConfig: _router,
           localizationsDelegates: const [
@@ -68,7 +70,7 @@ class MyApp extends StatelessWidget {
           ),
           theme: ThemeData(
             colorScheme: .fromSeed(
-              seedColor: Colors.blue,
+              seedColor: stream.hasData ? stream.requireData : Colors.blue,
               brightness: Brightness.dark,
             ),
           ),

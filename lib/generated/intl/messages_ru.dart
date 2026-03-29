@@ -25,6 +25,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "all_bought": MessageLookupByLibrary.simpleMessage("всё куплено"),
         "cancel": MessageLookupByLibrary.simpleMessage("Отменить"),
         "cart_name": MessageLookupByLibrary.simpleMessage("Название списка"),
+        "cart_name_suggestions":
+            MessageLookupByLibrary.simpleMessage("Подсказки названия списка"),
         "def_suggestion1": MessageLookupByLibrary.simpleMessage("продукты"),
         "def_suggestion2": MessageLookupByLibrary.simpleMessage("аптека"),
         "edit_item":
@@ -32,8 +34,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "empty": MessageLookupByLibrary.simpleMessage("пусто"),
         "error_general": MessageLookupByLibrary.simpleMessage("Ошибка"),
         "new_list": MessageLookupByLibrary.simpleMessage("Новый список"),
+        "no": MessageLookupByLibrary.simpleMessage("Нет"),
         "remove_item": MessageLookupByLibrary.simpleMessage("Удалить элемент"),
         "save": MessageLookupByLibrary.simpleMessage("Сохранить"),
-        "settings": MessageLookupByLibrary.simpleMessage("Настройки")
+        "save_changes":
+            MessageLookupByLibrary.simpleMessage("Сохранить изменения"),
+        "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
+        "share_desc": MessageLookupByLibrary.simpleMessage(
+            "Скопируйте сообщение и нажмите на ссылку"),
+        "suggest_date": MessageLookupByLibrary.simpleMessage("Предлагать дату"),
+        "theme": MessageLookupByLibrary.simpleMessage("Цвет"),
+        "yes": MessageLookupByLibrary.simpleMessage("Да")
       };
 }

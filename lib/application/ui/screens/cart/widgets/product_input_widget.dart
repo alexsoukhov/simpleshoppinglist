@@ -13,6 +13,7 @@ class ProductInputWidget extends StatefulWidget {
     required this.onBack,
     required this.allowBack,
     required this.onCallback,
+    required this.onShare,
     this.onAdd,
     this.enabled = true,
   });
@@ -20,6 +21,7 @@ class ProductInputWidget extends StatefulWidget {
   final bool enabled;
   final bool allowBack;
   final void Function(String value)? onAdd;
+  final VoidCallback onShare;
   final VoidCallback onBack;
   final FutureOr<List<String>?> Function(String search) onCallback;
 
@@ -57,7 +59,7 @@ class _ProductInputWidgetState extends State<ProductInputWidget> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
+      children: [
         if (widget.allowBack)
           BorderIconButton(onTap: widget.onBack, icon: Icons.arrow_back),
         const SizedBox(width: Dimensions.gapHorizontal),
@@ -99,12 +101,15 @@ class _ProductInputWidgetState extends State<ProductInputWidget> {
                         ),
                         textInputAction: TextInputAction.done,
                       ),
-                      decorationBuilder: (context, child) => Material(
-                        type: MaterialType.card,
-                        color: Theme.of(
-                          context,
-                        ).colorScheme.surfaceContainerLow,
-                        elevation: 4,
+                      decorationBuilder: (context, child) => Container(
+                        decoration: BoxDecoration(
+                          color: Styles.cardBackgroundColor(context),
+                          borderRadius: Dimensions.borderRadius,
+                          border: Border.all(
+                            color: Styles.borderColorSmall(context),
+                            width: 1,
+                          ),
+                        ),
                         child: child,
                       ),
                       itemBuilder: (context, item) => ListTile(
@@ -113,7 +118,7 @@ class _ProductInputWidgetState extends State<ProductInputWidget> {
                         trailing: IconButton(
                           onPressed: () {
                             _focusNode.unfocus();
-                            widget.onAdd?.call(_textEditingController.text);
+                            widget.onAdd?.call(item);
                             _textEditingController.text = "";
                           },
                           icon: Icon(Icons.add),
@@ -141,6 +146,13 @@ class _ProductInputWidgetState extends State<ProductInputWidget> {
             _focusNode.unfocus();
             widget.onAdd?.call(_textEditingController.text);
             _textEditingController.text = "";
+          },
+        ),
+        const SizedBox(width: Dimensions.gapHorizontal),
+        BorderIconButton(
+          icon: Icons.share,
+          onTap: () {
+            widget.onShare.call();
           },
         ),
       ],

@@ -3,7 +3,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../../../generated/l10n.dart';
 import '../../theme/dimensions.dart';
-import '../../theme/styles.dart';
 import '../../theme/theme.dart';
 
 extension ToastContext on BuildContext {

@@ -33,6 +33,7 @@ class CartsListPage extends StatelessWidget {
             return CustomScrollView(
               slivers: <Widget>[
                 SliverAppBar(
+                  automaticallyImplyLeading: false,
                   forceMaterialTransparency: true,
                   title: CartNameInputWidget(
                     onAdd: (text) => _onAdd(context, text),

@@ -43,4 +43,11 @@ class Styles {
           .of(context)
           .colorScheme
           .primaryFixedDim;
+
+
+  static TextStyle? textSmall(BuildContext context) => Theme.of(context).primaryTextTheme.bodySmall;
+
+  static TextStyle? textMedium(BuildContext context) => Theme.of(context).primaryTextTheme.bodyMedium;
+
+  static TextStyle? textLarge(BuildContext context) => Theme.of(context).primaryTextTheme.bodyLarge;
 }

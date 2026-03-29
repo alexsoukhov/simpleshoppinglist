@@ -10,7 +10,11 @@ class SettingsEvent with _$SettingsEvent {
 
   const factory SettingsEvent.add(String value) = SettingsEventAdd;
 
+  const factory SettingsEvent.edit(int idx, String value) = SettingsEventEdit;
+
   const factory SettingsEvent.switchDate(bool value) = SettingsEventSwitchDate;
+
+  const factory SettingsEvent.changeColor(Color value) = SettingsEventChangeColor;
 
   const factory SettingsEvent.save() = SettingsEventSave;
 }

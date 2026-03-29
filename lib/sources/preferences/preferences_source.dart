@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../generated/l10n.dart';
@@ -10,6 +11,7 @@ class PreferencesSource {
 
   static const _cartSuggestionsName = 'cart_suggestions';
   static const _cartSuggestionDateName = 'cart_suggestion_date';
+  static const _appSeedColorName = 'app_seed_color';
 
   static final List<String> _defaultSuggestions = [];
 
@@ -46,4 +48,8 @@ class PreferencesSource {
 
   set cartNameSuggestionDate(bool value) =>
       _preferences.setBool(_cartSuggestionDateName, value);
+
+  int get appSeedColor => _preferences.getInt(_appSeedColorName) ?? 0xFF2196F3;
+
+  set appSeedColor(int value) => _preferences.setInt(_appSeedColorName, value);
 }

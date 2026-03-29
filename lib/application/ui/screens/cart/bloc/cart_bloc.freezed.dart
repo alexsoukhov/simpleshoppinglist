@@ -55,7 +55,7 @@ extension CartEventPatterns on CartEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( CartEventInit value)?  init,TResult Function( CartEventCreateItem value)?  createItem,TResult Function( CartEventReorder value)?  reorder,TResult Function( CartEventToggle value)?  toggle,TResult Function( CartEventDelete value)?  delete,TResult Function( CartEventEdit value)?  edit,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( CartEventInit value)?  init,TResult Function( CartEventCreateItem value)?  createItem,TResult Function( CartEventReorder value)?  reorder,TResult Function( CartEventToggle value)?  toggle,TResult Function( CartEventDelete value)?  delete,TResult Function( CartEventEdit value)?  edit,TResult Function( CartEventShare value)?  share,TResult Function( CartEventShareData value)?  shareData,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case CartEventInit() when init != null:
@@ -64,7 +64,9 @@ return createItem(_that);case CartEventReorder() when reorder != null:
 return reorder(_that);case CartEventToggle() when toggle != null:
 return toggle(_that);case CartEventDelete() when delete != null:
 return delete(_that);case CartEventEdit() when edit != null:
-return edit(_that);case _:
+return edit(_that);case CartEventShare() when share != null:
+return share(_that);case CartEventShareData() when shareData != null:
+return shareData(_that);case _:
   return orElse();
 
 }
@@ -82,7 +84,7 @@ return edit(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( CartEventInit value)  init,required TResult Function( CartEventCreateItem value)  createItem,required TResult Function( CartEventReorder value)  reorder,required TResult Function( CartEventToggle value)  toggle,required TResult Function( CartEventDelete value)  delete,required TResult Function( CartEventEdit value)  edit,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( CartEventInit value)  init,required TResult Function( CartEventCreateItem value)  createItem,required TResult Function( CartEventReorder value)  reorder,required TResult Function( CartEventToggle value)  toggle,required TResult Function( CartEventDelete value)  delete,required TResult Function( CartEventEdit value)  edit,required TResult Function( CartEventShare value)  share,required TResult Function( CartEventShareData value)  shareData,}){
 final _that = this;
 switch (_that) {
 case CartEventInit():
@@ -91,7 +93,9 @@ return createItem(_that);case CartEventReorder():
 return reorder(_that);case CartEventToggle():
 return toggle(_that);case CartEventDelete():
 return delete(_that);case CartEventEdit():
-return edit(_that);case _:
+return edit(_that);case CartEventShare():
+return share(_that);case CartEventShareData():
+return shareData(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -108,7 +112,7 @@ return edit(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( CartEventInit value)?  init,TResult? Function( CartEventCreateItem value)?  createItem,TResult? Function( CartEventReorder value)?  reorder,TResult? Function( CartEventToggle value)?  toggle,TResult? Function( CartEventDelete value)?  delete,TResult? Function( CartEventEdit value)?  edit,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( CartEventInit value)?  init,TResult? Function( CartEventCreateItem value)?  createItem,TResult? Function( CartEventReorder value)?  reorder,TResult? Function( CartEventToggle value)?  toggle,TResult? Function( CartEventDelete value)?  delete,TResult? Function( CartEventEdit value)?  edit,TResult? Function( CartEventShare value)?  share,TResult? Function( CartEventShareData value)?  shareData,}){
 final _that = this;
 switch (_that) {
 case CartEventInit() when init != null:
@@ -117,7 +121,9 @@ return createItem(_that);case CartEventReorder() when reorder != null:
 return reorder(_that);case CartEventToggle() when toggle != null:
 return toggle(_that);case CartEventDelete() when delete != null:
 return delete(_that);case CartEventEdit() when edit != null:
-return edit(_that);case _:
+return edit(_that);case CartEventShare() when share != null:
+return share(_that);case CartEventShareData() when shareData != null:
+return shareData(_that);case _:
   return null;
 
 }
@@ -134,7 +140,7 @@ return edit(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  init,TResult Function( String name)?  createItem,TResult Function( int oldIndex,  int newIndex)?  reorder,TResult Function( CartItem item)?  toggle,TResult Function( CartItem item)?  delete,TResult Function( CartItem item,  String value)?  edit,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  init,TResult Function( String name)?  createItem,TResult Function( int oldIndex,  int newIndex)?  reorder,TResult Function( CartItem item)?  toggle,TResult Function( CartItem item)?  delete,TResult Function( CartItem item,  String value)?  edit,TResult Function()?  share,TResult Function( String data)?  shareData,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case CartEventInit() when init != null:
 return init();case CartEventCreateItem() when createItem != null:
@@ -142,7 +148,9 @@ return createItem(_that.name);case CartEventReorder() when reorder != null:
 return reorder(_that.oldIndex,_that.newIndex);case CartEventToggle() when toggle != null:
 return toggle(_that.item);case CartEventDelete() when delete != null:
 return delete(_that.item);case CartEventEdit() when edit != null:
-return edit(_that.item,_that.value);case _:
+return edit(_that.item,_that.value);case CartEventShare() when share != null:
+return share();case CartEventShareData() when shareData != null:
+return shareData(_that.data);case _:
   return orElse();
 
 }
@@ -160,7 +168,7 @@ return edit(_that.item,_that.value);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  init,required TResult Function( String name)  createItem,required TResult Function( int oldIndex,  int newIndex)  reorder,required TResult Function( CartItem item)  toggle,required TResult Function( CartItem item)  delete,required TResult Function( CartItem item,  String value)  edit,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  init,required TResult Function( String name)  createItem,required TResult Function( int oldIndex,  int newIndex)  reorder,required TResult Function( CartItem item)  toggle,required TResult Function( CartItem item)  delete,required TResult Function( CartItem item,  String value)  edit,required TResult Function()  share,required TResult Function( String data)  shareData,}) {final _that = this;
 switch (_that) {
 case CartEventInit():
 return init();case CartEventCreateItem():
@@ -168,7 +176,9 @@ return createItem(_that.name);case CartEventReorder():
 return reorder(_that.oldIndex,_that.newIndex);case CartEventToggle():
 return toggle(_that.item);case CartEventDelete():
 return delete(_that.item);case CartEventEdit():
-return edit(_that.item,_that.value);case _:
+return edit(_that.item,_that.value);case CartEventShare():
+return share();case CartEventShareData():
+return shareData(_that.data);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -185,7 +195,7 @@ return edit(_that.item,_that.value);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  init,TResult? Function( String name)?  createItem,TResult? Function( int oldIndex,  int newIndex)?  reorder,TResult? Function( CartItem item)?  toggle,TResult? Function( CartItem item)?  delete,TResult? Function( CartItem item,  String value)?  edit,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  init,TResult? Function( String name)?  createItem,TResult? Function( int oldIndex,  int newIndex)?  reorder,TResult? Function( CartItem item)?  toggle,TResult? Function( CartItem item)?  delete,TResult? Function( CartItem item,  String value)?  edit,TResult? Function()?  share,TResult? Function( String data)?  shareData,}) {final _that = this;
 switch (_that) {
 case CartEventInit() when init != null:
 return init();case CartEventCreateItem() when createItem != null:
@@ -193,7 +203,9 @@ return createItem(_that.name);case CartEventReorder() when reorder != null:
 return reorder(_that.oldIndex,_that.newIndex);case CartEventToggle() when toggle != null:
 return toggle(_that.item);case CartEventDelete() when delete != null:
 return delete(_that.item);case CartEventEdit() when edit != null:
-return edit(_that.item,_that.value);case _:
+return edit(_that.item,_that.value);case CartEventShare() when share != null:
+return share();case CartEventShareData() when shareData != null:
+return shareData(_that.data);case _:
   return null;
 
 }
@@ -592,6 +604,104 @@ $CartItemCopyWith<$Res> get item {
     return _then(_self.copyWith(item: value));
   });
 }
+}
+
+/// @nodoc
+
+
+class CartEventShare implements CartEvent {
+  const CartEventShare();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CartEventShare);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'CartEvent.share()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class CartEventShareData implements CartEvent {
+  const CartEventShareData(this.data);
+  
+
+ final  String data;
+
+/// Create a copy of CartEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$CartEventShareDataCopyWith<CartEventShareData> get copyWith => _$CartEventShareDataCopyWithImpl<CartEventShareData>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CartEventShareData&&(identical(other.data, data) || other.data == data));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,data);
+
+@override
+String toString() {
+  return 'CartEvent.shareData(data: $data)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $CartEventShareDataCopyWith<$Res> implements $CartEventCopyWith<$Res> {
+  factory $CartEventShareDataCopyWith(CartEventShareData value, $Res Function(CartEventShareData) _then) = _$CartEventShareDataCopyWithImpl;
+@useResult
+$Res call({
+ String data
+});
+
+
+
+
+}
+/// @nodoc
+class _$CartEventShareDataCopyWithImpl<$Res>
+    implements $CartEventShareDataCopyWith<$Res> {
+  _$CartEventShareDataCopyWithImpl(this._self, this._then);
+
+  final CartEventShareData _self;
+  final $Res Function(CartEventShareData) _then;
+
+/// Create a copy of CartEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? data = null,}) {
+  return _then(CartEventShareData(
+null == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
 }
 
 /// @nodoc

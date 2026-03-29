@@ -113,7 +113,6 @@ class _CartNameInputWidgetState extends State<CartNameInputWidget> {
                       ),
                       itemBuilder: (context, item) => ListTile(
                         title: Text(
-                          style: TextStyle(color: Styles.textColorDim(context)),
                           item,
                         ),
                       ),
