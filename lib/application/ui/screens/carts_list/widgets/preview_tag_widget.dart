@@ -19,7 +19,7 @@ class PreviewTagWidget extends StatelessWidget {
       ),
       child: Text(
         label,
-        style: TextStyle(color: Styles.textColorDim(context), fontSize: 11),
+        style: Styles.textSmall(context)?.copyWith(color: Styles.textColorDim(context)),
       ),
     );
   }

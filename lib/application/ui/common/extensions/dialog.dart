@@ -15,7 +15,7 @@ extension DialogContext on BuildContext {
               controller: textEditingController,
               autofocus: true,
             ),
-            actions: <Widget>[
+            actions: [
               TextButton(
                 child: Text(S.of(context).cancel),
                 onPressed: () {

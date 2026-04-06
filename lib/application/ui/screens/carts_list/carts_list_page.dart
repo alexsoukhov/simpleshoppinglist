@@ -31,7 +31,7 @@ class CartsListPage extends StatelessWidget {
         child: BlocBuilder<CartsListBloc, CartsListState>(
           builder: (context, state) {
             return CustomScrollView(
-              slivers: <Widget>[
+              slivers: [
                 SliverAppBar(
                   automaticallyImplyLeading: false,
                   forceMaterialTransparency: true,

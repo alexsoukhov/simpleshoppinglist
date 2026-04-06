@@ -1,6 +1,5 @@
 import 'package:bloc_presentation/bloc_presentation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../di/di.dart';
@@ -86,7 +85,7 @@ class _MainPageState extends State<MainPage> {
                       return orient == Orientation.portrait
                           ? PageView(
                               controller: _pageController,
-                              children: <Widget>[CartsListPage(), CartPage()],
+                              children: [CartsListPage(), CartPage()],
                             )
                           : SafeArea(
                               left: true,
@@ -94,7 +93,7 @@ class _MainPageState extends State<MainPage> {
                               top: false,
                               bottom: false,
                               child: Row(
-                                children: <Widget>[
+                                children: [
                                   Expanded(child: CartsListPage()),
                                   Expanded(child: CartPage(allowBack: false)),
                                 ],

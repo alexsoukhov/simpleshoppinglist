@@ -163,6 +163,8 @@ class CartBloc extends Bloc<CartEvent, CartState>
         return "$prev\n${elem.value}";
       });
 
+      res += "\n\nhttps://simpleshoppingcart.com/home";
+
       emitPresentation(CartEvent.shareData(res));
     }
   }

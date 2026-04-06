@@ -28,6 +28,10 @@ Future<void> main() async {
 final GoRouter _router = GoRouter(
   routes: <RouteBase>[
     GoRoute(
+      path: "/home",
+      redirect: (_, __) => "/"
+    ),
+    GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
         return const MainPage();
@@ -52,31 +56,53 @@ class MyApp extends StatelessWidget {
     return ApplicationProviders(
       builder: (context) => StreamBuilder(
         stream: getIt<PreferencesRepository>().appSeedColorStream,
-        builder: (context, stream) => MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          routerConfig: _router,
-          localizationsDelegates: const [
-            S.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          builder: (context, widget) => ApplicationLifecycleListener(
-            repository: context.read<AppLifecycleStateRepository>(),
-            builder: (context) {
-              PreferencesSource.initDefaultValues(context);
-              return ApplicationError(child: widget ?? const SizedBox());
-            },
-          ),
-          theme: ThemeData(
+        builder: (context, stream) {
+          ThemeData theme = ThemeData(
             colorScheme: .fromSeed(
               seedColor: stream.hasData ? stream.requireData : Colors.blue,
               brightness: Brightness.dark,
             ),
-          ),
-          locale: const Locale.fromSubtags(languageCode: 'ru'),
-          supportedLocales: S.delegate.supportedLocales,
-        ),
+          );
+
+          return MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            routerConfig: _router,
+            localizationsDelegates: const [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            builder: (context, widget) => ApplicationLifecycleListener(
+              repository: context.read<AppLifecycleStateRepository>(),
+              builder: (context) {
+                PreferencesSource.initDefaultValues(context);
+                return ApplicationError(child: widget ?? const SizedBox());
+              },
+            ),
+            theme:
+                ThemeData(
+                  colorScheme: .fromSeed(
+                    seedColor: stream.hasData
+                        ? stream.requireData
+                        : Colors.blue,
+                    brightness: Brightness.dark,
+                  ),
+                ).copyWith(
+                  textTheme: TextTheme(bodyMedium: TextStyle(fontSize: 22.0)),
+                  primaryTextTheme: TextTheme(
+                    bodySmall: TextStyle(fontSize: 15.0),
+                    bodyMedium: TextStyle(fontSize: 22.0),
+                    displayMedium: TextStyle(fontSize: 21.0),
+                    headlineMedium: TextStyle(fontSize: 21.0),
+                    titleMedium: TextStyle(fontSize: 21.0),
+                    labelMedium: TextStyle(fontSize: 21.0),
+                  ),
+                ),
+            locale: const Locale.fromSubtags(languageCode: 'ru'),
+            supportedLocales: S.delegate.supportedLocales,
+          );
+        },
       ),
     );
   }

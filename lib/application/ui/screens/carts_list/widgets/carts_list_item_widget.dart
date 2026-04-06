@@ -112,9 +112,8 @@ class _CartsListItemWidgetState extends State<CartsListItemWidget> {
                         children: [
                           Text(
                             '${widget.cart.doneCount}/${widget.cart.items.length}',
-                            style: TextStyle(
+                            style: Styles.textSmall(context)?.copyWith(
                               color: Styles.textColorSmall(context),
-                              fontSize: 11,
                               fontWeight: FontWeight.w500,
                             ),
                           ),

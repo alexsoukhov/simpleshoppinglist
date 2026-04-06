@@ -88,12 +88,12 @@ class _CartNameInputWidgetState extends State<CartNameInputWidget> {
                         onTapUpOutside: (_) => {focusNode.unfocus()},
                         controller: controller,
                         focusNode: focusNode,
-                        style: const TextStyle(fontSize: 14),
+                        style: Styles.textMedium(context),
                         decoration: InputDecoration(
                           hintText: S.of(context).new_list,
-                          hintStyle: TextStyle(
-                            color: Styles.textColorDim(context),
-                          ),
+                          hintStyle: Styles.textMedium(
+                            context,
+                          )?.copyWith(color: Styles.textColorDim(context)),
                           border: InputBorder.none,
                           isDense: true,
                           contentPadding: EdgeInsets.zero,
@@ -112,9 +112,7 @@ class _CartNameInputWidgetState extends State<CartNameInputWidget> {
                         child: child,
                       ),
                       itemBuilder: (context, item) => ListTile(
-                        title: Text(
-                          item,
-                        ),
+                        title: Text(item, style: Styles.textMedium(context)),
                       ),
                       onSelected: (String value) {
                         _textEditingController.text += " $value";

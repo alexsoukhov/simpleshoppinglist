@@ -1,6 +1,7 @@
 import 'package:bloc_presentation/bloc_presentation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:simpleshoppinglist/application/ui/screens/cart/widgets/header_delegate.dart';
 import 'package:simpleshoppinglist/application/ui/screens/cart/widgets/product_input_widget.dart';
 import 'package:simpleshoppinglist/application/ui/screens/main/bloc/main_bloc.dart';
 import '../../../../data/models/cart_item.dart';
@@ -16,12 +17,14 @@ import 'widgets/cart_item_widget.dart';
 import 'package:share_plus/share_plus.dart';
 
 class CartPage extends StatelessWidget {
-  const CartPage({super.key, this.allowBack = true});
+  const CartPage({super.key, bool allowBack = true}) : _allowBack = allowBack;
 
-  final bool allowBack;
+  final bool _allowBack;
 
   @override
   Widget build(BuildContext context) {
+    final double topPadding = MediaQuery.paddingOf(context).top;
+
     return BlocProvider(
       create: (context) =>
           CartBloc(getIt<CartsRepository>(), ApplicationErrorBloc.of(context)),
@@ -38,7 +41,7 @@ class CartPage extends StatelessWidget {
                 horizontal: Dimensions.paddingMainHorizontal,
               ),
               child: CustomScrollView(
-                slivers: <Widget>[
+                slivers: [
                   SliverAppBar(
                     forceMaterialTransparency: true,
                     title: ProductInputWidget(
@@ -46,7 +49,7 @@ class CartPage extends StatelessWidget {
                       onBack: () => _onBack(context),
                       onShare: () => _onShare(context),
                       enabled: state.data != null,
-                      allowBack: allowBack,
+                      allowBack: _allowBack,
                       onCallback: (String search) {
                         return CartBloc.of(context).getSuggestions(search);
                       },
@@ -55,6 +58,10 @@ class CartPage extends StatelessWidget {
                     titleSpacing: 0,
                     elevation: 1.0,
                   ),
+                  /*SliverPersistentHeader(
+                    pinned: true,
+                    delegate: HeaderDelegate(topPadding, state.data?.name ?? ""),
+                  ),*/
                   PinnedHeaderSliver(
                     child: Container(
                       decoration: BoxDecoration(
@@ -65,7 +72,7 @@ class CartPage extends StatelessWidget {
                           width: 1,
                         ),
                       ),
-                      padding: const EdgeInsets.all(14),
+                      padding: const EdgeInsets.all(8),
                       child: Center(child: Text(state.data?.name ?? "")),
                     ),
                   ),
@@ -140,6 +147,8 @@ class CartPage extends StatelessWidget {
   }
 
   void _onShareData(BuildContext context, String data) {
-    SharePlus.instance.share(ShareParams(text: "${S.of(context).share_desc}\n$data"));
+    SharePlus.instance.share(
+      ShareParams(text: "${S.of(context).share_desc}\n$data"),
+    );
   }
 }

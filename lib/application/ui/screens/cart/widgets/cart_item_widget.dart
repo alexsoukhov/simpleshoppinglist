@@ -88,6 +88,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                                 decoration: widget.cart.marked
                                     ? TextDecoration.lineThrough
                                     : TextDecoration.none,
+                                fontWeight: widget.cart.marked ? FontWeight.normal : FontWeight.bold
                               ),
                             ),
                           ),

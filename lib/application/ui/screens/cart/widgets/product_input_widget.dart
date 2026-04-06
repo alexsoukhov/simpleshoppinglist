@@ -95,6 +95,7 @@ class _ProductInputWidgetState extends State<ProductInputWidget> {
                         onTapUpOutside: (_) => {focusNode.unfocus()},
                         controller: controller,
                         focusNode: focusNode,
+                        style: Styles.textMedium(context),
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: "",
@@ -114,7 +115,7 @@ class _ProductInputWidgetState extends State<ProductInputWidget> {
                       ),
                       itemBuilder: (context, item) => ListTile(
                         contentPadding: EdgeInsets.only(left: 16),
-                        title: Text(item),
+                        title: Text(item, style: Styles.textMedium(context)),
                         trailing: IconButton(
                           onPressed: () {
                             _focusNode.unfocus();
