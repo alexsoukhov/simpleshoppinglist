@@ -60,75 +60,81 @@ class _CartNameInputWidgetState extends State<CartNameInputWidget> {
       child: Row(
         children: [
           Expanded(
-            child: Container(
-              height: Dimensions.inputHeight,
-              decoration: BoxDecoration(
-                color: Styles.cardBackgroundColor(context),
-                borderRadius: Dimensions.borderRadius,
-                border: Border.all(
-                  color: Styles.borderColorSmall(context),
-                  width: 1,
+            child: TypeAheadField<String>(
+              offset: const Offset(0, 8),
+              hideOnSelect: false,
+              focusNode: _focusNode,
+              suggestionsCallback: widget.onCallback,
+              controller: _textEditingController,
+              hideOnEmpty: true,
+              builder: (context, controller, focusNode) => SizedBox(
+                height: Dimensions.inputHeight,
+                child: TextField(
+                  onSubmitted: (_) {
+                    widget.onAdd?.call(_textEditingController.text);
+                    _textEditingController.text = "";
+                  },
+                  onTapUpOutside: (_) => {focusNode.unfocus()},
+                  controller: controller,
+                  focusNode: focusNode,
+                  style: Styles.textMedium(context),
+                  textAlignVertical: TextAlignVertical.center,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Styles.cardBackgroundColor(context),
+                    hintText: S.of(context).new_list,
+                    hintStyle: Styles.textMedium(
+                      context,
+                    )?.copyWith(color: Styles.textColorDim(context)),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 12),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: Dimensions.borderRadius,
+                      borderSide: BorderSide(
+                        color: Styles.borderColorSmall(context),
+                        width: 1,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: Dimensions.borderRadius,
+                      borderSide: BorderSide(
+                        color: Styles.borderColorSmall(context),
+                        width: 1,
+                      ),
+                    ),
+                    suffixIcon: clear
+                        ? IconButton(
+                            iconSize: Dimensions.iconSize,
+                            onPressed: _textEditingController.clear,
+                            icon: const Icon(Icons.clear),
+                          )
+                        : null,
+                    isDense: false,
+                  ),
+                  textInputAction: TextInputAction.done,
                 ),
               ),
-              padding: const EdgeInsets.only(left: 12),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: TypeAheadField<String>(
-                      offset: Offset(0, 8),
-                      hideOnSelect: false,
-                      focusNode: _focusNode,
-                      suggestionsCallback: widget.onCallback,
-                      controller: _textEditingController,
-                      hideOnEmpty: true,
-                      builder: (context, controller, focusNode) => TextField(
-                        onSubmitted: (_) {
-                          widget.onAdd?.call(_textEditingController.text);
-                          _textEditingController.text = "";
-                        },
-                        onTapUpOutside: (_) => {focusNode.unfocus()},
-                        controller: controller,
-                        focusNode: focusNode,
-                        style: Styles.textMedium(context),
-                        decoration: InputDecoration(
-                          hintText: S.of(context).new_list,
-                          hintStyle: Styles.textMedium(
-                            context,
-                          )?.copyWith(color: Styles.textColorDim(context)),
-                          border: InputBorder.none,
-                          isDense: true,
-                          contentPadding: EdgeInsets.zero,
-                        ),
-                        textInputAction: TextInputAction.done,
-                      ),
-                      decorationBuilder: (context, child) => Container(
-                        decoration: BoxDecoration(
-                          color: Styles.cardBackgroundColor(context),
-                          borderRadius: Dimensions.borderRadius,
-                          border: Border.all(
-                            color: Styles.borderColorSmall(context),
-                            width: 1,
-                          ),
-                        ),
-                        child: child,
-                      ),
-                      itemBuilder: (context, item) => ListTile(
-                        title: Text(item, style: Styles.textMedium(context)),
-                      ),
-                      onSelected: (String value) {
-                        _textEditingController.text += " $value";
-                      },
-                    ),
+              decorationBuilder: (context, child) => Container(
+                decoration: BoxDecoration(
+                  color: Styles.cardBackgroundColor(context),
+                  borderRadius: Dimensions.borderRadius,
+                  border: Border.all(
+                    color: Styles.borderColorSmall(context),
+                    width: 1,
                   ),
-                  if (clear)
-                    IconButton(
-                      iconSize: Dimensions.iconSize,
-                      onPressed: _textEditingController.clear,
-                      icon: Icon(Icons.clear),
-                    ),
-                ],
+                ),
+                child: child,
               ),
+              itemBuilder: (context, item) => ListTile(
+                title: Text(
+                  item,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Styles.textMedium(context),
+                ),
+              ),
+              onSelected: (String value) {
+                _textEditingController.text += " $value";
+              },
             ),
           ),
           const SizedBox(width: Dimensions.gapHorizontal),
