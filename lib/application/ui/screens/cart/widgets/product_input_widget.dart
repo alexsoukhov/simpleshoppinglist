@@ -44,6 +44,8 @@ class _ProductInputWidgetState extends State<ProductInputWidget> {
   @override
   void dispose() {
     _textEditingController.removeListener(_onTextChanged);
+    _textEditingController.dispose();
+    _focusNode.dispose();
 
     super.dispose();
   }

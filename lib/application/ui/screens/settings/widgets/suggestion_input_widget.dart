@@ -26,6 +26,7 @@ class _SuggestionInputWidgetState extends State<SuggestionInputWidget> {
   @override
   void dispose() {
     _textEditingController.removeListener(_onTextChanged);
+    _textEditingController.dispose();
 
     super.dispose();
   }

@@ -39,6 +39,8 @@ class _CartNameInputWidgetState extends State<CartNameInputWidget> {
   @override
   void dispose() {
     _textEditingController.removeListener(_onTextChanged);
+    _textEditingController.dispose();
+    _focusNode.dispose();
 
     super.dispose();
   }
