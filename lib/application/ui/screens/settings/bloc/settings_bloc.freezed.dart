@@ -55,7 +55,7 @@ extension SettingsEventPatterns on SettingsEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( SettingsEventInit value)?  init,TResult Function( SettingsEventReorder value)?  reorder,TResult Function( SettingsEventDelete value)?  delete,TResult Function( SettingsEventAdd value)?  add,TResult Function( SettingsEventEdit value)?  edit,TResult Function( SettingsEventSwitchDate value)?  switchDate,TResult Function( SettingsEventChangeColor value)?  changeColor,TResult Function( SettingsEventSave value)?  save,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( SettingsEventInit value)?  init,TResult Function( SettingsEventReorder value)?  reorder,TResult Function( SettingsEventDelete value)?  delete,TResult Function( SettingsEventAdd value)?  add,TResult Function( SettingsEventEdit value)?  edit,TResult Function( SettingsEventSwitchDate value)?  switchDate,TResult Function( SettingsEventChangeColor value)?  changeColor,TResult Function( SettingsEventSwitchTheme value)?  switchTheme,TResult Function( SettingsEventSave value)?  save,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case SettingsEventInit() when init != null:
@@ -65,7 +65,8 @@ return delete(_that);case SettingsEventAdd() when add != null:
 return add(_that);case SettingsEventEdit() when edit != null:
 return edit(_that);case SettingsEventSwitchDate() when switchDate != null:
 return switchDate(_that);case SettingsEventChangeColor() when changeColor != null:
-return changeColor(_that);case SettingsEventSave() when save != null:
+return changeColor(_that);case SettingsEventSwitchTheme() when switchTheme != null:
+return switchTheme(_that);case SettingsEventSave() when save != null:
 return save(_that);case _:
   return orElse();
 
@@ -84,7 +85,7 @@ return save(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( SettingsEventInit value)  init,required TResult Function( SettingsEventReorder value)  reorder,required TResult Function( SettingsEventDelete value)  delete,required TResult Function( SettingsEventAdd value)  add,required TResult Function( SettingsEventEdit value)  edit,required TResult Function( SettingsEventSwitchDate value)  switchDate,required TResult Function( SettingsEventChangeColor value)  changeColor,required TResult Function( SettingsEventSave value)  save,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( SettingsEventInit value)  init,required TResult Function( SettingsEventReorder value)  reorder,required TResult Function( SettingsEventDelete value)  delete,required TResult Function( SettingsEventAdd value)  add,required TResult Function( SettingsEventEdit value)  edit,required TResult Function( SettingsEventSwitchDate value)  switchDate,required TResult Function( SettingsEventChangeColor value)  changeColor,required TResult Function( SettingsEventSwitchTheme value)  switchTheme,required TResult Function( SettingsEventSave value)  save,}){
 final _that = this;
 switch (_that) {
 case SettingsEventInit():
@@ -94,7 +95,8 @@ return delete(_that);case SettingsEventAdd():
 return add(_that);case SettingsEventEdit():
 return edit(_that);case SettingsEventSwitchDate():
 return switchDate(_that);case SettingsEventChangeColor():
-return changeColor(_that);case SettingsEventSave():
+return changeColor(_that);case SettingsEventSwitchTheme():
+return switchTheme(_that);case SettingsEventSave():
 return save(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -112,7 +114,7 @@ return save(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( SettingsEventInit value)?  init,TResult? Function( SettingsEventReorder value)?  reorder,TResult? Function( SettingsEventDelete value)?  delete,TResult? Function( SettingsEventAdd value)?  add,TResult? Function( SettingsEventEdit value)?  edit,TResult? Function( SettingsEventSwitchDate value)?  switchDate,TResult? Function( SettingsEventChangeColor value)?  changeColor,TResult? Function( SettingsEventSave value)?  save,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( SettingsEventInit value)?  init,TResult? Function( SettingsEventReorder value)?  reorder,TResult? Function( SettingsEventDelete value)?  delete,TResult? Function( SettingsEventAdd value)?  add,TResult? Function( SettingsEventEdit value)?  edit,TResult? Function( SettingsEventSwitchDate value)?  switchDate,TResult? Function( SettingsEventChangeColor value)?  changeColor,TResult? Function( SettingsEventSwitchTheme value)?  switchTheme,TResult? Function( SettingsEventSave value)?  save,}){
 final _that = this;
 switch (_that) {
 case SettingsEventInit() when init != null:
@@ -122,7 +124,8 @@ return delete(_that);case SettingsEventAdd() when add != null:
 return add(_that);case SettingsEventEdit() when edit != null:
 return edit(_that);case SettingsEventSwitchDate() when switchDate != null:
 return switchDate(_that);case SettingsEventChangeColor() when changeColor != null:
-return changeColor(_that);case SettingsEventSave() when save != null:
+return changeColor(_that);case SettingsEventSwitchTheme() when switchTheme != null:
+return switchTheme(_that);case SettingsEventSave() when save != null:
 return save(_that);case _:
   return null;
 
@@ -140,7 +143,7 @@ return save(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  init,TResult Function( int oldIndex,  int newIndex)?  reorder,TResult Function( int idx)?  delete,TResult Function( String value)?  add,TResult Function( int idx,  String value)?  edit,TResult Function( bool value)?  switchDate,TResult Function( Color value)?  changeColor,TResult Function()?  save,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  init,TResult Function( int oldIndex,  int newIndex)?  reorder,TResult Function( int idx)?  delete,TResult Function( String value)?  add,TResult Function( int idx,  String value)?  edit,TResult Function( bool value)?  switchDate,TResult Function( Color value)?  changeColor,TResult Function( bool value)?  switchTheme,TResult Function()?  save,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case SettingsEventInit() when init != null:
 return init();case SettingsEventReorder() when reorder != null:
@@ -149,7 +152,8 @@ return delete(_that.idx);case SettingsEventAdd() when add != null:
 return add(_that.value);case SettingsEventEdit() when edit != null:
 return edit(_that.idx,_that.value);case SettingsEventSwitchDate() when switchDate != null:
 return switchDate(_that.value);case SettingsEventChangeColor() when changeColor != null:
-return changeColor(_that.value);case SettingsEventSave() when save != null:
+return changeColor(_that.value);case SettingsEventSwitchTheme() when switchTheme != null:
+return switchTheme(_that.value);case SettingsEventSave() when save != null:
 return save();case _:
   return orElse();
 
@@ -168,7 +172,7 @@ return save();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  init,required TResult Function( int oldIndex,  int newIndex)  reorder,required TResult Function( int idx)  delete,required TResult Function( String value)  add,required TResult Function( int idx,  String value)  edit,required TResult Function( bool value)  switchDate,required TResult Function( Color value)  changeColor,required TResult Function()  save,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  init,required TResult Function( int oldIndex,  int newIndex)  reorder,required TResult Function( int idx)  delete,required TResult Function( String value)  add,required TResult Function( int idx,  String value)  edit,required TResult Function( bool value)  switchDate,required TResult Function( Color value)  changeColor,required TResult Function( bool value)  switchTheme,required TResult Function()  save,}) {final _that = this;
 switch (_that) {
 case SettingsEventInit():
 return init();case SettingsEventReorder():
@@ -177,7 +181,8 @@ return delete(_that.idx);case SettingsEventAdd():
 return add(_that.value);case SettingsEventEdit():
 return edit(_that.idx,_that.value);case SettingsEventSwitchDate():
 return switchDate(_that.value);case SettingsEventChangeColor():
-return changeColor(_that.value);case SettingsEventSave():
+return changeColor(_that.value);case SettingsEventSwitchTheme():
+return switchTheme(_that.value);case SettingsEventSave():
 return save();case _:
   throw StateError('Unexpected subclass');
 
@@ -195,7 +200,7 @@ return save();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  init,TResult? Function( int oldIndex,  int newIndex)?  reorder,TResult? Function( int idx)?  delete,TResult? Function( String value)?  add,TResult? Function( int idx,  String value)?  edit,TResult? Function( bool value)?  switchDate,TResult? Function( Color value)?  changeColor,TResult? Function()?  save,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  init,TResult? Function( int oldIndex,  int newIndex)?  reorder,TResult? Function( int idx)?  delete,TResult? Function( String value)?  add,TResult? Function( int idx,  String value)?  edit,TResult? Function( bool value)?  switchDate,TResult? Function( Color value)?  changeColor,TResult? Function( bool value)?  switchTheme,TResult? Function()?  save,}) {final _that = this;
 switch (_that) {
 case SettingsEventInit() when init != null:
 return init();case SettingsEventReorder() when reorder != null:
@@ -204,7 +209,8 @@ return delete(_that.idx);case SettingsEventAdd() when add != null:
 return add(_that.value);case SettingsEventEdit() when edit != null:
 return edit(_that.idx,_that.value);case SettingsEventSwitchDate() when switchDate != null:
 return switchDate(_that.value);case SettingsEventChangeColor() when changeColor != null:
-return changeColor(_that.value);case SettingsEventSave() when save != null:
+return changeColor(_that.value);case SettingsEventSwitchTheme() when switchTheme != null:
+return switchTheme(_that.value);case SettingsEventSave() when save != null:
 return save();case _:
   return null;
 
@@ -648,6 +654,72 @@ as Color,
 /// @nodoc
 
 
+class SettingsEventSwitchTheme implements SettingsEvent {
+  const SettingsEventSwitchTheme(this.value);
+  
+
+ final  bool value;
+
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SettingsEventSwitchThemeCopyWith<SettingsEventSwitchTheme> get copyWith => _$SettingsEventSwitchThemeCopyWithImpl<SettingsEventSwitchTheme>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SettingsEventSwitchTheme&&(identical(other.value, value) || other.value == value));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,value);
+
+@override
+String toString() {
+  return 'SettingsEvent.switchTheme(value: $value)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $SettingsEventSwitchThemeCopyWith<$Res> implements $SettingsEventCopyWith<$Res> {
+  factory $SettingsEventSwitchThemeCopyWith(SettingsEventSwitchTheme value, $Res Function(SettingsEventSwitchTheme) _then) = _$SettingsEventSwitchThemeCopyWithImpl;
+@useResult
+$Res call({
+ bool value
+});
+
+
+
+
+}
+/// @nodoc
+class _$SettingsEventSwitchThemeCopyWithImpl<$Res>
+    implements $SettingsEventSwitchThemeCopyWith<$Res> {
+  _$SettingsEventSwitchThemeCopyWithImpl(this._self, this._then);
+
+  final SettingsEventSwitchTheme _self;
+  final $Res Function(SettingsEventSwitchTheme) _then;
+
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? value = null,}) {
+  return _then(SettingsEventSwitchTheme(
+null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
 class SettingsEventSave implements SettingsEvent {
   const SettingsEventSave();
   
@@ -680,7 +752,7 @@ String toString() {
 /// @nodoc
 mixin _$SettingsState {
 
- bool get suggestionDate; bool get loading; List<String> get suggestions; bool get isModified; Color get seedColor;
+ bool get suggestionDate; bool get useDarkTheme; bool get loading; List<String> get suggestions; bool get isModified; Color get seedColor;
 /// Create a copy of SettingsState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -691,16 +763,16 @@ $SettingsStateCopyWith<SettingsState> get copyWith => _$SettingsStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SettingsState&&(identical(other.suggestionDate, suggestionDate) || other.suggestionDate == suggestionDate)&&(identical(other.loading, loading) || other.loading == loading)&&const DeepCollectionEquality().equals(other.suggestions, suggestions)&&(identical(other.isModified, isModified) || other.isModified == isModified)&&(identical(other.seedColor, seedColor) || other.seedColor == seedColor));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SettingsState&&(identical(other.suggestionDate, suggestionDate) || other.suggestionDate == suggestionDate)&&(identical(other.useDarkTheme, useDarkTheme) || other.useDarkTheme == useDarkTheme)&&(identical(other.loading, loading) || other.loading == loading)&&const DeepCollectionEquality().equals(other.suggestions, suggestions)&&(identical(other.isModified, isModified) || other.isModified == isModified)&&(identical(other.seedColor, seedColor) || other.seedColor == seedColor));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,suggestionDate,loading,const DeepCollectionEquality().hash(suggestions),isModified,seedColor);
+int get hashCode => Object.hash(runtimeType,suggestionDate,useDarkTheme,loading,const DeepCollectionEquality().hash(suggestions),isModified,seedColor);
 
 @override
 String toString() {
-  return 'SettingsState(suggestionDate: $suggestionDate, loading: $loading, suggestions: $suggestions, isModified: $isModified, seedColor: $seedColor)';
+  return 'SettingsState(suggestionDate: $suggestionDate, useDarkTheme: $useDarkTheme, loading: $loading, suggestions: $suggestions, isModified: $isModified, seedColor: $seedColor)';
 }
 
 
@@ -711,7 +783,7 @@ abstract mixin class $SettingsStateCopyWith<$Res>  {
   factory $SettingsStateCopyWith(SettingsState value, $Res Function(SettingsState) _then) = _$SettingsStateCopyWithImpl;
 @useResult
 $Res call({
- bool suggestionDate, bool loading, List<String> suggestions, bool isModified, Color seedColor
+ bool suggestionDate, bool useDarkTheme, bool loading, List<String> suggestions, bool isModified, Color seedColor
 });
 
 
@@ -728,9 +800,10 @@ class _$SettingsStateCopyWithImpl<$Res>
 
 /// Create a copy of SettingsState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? suggestionDate = null,Object? loading = null,Object? suggestions = null,Object? isModified = null,Object? seedColor = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? suggestionDate = null,Object? useDarkTheme = null,Object? loading = null,Object? suggestions = null,Object? isModified = null,Object? seedColor = null,}) {
   return _then(_self.copyWith(
 suggestionDate: null == suggestionDate ? _self.suggestionDate : suggestionDate // ignore: cast_nullable_to_non_nullable
+as bool,useDarkTheme: null == useDarkTheme ? _self.useDarkTheme : useDarkTheme // ignore: cast_nullable_to_non_nullable
 as bool,loading: null == loading ? _self.loading : loading // ignore: cast_nullable_to_non_nullable
 as bool,suggestions: null == suggestions ? _self.suggestions : suggestions // ignore: cast_nullable_to_non_nullable
 as List<String>,isModified: null == isModified ? _self.isModified : isModified // ignore: cast_nullable_to_non_nullable
@@ -820,10 +893,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool suggestionDate,  bool loading,  List<String> suggestions,  bool isModified,  Color seedColor)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool suggestionDate,  bool useDarkTheme,  bool loading,  List<String> suggestions,  bool isModified,  Color seedColor)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SettingsState() when $default != null:
-return $default(_that.suggestionDate,_that.loading,_that.suggestions,_that.isModified,_that.seedColor);case _:
+return $default(_that.suggestionDate,_that.useDarkTheme,_that.loading,_that.suggestions,_that.isModified,_that.seedColor);case _:
   return orElse();
 
 }
@@ -841,10 +914,10 @@ return $default(_that.suggestionDate,_that.loading,_that.suggestions,_that.isMod
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool suggestionDate,  bool loading,  List<String> suggestions,  bool isModified,  Color seedColor)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool suggestionDate,  bool useDarkTheme,  bool loading,  List<String> suggestions,  bool isModified,  Color seedColor)  $default,) {final _that = this;
 switch (_that) {
 case _SettingsState():
-return $default(_that.suggestionDate,_that.loading,_that.suggestions,_that.isModified,_that.seedColor);case _:
+return $default(_that.suggestionDate,_that.useDarkTheme,_that.loading,_that.suggestions,_that.isModified,_that.seedColor);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -861,10 +934,10 @@ return $default(_that.suggestionDate,_that.loading,_that.suggestions,_that.isMod
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool suggestionDate,  bool loading,  List<String> suggestions,  bool isModified,  Color seedColor)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool suggestionDate,  bool useDarkTheme,  bool loading,  List<String> suggestions,  bool isModified,  Color seedColor)?  $default,) {final _that = this;
 switch (_that) {
 case _SettingsState() when $default != null:
-return $default(_that.suggestionDate,_that.loading,_that.suggestions,_that.isModified,_that.seedColor);case _:
+return $default(_that.suggestionDate,_that.useDarkTheme,_that.loading,_that.suggestions,_that.isModified,_that.seedColor);case _:
   return null;
 
 }
@@ -876,10 +949,11 @@ return $default(_that.suggestionDate,_that.loading,_that.suggestions,_that.isMod
 
 
 class _SettingsState extends SettingsState {
-  const _SettingsState({this.suggestionDate = false, this.loading = false, final  List<String> suggestions = const <String>[], this.isModified = false, this.seedColor = Colors.blue}): _suggestions = suggestions,super._();
+  const _SettingsState({this.suggestionDate = false, this.useDarkTheme = false, this.loading = false, final  List<String> suggestions = const <String>[], this.isModified = false, this.seedColor = Colors.blue}): _suggestions = suggestions,super._();
   
 
 @override@JsonKey() final  bool suggestionDate;
+@override@JsonKey() final  bool useDarkTheme;
 @override@JsonKey() final  bool loading;
  final  List<String> _suggestions;
 @override@JsonKey() List<String> get suggestions {
@@ -901,16 +975,16 @@ _$SettingsStateCopyWith<_SettingsState> get copyWith => __$SettingsStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SettingsState&&(identical(other.suggestionDate, suggestionDate) || other.suggestionDate == suggestionDate)&&(identical(other.loading, loading) || other.loading == loading)&&const DeepCollectionEquality().equals(other._suggestions, _suggestions)&&(identical(other.isModified, isModified) || other.isModified == isModified)&&(identical(other.seedColor, seedColor) || other.seedColor == seedColor));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SettingsState&&(identical(other.suggestionDate, suggestionDate) || other.suggestionDate == suggestionDate)&&(identical(other.useDarkTheme, useDarkTheme) || other.useDarkTheme == useDarkTheme)&&(identical(other.loading, loading) || other.loading == loading)&&const DeepCollectionEquality().equals(other._suggestions, _suggestions)&&(identical(other.isModified, isModified) || other.isModified == isModified)&&(identical(other.seedColor, seedColor) || other.seedColor == seedColor));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,suggestionDate,loading,const DeepCollectionEquality().hash(_suggestions),isModified,seedColor);
+int get hashCode => Object.hash(runtimeType,suggestionDate,useDarkTheme,loading,const DeepCollectionEquality().hash(_suggestions),isModified,seedColor);
 
 @override
 String toString() {
-  return 'SettingsState(suggestionDate: $suggestionDate, loading: $loading, suggestions: $suggestions, isModified: $isModified, seedColor: $seedColor)';
+  return 'SettingsState(suggestionDate: $suggestionDate, useDarkTheme: $useDarkTheme, loading: $loading, suggestions: $suggestions, isModified: $isModified, seedColor: $seedColor)';
 }
 
 
@@ -921,7 +995,7 @@ abstract mixin class _$SettingsStateCopyWith<$Res> implements $SettingsStateCopy
   factory _$SettingsStateCopyWith(_SettingsState value, $Res Function(_SettingsState) _then) = __$SettingsStateCopyWithImpl;
 @override @useResult
 $Res call({
- bool suggestionDate, bool loading, List<String> suggestions, bool isModified, Color seedColor
+ bool suggestionDate, bool useDarkTheme, bool loading, List<String> suggestions, bool isModified, Color seedColor
 });
 
 
@@ -938,9 +1012,10 @@ class __$SettingsStateCopyWithImpl<$Res>
 
 /// Create a copy of SettingsState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? suggestionDate = null,Object? loading = null,Object? suggestions = null,Object? isModified = null,Object? seedColor = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? suggestionDate = null,Object? useDarkTheme = null,Object? loading = null,Object? suggestions = null,Object? isModified = null,Object? seedColor = null,}) {
   return _then(_SettingsState(
 suggestionDate: null == suggestionDate ? _self.suggestionDate : suggestionDate // ignore: cast_nullable_to_non_nullable
+as bool,useDarkTheme: null == useDarkTheme ? _self.useDarkTheme : useDarkTheme // ignore: cast_nullable_to_non_nullable
 as bool,loading: null == loading ? _self.loading : loading // ignore: cast_nullable_to_non_nullable
 as bool,suggestions: null == suggestions ? _self._suggestions : suggestions // ignore: cast_nullable_to_non_nullable
 as List<String>,isModified: null == isModified ? _self.isModified : isModified // ignore: cast_nullable_to_non_nullable

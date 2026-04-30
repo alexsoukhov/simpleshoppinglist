@@ -239,6 +239,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Использовать тёмную тему`
+  String get use_dark_theme {
+    return Intl.message(
+      'Использовать тёмную тему',
+      name: 'use_dark_theme',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

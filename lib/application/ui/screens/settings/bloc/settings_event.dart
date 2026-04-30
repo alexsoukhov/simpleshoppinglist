@@ -16,5 +16,7 @@ class SettingsEvent with _$SettingsEvent {
 
   const factory SettingsEvent.changeColor(Color value) = SettingsEventChangeColor;
 
+  const factory SettingsEvent.switchTheme(bool value) = SettingsEventSwitchTheme;
+
   const factory SettingsEvent.save() = SettingsEventSave;
 }

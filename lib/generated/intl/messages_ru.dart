@@ -44,6 +44,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Скопируйте сообщение и нажмите на ссылку"),
         "suggest_date": MessageLookupByLibrary.simpleMessage("Предлагать дату"),
         "theme": MessageLookupByLibrary.simpleMessage("Цвет"),
+        "use_dark_theme":
+            MessageLookupByLibrary.simpleMessage("Использовать тёмную тему"),
         "yes": MessageLookupByLibrary.simpleMessage("Да")
       };
 }

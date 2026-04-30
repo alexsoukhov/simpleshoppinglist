@@ -9,12 +9,16 @@ import '../../domain/preferences_repository.dart';
 class PreferencesRepositoryImpl implements PreferencesRepository {
   PreferencesRepositoryImpl(this._preferencesSource) {
     _appSeedColorStreamController.sink.add(appSeedColor);
+    _useDarkThemeStreamController.sink.add(useDarkTheme);
   }
 
   final PreferencesSource _preferencesSource;
 
   final StreamController<Color> _appSeedColorStreamController =
       StreamController<Color>();
+
+  final StreamController<bool> _useDarkThemeStreamController =
+      StreamController<bool>();
 
   @override
   List<String> get cartNameSuggestions =>
@@ -45,5 +49,21 @@ class PreferencesRepositoryImpl implements PreferencesRepository {
 
   void _notifyAppSeedColor() {
     _appSeedColorStreamController.sink.add(appSeedColor);
+  }
+
+  @override
+  bool get useDarkTheme => _preferencesSource.useDarkTheme;
+
+  @override
+  set useDarkTheme(bool value) {
+    _preferencesSource.useDarkTheme = value;
+    _notifyUseDarkTheme();
+  }
+
+  @override
+  Stream<bool> get useDarkThemeStream => _useDarkThemeStreamController.stream;
+
+  void _notifyUseDarkTheme() {
+    _useDarkThemeStreamController.sink.add(useDarkTheme);
   }
 }

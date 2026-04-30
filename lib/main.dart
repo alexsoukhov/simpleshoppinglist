@@ -1,7 +1,10 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:simpleshoppinglist/di/di.dart';
 import 'package:simpleshoppinglist/domain/preferences_repository.dart';
 import 'package:simpleshoppinglist/sources/preferences/preferences_source.dart';
@@ -27,10 +30,7 @@ Future<void> main() async {
 
 final GoRouter _router = GoRouter(
   routes: <RouteBase>[
-    GoRoute(
-      path: "/home",
-      redirect: (_, __) => "/"
-    ),
+    GoRoute(path: "/home", redirect: (_, __) => "/"),
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
@@ -55,14 +55,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ApplicationProviders(
       builder: (context) => StreamBuilder(
-        stream: getIt<PreferencesRepository>().appSeedColorStream,
-        builder: (context, stream) {
-          ThemeData theme = ThemeData(
-            colorScheme: .fromSeed(
-              seedColor: stream.hasData ? stream.requireData : Colors.blue,
-              brightness: Brightness.dark,
-            ),
-          );
+        stream: Rx.combineLatest2(
+          getIt<PreferencesRepository>().appSeedColorStream,
+          getIt<PreferencesRepository>().useDarkThemeStream,
+          (Color stream1, bool stream2) {
+            return [stream1, stream2];
+          },
+        ),
+        builder: (context, values) {
+          Color color = values.hasData ? values.requireData[0] as Color : Colors.blue;
+          bool useDarkTheme = values.hasData ? values.requireData[1] as bool : true;
 
           return MaterialApp.router(
             debugShowCheckedModeBanner: false,
@@ -83,10 +85,8 @@ class MyApp extends StatelessWidget {
             theme:
                 ThemeData(
                   colorScheme: .fromSeed(
-                    seedColor: stream.hasData
-                        ? stream.requireData
-                        : Colors.blue,
-                    brightness: Brightness.dark,
+                    seedColor: color,
+                    brightness: useDarkTheme ? Brightness.dark : Brightness.light,
                   ),
                 ).copyWith(
                   textTheme: TextTheme(bodyMedium: TextStyle(fontSize: 22.0)),

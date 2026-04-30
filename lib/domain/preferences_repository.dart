@@ -14,4 +14,10 @@ abstract class PreferencesRepository {
   set appSeedColor(Color value);
 
   Stream<Color> get appSeedColorStream;
+
+  bool get useDarkTheme;
+
+  set useDarkTheme(bool value);
+
+  Stream<bool> get useDarkThemeStream;
 }

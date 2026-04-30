@@ -97,6 +97,29 @@ class SettingsPage extends StatelessWidget {
                             child: Container(
                               decoration: BoxDecoration(
                                 border: Border(
+                                  left: borderSide,
+                                  right: borderSide,
+                                ),
+                              ),
+                              child: CheckboxListTile(
+                                contentPadding: EdgeInsets.symmetric(
+                                  horizontal: Dimensions.gapHorizontal,
+                                ),
+                                title: Text(
+                                  S.of(context).use_dark_theme,
+                                  style: Styles.textMedium(context),
+                                ),
+                                value: state.useDarkTheme,
+                                onChanged: (bool? value) =>
+                                    _onDarkTheme(context, value),
+                              ),
+                            ),
+                          ),
+
+                          SliverToBoxAdapter(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                border: Border(
                                   bottom: borderSide,
                                   left: borderSide,
                                   right: borderSide,
@@ -315,5 +338,11 @@ class SettingsPage extends StatelessWidget {
 
   void _onChangeColor(BuildContext context, Color value) {
     SettingsBloc.of(context).add(SettingsEvent.changeColor(value));
+  }
+
+  void _onDarkTheme(BuildContext context, bool? value) {
+    if (value != null) {
+      SettingsBloc.of(context).add(SettingsEvent.switchTheme(value));
+    }
   }
 }

@@ -11,6 +11,7 @@ class PreferencesSource {
 
   static const _cartSuggestionsName = 'cart_suggestions';
   static const _cartSuggestionDateName = 'cart_suggestion_date';
+  static const _useDarkThemeName = 'use_dark_theme';
   static const _appSeedColorName = 'app_seed_color';
 
   static final List<String> _defaultSuggestions = [];
@@ -52,4 +53,10 @@ class PreferencesSource {
   int get appSeedColor => _preferences.getInt(_appSeedColorName) ?? 0xFF2196F3;
 
   set appSeedColor(int value) => _preferences.setInt(_appSeedColorName, value);
+
+  bool get useDarkTheme =>
+      _preferences.getBool(_useDarkThemeName) ?? true;
+
+  set useDarkTheme(bool value) =>
+      _preferences.setBool(_useDarkThemeName, value);
 }

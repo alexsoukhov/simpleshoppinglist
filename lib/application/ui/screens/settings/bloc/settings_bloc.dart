@@ -23,6 +23,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           suggestions: _preferencesRepository.cartNameSuggestions,
           suggestionDate: _preferencesRepository.cartNameSuggestionDate,
           seedColor: _preferencesRepository.appSeedColor,
+          useDarkTheme: _preferencesRepository.useDarkTheme,
         ),
       ) {
     _originalSettings = state.copyWith();
@@ -32,6 +33,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     on<SettingsEventEdit>(_edit);
     on<SettingsEventSwitchDate>(_switchDate);
     on<SettingsEventChangeColor>(_changeColor);
+    on<SettingsEventSwitchTheme>(_switchTheme);
     on<SettingsEventSave>(_save);
   }
 
@@ -92,6 +94,14 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     emit(newState.copyWith(isModified: !newState.isSame(_originalSettings)));
   }
 
+  void _switchTheme(SettingsEventSwitchTheme event, Emitter<SettingsState> emit) {
+    SettingsState newState = state.copyWith(
+      useDarkTheme: !state.useDarkTheme,
+    );
+
+    emit(newState.copyWith(isModified: !newState.isSame(_originalSettings)));
+  }
+
   Future<void> _save(
     SettingsEventSave event,
     Emitter<SettingsState> emit,
@@ -99,6 +109,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     _preferencesRepository.cartNameSuggestions = state.suggestions;
     _preferencesRepository.cartNameSuggestionDate = state.suggestionDate;
     _preferencesRepository.appSeedColor = state.seedColor;
+    _preferencesRepository.useDarkTheme = state.useDarkTheme;
 
     _originalSettings = state.copyWith();
 
